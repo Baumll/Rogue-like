@@ -1,0 +1,17 @@
+[gd_resource type="Resource" load_steps=3 format=2]
+
+[ext_resource path="res://ScribtAble/ClassItem.gd" type="Script" id=1]
+[ext_resource path="res://Assets/images/Icons/Armor/hm_t_01.png" type="Texture" id=2]
+
+
+[resource]
+script = ExtResource( 1 )
+type = "Hammer"
+description = "Ein schwerer Hammer"
+value = 7
+hp = 5
+streng = 5
+defence = 0
+dexterity = 0
+intelligence = 0
+image = ExtResource( 2 )

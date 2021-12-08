@@ -1,0 +1,26 @@
+[gd_resource type="Resource" load_steps=8 format=2]
+
+[ext_resource path="res://ScribtAble/ClassChracter.gd" type="Script" id=1]
+[ext_resource path="res://Assets/images/chars/NicePng_mage-png_3499950.png" type="Texture" id=2]
+[ext_resource path="res://Assets/images/Icons/Armor/staff_05_t.png" type="Texture" id=3]
+[ext_resource path="res://Units/Attacks/MoveTeamHeal.tres" type="Resource" id=4]
+[ext_resource path="res://Units/Attacks/MoveAim.tres" type="Resource" id=5]
+[ext_resource path="res://Units/Attacks/MoveAllAttack.tres" type="Resource" id=6]
+[ext_resource path="res://Units/Attacks/MoveBuff.tres" type="Resource" id=7]
+
+[resource]
+script = ExtResource( 1 )
+klass = "Mage"
+baseMaxHealth = 30
+baseStreng = 2
+baseDefence = 2
+baseDexterity = 3
+baseMagic = 10
+baseSpeed = 15
+baseCritChance = 0
+baseCritModifier = 0
+image = ExtResource( 2 )
+icon = ExtResource( 3 )
+moves = [ ExtResource( 6 ), ExtResource( 5 ), ExtResource( 4 ), ExtResource( 7 ) ]
+equip = [ null, null ]
+status = [  ]

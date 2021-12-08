@@ -1,0 +1,21 @@
+[gd_resource type="Resource" load_steps=3 format=2]
+
+[ext_resource path="res://ScribtAble/ClassItem.gd" type="Script" id=1]
+[ext_resource path="res://Assets/images/Icons/Armor/m_t_05.png" type="Texture" id=2]
+
+
+[resource]
+script = ExtResource( 1 )
+type = "Dagger"
+description = "Ein Schwarfer dolch"
+value = 8
+maxHealth = 5
+streng = 0
+defence = 0
+dexterity = 3
+magic = 0
+speed = 0
+healProcent = 0.0
+damgeProcent = 0.0
+protectProcent = 0.0
+image = ExtResource( 2 )

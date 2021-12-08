@@ -1,0 +1,59 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://scenes/UI/Inventory.gd" type="Script" id=1]
+[ext_resource path="res://scenes/UI/Equip.gd" type="Script" id=2]
+[ext_resource path="res://scenes/UI/Slots.gd" type="Script" id=3]
+[ext_resource path="res://fonts/UI/FontGold.tres" type="DynamicFont" id=4]
+
+[node name="inventorySlots" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="HBomb" type="HBoxContainer" parent="."]
+anchor_right = 1.0
+margin_bottom = 720.0
+custom_constants/separation = 0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Slots" type="Panel" parent="HBomb"]
+margin_right = 720.0
+margin_bottom = 720.0
+rect_min_size = Vector2( 720, 720 )
+script = ExtResource( 3 )
+
+[node name="VBoxContainer" type="VBoxContainer" parent="HBomb"]
+margin_left = 720.0
+margin_right = 1080.0
+margin_bottom = 720.0
+custom_constants/separation = 0
+
+[node name="Equip0" type="Panel" parent="HBomb/VBoxContainer"]
+margin_right = 360.0
+margin_bottom = 240.0
+rect_min_size = Vector2( 360, 240 )
+script = ExtResource( 2 )
+
+[node name="Equip1" type="Panel" parent="HBomb/VBoxContainer"]
+margin_top = 240.0
+margin_right = 360.0
+margin_bottom = 480.0
+rect_min_size = Vector2( 350, 240 )
+
+[node name="Button" type="Button" parent="HBomb/VBoxContainer"]
+margin_top = 480.0
+margin_right = 360.0
+margin_bottom = 720.0
+rect_min_size = Vector2( 360, 240 )
+custom_fonts/font = ExtResource( 4 )
+text = "Back"
+__meta__ = {
+"_edit_use_anchors_": false,
+"_editor_description_": ""
+}
+[connection signal="pressed" from="HBomb/VBoxContainer/Button" to="." method="_on_Button_pressed"]

@@ -1,0 +1,85 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://fonts/UI/FontChracterStats.tres" type="DynamicFont" id=1]
+[ext_resource path="res://scenes/UI/LoadOut.gd" type="Script" id=2]
+
+[node name="LoadOut" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+rect_min_size = Vector2( 1080, 720 )
+script = ExtResource( 2 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="CenterContainer" type="CenterContainer" parent="HBoxContainer"]
+margin_right = 720.0
+margin_bottom = 1920.0
+rect_min_size = Vector2( 720, 720 )
+
+[node name="TextureRect" type="TextureRect" parent="HBoxContainer/CenterContainer"]
+margin_top = 600.0
+margin_right = 720.0
+margin_bottom = 1320.0
+rect_min_size = Vector2( 720, 720 )
+expand = true
+
+[node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer"]
+margin_left = 724.0
+margin_right = 921.0
+margin_bottom = 1920.0
+
+[node name="Label" type="Label" parent="HBoxContainer/VBoxContainer"]
+margin_right = 197.0
+margin_bottom = 80.0
+custom_fonts/font = ExtResource( 1 )
+text = "Name:"
+
+[node name="Label2" type="Label" parent="HBoxContainer/VBoxContainer"]
+margin_top = 84.0
+margin_right = 197.0
+margin_bottom = 164.0
+custom_fonts/font = ExtResource( 1 )
+text = "HP: 60/60"
+
+[node name="Label3" type="Label" parent="HBoxContainer/VBoxContainer"]
+margin_top = 168.0
+margin_right = 197.0
+margin_bottom = 248.0
+custom_fonts/font = ExtResource( 1 )
+text = "DEF: 5"
+
+[node name="Label4" type="Label" parent="HBoxContainer/VBoxContainer"]
+margin_top = 252.0
+margin_right = 197.0
+margin_bottom = 332.0
+custom_fonts/font = ExtResource( 1 )
+text = "Str: 99"
+
+[node name="Label5" type="Label" parent="HBoxContainer/VBoxContainer"]
+margin_top = 336.0
+margin_right = 197.0
+margin_bottom = 416.0
+custom_fonts/font = ExtResource( 1 )
+text = "Mag: 55"
+
+[node name="Label6" type="Label" parent="HBoxContainer/VBoxContainer"]
+margin_top = 420.0
+margin_right = 197.0
+margin_bottom = 500.0
+custom_fonts/font = ExtResource( 1 )
+text = "Dex: 11"
+
+[node name="Label7" type="Label" parent="HBoxContainer/VBoxContainer"]
+margin_top = 504.0
+margin_right = 197.0
+margin_bottom = 584.0
+custom_fonts/font = ExtResource( 1 )
+text = "Spd: 73"

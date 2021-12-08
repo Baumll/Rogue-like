@@ -1,0 +1,9 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://scenes/Stuff/AudioStreamPlayer.gd" type="Script" id=1]
+[ext_resource path="res://Assets/Sounds/TestSounds/Weapon_Hit_Armour_03.wav" type="AudioStream" id=2]
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer"]
+stream = ExtResource( 2 )
+bus = "SoundEffects"
+script = ExtResource( 1 )

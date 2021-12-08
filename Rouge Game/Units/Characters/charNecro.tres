@@ -1,0 +1,25 @@
+[gd_resource type="Resource" load_steps=6 format=2]
+
+[ext_resource path="res://ScribtAble/ClassChracter.gd" type="Script" id=1]
+[ext_resource path="res://Assets/images/chars/skelett.png" type="Texture" id=2]
+[ext_resource path="res://Assets/images/Icons/Armor/NecromancerIcons_54_t.png" type="Texture" id=3]
+[ext_resource path="res://Units/Attacks/MoveAllAttack.tres" type="Resource" id=4]
+[ext_resource path="res://Units/Attacks/MoveStrike.tres" type="Resource" id=5]
+
+
+[resource]
+script = ExtResource( 1 )
+klass = "Mage"
+baseMaxHealth = 5
+baseStreng = 0
+baseDefence = 0
+baseDexterity = 0
+baseMagic = 0
+baseSpeed = 5
+baseCritChance = 0
+baseCritModifier = 0
+image = ExtResource( 2 )
+icon = ExtResource( 3 )
+moves = [ ExtResource( 5 ), ExtResource( 5 ), ExtResource( 4 ), ExtResource( 4 ) ]
+equip = [ null, null ]
+status = [  ]

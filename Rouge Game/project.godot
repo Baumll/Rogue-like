@@ -1,0 +1,71 @@
+; Engine configuration file.
+; It's best edited using the editor UI and not directly,
+; since the parameters that go here are not all obvious.
+;
+; Format:
+;   [section] ; section goes between []
+;   param=value ; assign values to parameters
+
+config_version=4
+
+_global_script_classes=[ {
+"base": "Resource",
+"class": "ClassChracter",
+"language": "GDScript",
+"path": "res://ScribtAble/ClassChracter.gd"
+}, {
+"base": "Resource",
+"class": "ClassItem",
+"language": "GDScript",
+"path": "res://ScribtAble/ClassItem.gd"
+}, {
+"base": "Resource",
+"class": "ClassMove",
+"language": "GDScript",
+"path": "res://ScribtAble/Attacks/ClassMove.gd"
+}, {
+"base": "Resource",
+"class": "ClassStatus",
+"language": "GDScript",
+"path": "res://ScribtAble/ClassStatus.gd"
+} ]
+_global_script_class_icons={
+"ClassChracter": "",
+"ClassItem": "",
+"ClassMove": "",
+"ClassStatus": ""
+}
+
+[application]
+
+config/name="RougeLike"
+run/main_scene="res://scenes/Stuff/test.tscn"
+config/icon="res://icon.png"
+
+[display]
+
+window/size/width=1080
+window/size/height=1920
+window/size/test_width=270
+window/size/test_height=480
+window/stretch/mode="viewport"
+window/stretch/aspect="keep"
+
+[input]
+
+ui_mouse_left={
+"deadzone": 0.5,
+"events": [ Object(InputEventMouseButton,"resource_local_to_scene":false,"resource_name":"","device":-1,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"button_mask":0,"position":Vector2( 0, 0 ),"global_position":Vector2( 0, 0 ),"factor":1.0,"button_index":1,"pressed":false,"doubleclick":false,"script":null)
+ ]
+}
+ui_mouse_right={
+"deadzone": 0.5,
+"events": [ Object(InputEventMouseButton,"resource_local_to_scene":false,"resource_name":"","device":-1,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"button_mask":0,"position":Vector2( 0, 0 ),"global_position":Vector2( 0, 0 ),"factor":1.0,"button_index":2,"pressed":false,"doubleclick":false,"script":null)
+ ]
+}
+
+[rendering]
+
+quality/driver/driver_name="GLES2"
+vram_compression/import_etc=true
+vram_compression/import_etc2=false

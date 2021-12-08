@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/Weapon_Hit_Armour_03.wav-71869893fc211071f886b09de089f183.sample"
+
+[deps]
+
+source_file="res://Assets/Sounds/TestSounds/Weapon_Hit_Armour_03.wav"
+dest_files=[ "res://.import/Weapon_Hit_Armour_03.wav-71869893fc211071f886b09de089f183.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0
