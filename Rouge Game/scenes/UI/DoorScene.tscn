@@ -3,7 +3,6 @@
 [ext_resource path="res://Assets/images/Icons/Brown_Door_PNG_Clipart-2397.png" type="Texture" id=1]
 [ext_resource path="res://scenes/UI/DoorScene.gd" type="Script" id=2]
 
-
 [node name="DoorScene" type="Control"]
 anchor_right = 1.0
 anchor_bottom = 1.0

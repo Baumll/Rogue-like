@@ -1,6 +1,6 @@
 [gd_resource type="Resource" load_steps=3 format=2]
 
-[ext_resource path="res://ScribtAble/Attacks/ClassMove.gd" type="Script" id=1]
+[ext_resource path="res://ScribtAble/ClassMove.gd" type="Script" id=1]
 [ext_resource path="res://Assets/images/Icons/Moves/green_20.PNG" type="Texture" id=2]
 
 [resource]
@@ -10,6 +10,7 @@ description = "Heilt das Team"
 image = ExtResource( 2 )
 cost = 20
 targets = 5
-moves = [ 4 ]
-value = [ 5 ]
+physicalDmg = 2
+magicalDmg = 0
+heal = 0
 animation = "TestHeal"

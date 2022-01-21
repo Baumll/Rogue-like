@@ -1,6 +1,6 @@
 [gd_resource type="Resource" load_steps=2 format=2]
 
-[ext_resource path="res://ScribtAble/Attacks/ClassMove.gd" type="Script" id=1]
+[ext_resource path="res://ScribtAble/ClassMove.gd" type="Script" id=1]
 
 [resource]
 script = ExtResource( 1 )
@@ -8,6 +8,7 @@ name = "self Damg"
 description = "Ein einfacher angriff ohne was"
 cost = 10
 targets = 0
-moves = [  ]
-value = [  ]
+physicalDmg = 0
+magicalDmg = 0
+heal = 0
 animation = "TestStrike"

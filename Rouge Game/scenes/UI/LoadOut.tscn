@@ -1,85 +1,78 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=6 format=2]
 
-[ext_resource path="res://fonts/UI/FontChracterStats.tres" type="DynamicFont" id=1]
-[ext_resource path="res://scenes/UI/LoadOut.gd" type="Script" id=2]
+[ext_resource path="res://scenes/UI/LoadOut.gd" type="Script" id=1]
+[ext_resource path="res://Assets/images/bars/healthbar.png" type="Texture" id=2]
+[ext_resource path="res://fonts/UI/FontSmal.tres" type="DynamicFont" id=3]
+[ext_resource path="res://scenes/UI/Inventory/Ui_Under.tscn" type="PackedScene" id=4]
+[ext_resource path="res://scenes/UI/Inventory/GoldSign.tscn" type="PackedScene" id=5]
 
 [node name="LoadOut" type="Control"]
 anchor_right = 1.0
 anchor_bottom = 1.0
 rect_min_size = Vector2( 1080, 720 )
-script = ExtResource( 2 )
+script = ExtResource( 1 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="HBoxContainer" type="HBoxContainer" parent="."]
-anchor_right = 1.0
-anchor_bottom = 1.0
+[node name="GoldSign" parent="." instance=ExtResource( 5 )]
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+margin_right = 40.0
+margin_bottom = 40.0
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="CenterContainer" type="CenterContainer" parent="HBoxContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer"]
+margin_right = 1080.0
+margin_bottom = 720.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="CenterContainer" type="CenterContainer" parent="VBoxContainer/HBoxContainer"]
 margin_right = 720.0
-margin_bottom = 1920.0
+margin_bottom = 720.0
 rect_min_size = Vector2( 720, 720 )
 
-[node name="TextureRect" type="TextureRect" parent="HBoxContainer/CenterContainer"]
-margin_top = 600.0
+[node name="TextureRect" type="TextureRect" parent="VBoxContainer/HBoxContainer/CenterContainer"]
 margin_right = 720.0
-margin_bottom = 1320.0
+margin_bottom = 720.0
 rect_min_size = Vector2( 720, 720 )
 expand = true
 
-[node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/HBoxContainer"]
 margin_left = 724.0
-margin_right = 921.0
-margin_bottom = 1920.0
+margin_right = 846.0
+margin_bottom = 720.0
 
-[node name="Label" type="Label" parent="HBoxContainer/VBoxContainer"]
-margin_right = 197.0
+[node name="Label" type="Label" parent="VBoxContainer/HBoxContainer/VBoxContainer"]
+margin_right = 122.0
 margin_bottom = 80.0
-custom_fonts/font = ExtResource( 1 )
+custom_fonts/font = ExtResource( 3 )
 text = "Name:"
 
-[node name="Label2" type="Label" parent="HBoxContainer/VBoxContainer"]
-margin_top = 84.0
-margin_right = 197.0
-margin_bottom = 164.0
-custom_fonts/font = ExtResource( 1 )
-text = "HP: 60/60"
+[node name="TextureProgress" type="TextureProgress" parent="VBoxContainer"]
+margin_top = 724.0
+margin_right = 1080.0
+margin_bottom = 744.0
+rect_min_size = Vector2( 1080, 20 )
+value = 50.0
+texture_progress = ExtResource( 2 )
+tint_progress = Color( 0.952941, 0.462745, 0.172549, 1 )
+nine_patch_stretch = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
-[node name="Label3" type="Label" parent="HBoxContainer/VBoxContainer"]
-margin_top = 168.0
-margin_right = 197.0
-margin_bottom = 248.0
-custom_fonts/font = ExtResource( 1 )
-text = "DEF: 5"
-
-[node name="Label4" type="Label" parent="HBoxContainer/VBoxContainer"]
-margin_top = 252.0
-margin_right = 197.0
-margin_bottom = 332.0
-custom_fonts/font = ExtResource( 1 )
-text = "Str: 99"
-
-[node name="Label5" type="Label" parent="HBoxContainer/VBoxContainer"]
-margin_top = 336.0
-margin_right = 197.0
-margin_bottom = 416.0
-custom_fonts/font = ExtResource( 1 )
-text = "Mag: 55"
-
-[node name="Label6" type="Label" parent="HBoxContainer/VBoxContainer"]
-margin_top = 420.0
-margin_right = 197.0
-margin_bottom = 500.0
-custom_fonts/font = ExtResource( 1 )
-text = "Dex: 11"
-
-[node name="Label7" type="Label" parent="HBoxContainer/VBoxContainer"]
-margin_top = 504.0
-margin_right = 197.0
-margin_bottom = 584.0
-custom_fonts/font = ExtResource( 1 )
-text = "Spd: 73"
+[node name="Ui_Under" parent="VBoxContainer" instance=ExtResource( 4 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_top = 748.0
+margin_right = 1080.0
+margin_bottom = 748.0
+[connection signal="loadChars" from="." to="VBoxContainer/Ui_Under" method="load_characters"]
+[connection signal="needDescription" from="." to="VBoxContainer/Ui_Under" method="set_description"]
+[connection signal="back" from="VBoxContainer/Ui_Under" to="." method="_on_Ui_Under_back"]
+[connection signal="selected_character" from="VBoxContainer/Ui_Under" to="." method="load_character"]

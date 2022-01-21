@@ -1,21 +1,23 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://fonts/testFont.tres" type="DynamicFont" id=1]
 [ext_resource path="res://scenes/UI/Fighting/WinSzene.gd" type="Script" id=2]
-[ext_resource path="res://fonts/CharSelectScreen/fontCharSelectHead.tres" type="DynamicFont" id=3]
+[ext_resource path="res://fonts/UI/FontGold.tres" type="DynamicFont" id=3]
+[ext_resource path="res://fonts/UI/FontBig.tres" type="DynamicFont" id=4]
 
 [node name="WinSzene" type="Control"]
 anchor_right = 1.0
 anchor_bottom = 1.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
 script = ExtResource( 2 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Button" type="Button" parent="."]
+[node name="Label" type="Label" parent="."]
 margin_right = 1080.0
 margin_bottom = 1920.0
-custom_fonts/font = ExtResource( 1 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -37,22 +39,33 @@ margin_bottom = 1420.0
 
 [node name="Label" type="Label" parent="MarginContainer/VBoxContainer"]
 margin_right = 880.0
-margin_bottom = 372.0
-custom_fonts/font = ExtResource( 1 )
+margin_bottom = 400.0
+custom_fonts/font = ExtResource( 4 )
 text = "Win"
 align = 1
 valign = 1
 
 [node name="Label2" type="Label" parent="MarginContainer/VBoxContainer"]
-margin_top = 376.0
+margin_top = 404.0
 margin_right = 880.0
-margin_bottom = 562.0
+margin_bottom = 504.0
 custom_fonts/font = ExtResource( 3 )
 text = "You Got:"
 align = 1
 
 [node name="TextureRect" type="TextureRect" parent="MarginContainer/VBoxContainer"]
-margin_top = 566.0
+margin_top = 508.0
 margin_right = 880.0
-margin_bottom = 566.0
+margin_bottom = 508.0
+
+[node name="Button" type="Button" parent="."]
+margin_right = 1080.0
+margin_bottom = 1920.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_fonts/font = ExtResource( 1 )
+flat = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
 [connection signal="pressed" from="Button" to="." method="_on_Button_pressed"]

@@ -1,7 +1,9 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://scenes/UI/Fighting/FighterTimeLine.gd" type="Script" id=1]
 [ext_resource path="res://Assets/images/Icons/Armor/helmets_23.png" type="Texture" id=2]
+[ext_resource path="res://Assets/images/Fight/TimeLine/TimeLineTurnSign.png" type="Texture" id=3]
+[ext_resource path="res://Assets/images/Fight/TimeLine/TimeLinePrev.png" type="Texture" id=4]
 
 [node name="FighterTimeLine" type="Control"]
 anchor_right = 1.0
@@ -20,8 +22,8 @@ __meta__ = {
 }
 
 [node name="HBoxContainer" type="HBoxContainer" parent="CenterContainer"]
-margin_left = 200.0
-margin_right = 880.0
+margin_left = 142.0
+margin_right = 938.0
 margin_bottom = 80.0
 custom_constants/separation = 40
 __meta__ = {
@@ -80,3 +82,23 @@ rect_min_size = Vector2( 80, 80 )
 texture = ExtResource( 2 )
 expand = true
 stretch_mode = 6
+
+[node name="TurnSignal" type="TextureRect" parent="CenterContainer/HBoxContainer"]
+margin_left = 720.0
+margin_right = 738.0
+margin_bottom = 80.0
+rect_min_size = Vector2( 18, 0 )
+size_flags_stretch_ratio = 3.15
+texture = ExtResource( 3 )
+expand = true
+stretch_mode = 5
+
+[node name="PrevSignal" type="TextureRect" parent="CenterContainer/HBoxContainer"]
+margin_left = 778.0
+margin_right = 796.0
+margin_bottom = 80.0
+rect_min_size = Vector2( 18, 0 )
+size_flags_stretch_ratio = 3.15
+texture = ExtResource( 4 )
+expand = true
+stretch_mode = 5

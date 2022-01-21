@@ -4,244 +4,143 @@ var rng = RandomNumberGenerator.new()
 
 signal selectCharacter(chracter)
 
-enum states {
-	start,
-	charakter,
-	door,
-	fight,
-	inventory,
-	event,
-	mercant,
-	mercio
-}
-var state
 
-export(Texture) var doorFight
-export(Texture) var doorMercio
-export(Texture) var doorMerchant
-var doorPre = []
+var doors = []
 
-export(int) var maxCharacters = 3
+export(int) var maxCharacters = 4
 var characterList = []
 var activeChracter = null
 
+var inventory = null
+var roomList = []
+var room = null
 
+export(int) var rows = 3
+export(int) var collums = 3
 
-onready var door = $Control/VBoxContainer/DoorScene
-onready var start = $Control/Start
-onready var character_screen = $Control/CharSelectScreen
-onready var inventory = $Control/VBoxContainer/inventory
-onready var attacks = $Control/VBoxContainer/AttackButtons
-onready var two_choise = $Control/VBoxContainer/TwoChoise
-onready var fight = $Control/VBoxContainer/FightScene
-onready var character_panel = $Control/VBoxContainer/CharacterChoise2
-onready var win_screen = $Control/WinSzene
-onready var lose_screen = $Control/LoseSzene
-onready var merchant_screen = $Control/VBoxContainer/merchant
-onready var gold_sgin = $Control/GoldSign
-onready var description_screen = $Control/VBoxContainer/DecriptinText
-onready var mercioSceen = $Control/mercenario
-onready var load_screen = $Control/VBoxContainer/LoadOut
+onready var door = $VBoxContainer/DoorScene
+onready var start = $Start
+onready var character_screen = $CharSelectScreen
+onready var ui_under = $VBoxContainer/Ui_Under
+onready var two_choise = $VBoxContainer/TwoChoise
+onready var win_screen = $WinSzene
+onready var lose_screen = $LoseSzene
+onready var load_screen = preload("res://scenes/UI/LoadOut.tscn")
+
+func roomList():
+	#Rist Path, Icon, Rarity
+	roomList.append(["res://scenes/UI/Rooms/HealRoom.tscn","res://Assets/images/Icons/Rooms/green_14.PNG", 2])
+	roomList.append(["res://scenes/UI/Rooms/mercenario.tscn","res://Assets/images/Icons/Rooms/yellow_40.png", 2])
+	roomList.append(["res://scenes/UI/Fighting/FightScene.tscn","res://Assets/images/Icons/Rooms/blue_12.png", 2])
+	roomList.append(["res://scenes/UI/Rooms/merchantScene.tscn","res://Assets/images/Icons/Rooms/gray_07.PNG", 2])
+	roomList.append(["res://scenes/UI/Rooms/ItemRoom.tscn","res://Assets/images/Icons/Rooms/TradingIcons_08.png", 2])
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	rng.randomize()
 	setup_start()
-
+	roomList()
+	inventory = load("res://ScribtAble/ClassInventory.gd")
+	inventory = inventory.new()
 
 func setup_start():
 	disable_all()
 	start.visible = true
-	state = states.start
 
 func setup_char_select():
 	disable_all()
 	character_screen.visible = true
-	state = states.charakter
 
 func setup_doors():
+	if(room != null):
+		room.queue_free()
+		room = null
 	disable_all()
-	doorPre = []
 	door.visible = true
 	var num = 0
-	var doors = []
+	doors = []
 	rng.randomize()
 	for i in range(2):
-		if( characterList.size() < 3):
-			num = rng.randi_range(0,2)
-		else:
-			num = rng.randi_range(0,1)
-		match num:
-			0:
-				doors.append(doorFight)
-				doorPre.append(states.fight)
-			1:
-				doors.append(doorMercio)
-				doorPre.append(states.mercio)
-			2:
-				doors.append(doorMerchant)
-				doorPre.append(states.mercant)
-	door.setup_doors(doors[0], doors[1])
+		num = rng.randi_range(0,roomList.size()-1)
+		doors.append(num)
+	door.setup_doors(load(roomList[doors[0]][1]), load(roomList[doors[1]][1]))
 	two_choise.visible = true
-	state = states.door
 
 func enter_door():
 	var num = 0
 	rng.randomize()
-	if( characterList.size() < 3):
-		num = rng.randi_range(0,2)
-	else:
-		num = rng.randi_range(0,1)
-	match num:
-		0:
-			setup_fight()
-		1:
-			setup_merchant()
-		2:
-			setup_mercinario()
+	num = rng.randi_range(0,3)
+	#hier raum laden
 
-func setup_fight():
-	disable_all()
-	inventory.visible = true
-	inventory.enable_inventory = false
-	attacks.visible = true
-	attacks.margin_right = -360
-	fight.visible = true
-	character_panel.visible = true
-	fight.pacifism = false
-	fight.setup_fight()
-	fight.add_fighter(load_enemy(),0)
-	fight.add_fighter(load_enemy(),0)
-	fight.add_fighter(load_enemy(),0)
-	load_characters_fight()
-	fight.start_fight()
-
-func setup_win_screen():
-	disable_all()
-	win_screen.visible = true
-	
-func setup_lose_screen():
-	disable_all()
-	inventory.reset()
-	lose_screen.visible = true
-
-func setup_merchant():
-	disable_all()
-	character_panel.visible = true
-	inventory.visible = true
-	merchant_screen.visible = true
-	merchant_screen.setup_items()
-	gold_sgin.visible = true
-	description_screen.visible = true
-	inventory.merchantActive = true
-	inventory.enable_inventory = true
-	inventory.create_item_to_sell()
-	inventory.create_item_to_sell()
-	inventory.create_item_to_sell()
-
-func setup_mercinario():
-	disable_all()
-	mercioSceen.visible = true
-
-
-func setup_load_out():
-	disable_all()
-	description_screen.visible = true
-	load_screen.visible = true
-	inventory.visible = true
-	inventory.enable_inventory = true
-	character_panel.visible = true
-	load_screen.load_character(activeChracter)
-	attacks._on_FightScene_loadAttacks(activeChracter.moves)
-	attacks.margin_right = -360
 
 func disable_all():
-	merchant_screen.visible = false
-	merchant_screen.remove_items()
 	door.visible = false
 	start.visible = false
 	character_screen.visible = false
-	inventory.visible = false
-	inventory.enable_inventory = false
-	inventory.merchantActive = false
-	attacks.visible = false
 	two_choise.visible = false
-	fight.visible = false
-	fight.pacifism = true
-	character_panel.visible = false
 	win_screen.visible = false
 	lose_screen.visible = false
-	gold_sgin.visible = false
-	description_screen.visible = false
-	mercioSceen.visible = false
-	load_screen.visible = false
 
 func load_enemy() -> Resource:
-	var preChar = load("res://Units/CharacterSzene.tscn")
-	var character = preChar.instance()
+	#var preChar = load("res://Units/CharacterSzene.tscn")
+	#var character = preChar.instance()
 	var i = rng.randi_range(-1.0,1.0)
-	if i > 0:
-		character.load_path("res://Units/enemys/UnitSkelett.tres")
-	else:
-		character.load_path("res://Units/enemys/UnitZombie.tres")
+	var scene = load("res://ScribtAble/ClassChracter.gd")
+	scene = scene.new()
 	
-	return character
+	var character
+	if i > 0:
+		scene.loadStats("res://Units/enemys/UnitSkelett.tres")
+	else:
+		scene.loadStats("res://Units/enemys/UnitZombie.tres")
+	return scene
 
 func load_characters_fight():
-	for x in characterList:
-		fight.add_fighter(x, 1)
+	var enemys = []
+	for x in range(0,rng.randi_range(1,4)):
+		enemys.append(load_enemy())
+	var friends = characterList
+	return [enemys, friends]
 	
 func _on_Start_start_pressed():
-	character_panel.reset()
 	setup_char_select()
 
-
-func _on_CharacterChoise_char_selected(num):
-	if num != -1:
-		if characterList.size() > num:
-			activeChracter = characterList[num]
-			inventory.load_equip(characterList[num])
-			emit_signal("selectCharacter",characterList[num])
-			load_screen.load_character(activeChracter)
-			attacks._on_FightScene_loadAttacks(activeChracter.moves)
-	else: #Swap between Inventory and Attacks in Loadout
-		if( load_screen.visible == true):
-			if attacks.visible == false:
-				inventory.enable_inventory = false
-				attacks.visible = true
-			else:
-				inventory.enable_inventory = true
-				attacks.visible = false
+func get_fighters():
+	return characterList
 
 
 
 func _on_DoorScene_door_enter(num):
-	match doorPre[num]:
-		states.fight:
-			setup_fight()
-		states.mercio:
-			setup_mercinario()
-		states.mercant:
-			setup_merchant()
-		
+	room = load(roomList[doors[num]][0]).instance()
+	add_child(room)
+	room.connect("exit", self,"_on_exit")
+	room.visible = true
 
 
 func _on_TwoChoise_choise_made(num):
-	if(state == states.door):
+	if(door.visible == true):
 		setup_load_out()
 
+func setup_load_out():
+	disable_all()
+	room = load_screen.instance()
+	add_child(room)
+	#room.load_all_chracters(characterList)
+	room.connect("exit", self,"_on_exit")
 
 func _on_CharSelectScreen_Chosen(num):
 	load_chracter(num)
 	setup_doors()
+	
 
 
-func _on_FightScene_endFight(team):
+#Old später unten einfügen?
+func _on_FightScene_endFight(team, ep):
 	if(team == 1):
-		setup_win_screen()
-		inventory.create_item()
-	else:
-		setup_lose_screen()
+		#xp veteilen:
+		for i in characterList:
+			i.give_exp(ep/characterList.size())
+		#inventory.create_item()
 
 
 func _on_WinSzene_winSzene():
@@ -268,55 +167,51 @@ func _on_mercenario_mercenario():
 
 
 func load_chracter(num):
-		var preChar = load("res://Units/CharacterSzene.tscn")
-		var character = preChar.instance()
+		var preChar = load("res://ScribtAble/ClassChracter.gd")
+		var character = preChar.new()
+		
 		match num:
 			0: 
-				character.load_path("res://Units/Characters/charMage.tres")
+				character.loadStats("res://Units/Characters/charMage.tres")
 			1: 
-				character.load_path("res://Units/Characters/charWarrier.tres")
+				character.loadStats("res://Units/Characters/charWarrier.tres")
 			2: 
-				character.load_path("res://Units/Characters/charRanger.tres")
+				character.loadStats("res://Units/Characters/charRanger.tres")
 			3: 
-				character.load_path("res://Units/Characters/charNecro.tres")
+				character.loadStats("res://Units/Characters/charNecro.tres")
+		
 		characterList.append(character)
-		character_panel.add_character(characterList[characterList.size()-1])
 		activeChracter = characterList[characterList.size()-1]
 		activeChracter.health = activeChracter.maxHealth
-		character_reset_stats(activeChracter)
-		inventory.load_equip(activeChracter)
+		#character_reset_stats(activeChracter)
+		activeChracter.reset_stats()
+		#inventory.load_equip(activeChracter)
 		print(characterList)
 
-func character_reset_stats(character):
-	character.maxHealth = character.baseMaxHealth
-	character.streng = character.baseStreng
-	character.defence = character.baseDefence
-	character.dexterity = character.baseDexterity
-	character.magic = character.baseMagic
-	character.speed = character.baseSpeed
-	character.healProcent = 0.0
-	character.damgeProcent = 0.0
-	character.protectProcent = 0.0
-	
-func character_add_item_stats(character):
-	for i in character.equip:
-		if i != null:
-			var item = load(i)
-			character.maxHealth += item.maxHealth
-			character.streng += item.streng
-			character.defence += item.defence
-			character.dexterity += item.dexterity
-			character.magic += item.magic
-			character.speed += item.speed
-			character.healProcent = item.healProcent
-			character.damgeProcent = item.damgeProcent
-			character.protectProcent = item.protectProcent
-	load_screen.load_character(activeChracter)
 
 
 
 
-func _on_AttackButtons_attack(num):
-	if num == -1:
-		setup_doors()
+func _on_HealRoom_full_team_heal():
+	for i in characterList:
+		i.health = i.maxHealth
+	setup_doors()
 
+		
+
+func _on_exit():
+	#checkt ob noch alle chars amleben sind
+	if room != null:
+		if room.name == "FightScene":
+			for x in characterList:
+				if x.health > 0:
+					#win screen hier noch besser machen
+					win_screen.visible
+					room.queue_free()
+					return
+			lose_screen.visible
+			room.queue_free()
+			return
+		room.queue_free()
+		room = null
+	setup_doors()

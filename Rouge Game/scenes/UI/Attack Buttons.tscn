@@ -1,11 +1,11 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://Assets/images/Icons/Armor/m_t_05.png" type="Texture" id=1]
 [ext_resource path="res://scenes/UI/Attack Buttons.gd" type="Script" id=2]
-[ext_resource path="res://fonts/UI/FontGold.tres" type="DynamicFont" id=3]
+[ext_resource path="res://fonts/UI/FontSmal.tres" type="DynamicFont" id=3]
+[ext_resource path="res://scenes/UI/Inventory/TargetMiniShow.tscn" type="PackedScene" id=4]
 
-
-[node name="VBoxContainer" type="VBoxContainer"]
+[node name="AttackButtons" type="VBoxContainer"]
 margin_right = 724.0
 margin_bottom = 1920.0
 rect_min_size = Vector2( 720, 720 )
@@ -52,6 +52,17 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
+[node name="TargetMiniShow" parent="HBoxContainer" instance=ExtResource( 4 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 720.0
+margin_right = 1080.0
+margin_bottom = 116.0
+rect_min_size = Vector2( 360, 116 )
+hint_tooltip = "ToolTip"
+size_flags_horizontal = 0
+size_flags_vertical = 0
+
 [node name="HBoxContainer2" type="HBoxContainer" parent="."]
 margin_top = 360.0
 margin_right = 1080.0
@@ -88,21 +99,24 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="MarginContainer" type="MarginContainer" parent="HBoxContainer2"]
+[node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer2"]
 margin_left = 720.0
 margin_right = 1080.0
 margin_bottom = 360.0
-custom_constants/margin_top = 120
 
-[node name="ButtonBack" type="Button" parent="HBoxContainer2/MarginContainer"]
-margin_top = 120.0
+[node name="Button" type="Button" parent="HBoxContainer2/VBoxContainer"]
 margin_right = 360.0
-margin_bottom = 360.0
+margin_bottom = 240.0
 rect_min_size = Vector2( 360, 240 )
 custom_fonts/font = ExtResource( 3 )
 text = "Back"
-[connection signal="pressed" from="HBoxContainer/Attack01" to="." method="_on_Attack01_pressed"]
-[connection signal="pressed" from="HBoxContainer/Attack02" to="." method="_on_Attack02_pressed"]
-[connection signal="pressed" from="HBoxContainer2/Attack03" to="." method="_on_Attack03_pressed"]
-[connection signal="pressed" from="HBoxContainer2/Attack04" to="." method="_on_Attack04_pressed"]
-[connection signal="pressed" from="HBoxContainer2/MarginContainer/ButtonBack" to="." method="_on_ButtonBack_pressed"]
+[connection signal="moveDown" from="." to="HBoxContainer/TargetMiniShow" method="_on_set_move"]
+[connection signal="button_down" from="HBoxContainer/Attack01" to="." method="_on_Attack01_button_down"]
+[connection signal="button_up" from="HBoxContainer/Attack01" to="." method="_on_Attack01_button_up"]
+[connection signal="button_down" from="HBoxContainer/Attack02" to="." method="_on_Attack02_button_down"]
+[connection signal="button_up" from="HBoxContainer/Attack02" to="." method="_on_Attack02_button_up"]
+[connection signal="button_down" from="HBoxContainer2/Attack03" to="." method="_on_Attack03_button_down"]
+[connection signal="button_up" from="HBoxContainer2/Attack03" to="." method="_on_Attack03_button_up"]
+[connection signal="button_down" from="HBoxContainer2/Attack04" to="." method="_on_Attack04_button_down"]
+[connection signal="button_up" from="HBoxContainer2/Attack04" to="." method="_on_Attack04_button_up"]
+[connection signal="button_up" from="HBoxContainer2/VBoxContainer/Button" to="." method="_on_Button_button_up"]

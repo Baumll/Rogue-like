@@ -12,6 +12,9 @@ func _ready():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 #
+func sethover(hov):
+	hover = hov
+
 func _process(delta):
 	if hover == true:
 		margin_top = sin(pos)*3

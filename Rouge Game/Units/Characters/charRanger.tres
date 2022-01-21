@@ -1,17 +1,21 @@
-[gd_resource type="Resource" load_steps=5 format=2]
+[gd_resource type="Resource" load_steps=6 format=2]
 
 [ext_resource path="res://ScribtAble/ClassChracter.gd" type="Script" id=1]
 [ext_resource path="res://Assets/images/Icons/Armor/b_t_05.png" type="Texture" id=2]
 [ext_resource path="res://Assets/images/chars/uokpl.rs-sterling-archer-png-5586779.png" type="Texture" id=3]
-[ext_resource path="res://Units/Attacks/MoveAllAttack.tres" type="Resource" id=4]
-
+[ext_resource path="res://Units/Attacks/MoveInstaKill.tres" type="Resource" id=4]
+[ext_resource path="res://Units/Attacks/MoveBuff.tres" type="Resource" id=5]
 
 [resource]
 script = ExtResource( 1 )
 klass = "Ranger"
-baseMaxHealth = 5
-baseStreng = 0
+level = 1
+baseExpToLevel = 20
+deathExp = 5
+baseMaxHealth = 50
+baseStrength = 0
 baseDefence = 0
+baseMagicDefence = 0
 baseDexterity = 0
 baseMagic = 0
 baseSpeed = 5
@@ -19,6 +23,5 @@ baseCritChance = 0
 baseCritModifier = 0
 image = ExtResource( 3 )
 icon = ExtResource( 2 )
-moves = [ ExtResource( 4 ) ]
+moves = [ ExtResource( 4 ), ExtResource( 5 ) ]
 equip = [ null, null ]
-status = [  ]

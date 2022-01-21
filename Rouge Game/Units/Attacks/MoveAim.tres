@@ -1,6 +1,6 @@
 [gd_resource type="Resource" load_steps=3 format=2]
 
-[ext_resource path="res://ScribtAble/Attacks/ClassMove.gd" type="Script" id=1]
+[ext_resource path="res://ScribtAble/ClassMove.gd" type="Script" id=1]
 [ext_resource path="res://Assets/images/Icons/Moves/pirates_62.png" type="Texture" id=2]
 
 [resource]
@@ -8,8 +8,9 @@ script = ExtResource( 1 )
 name = "Srike"
 description = "Puff Peng"
 image = ExtResource( 2 )
-cost = 10
+cost = 1
 targets = 6
-moves = [ 1 ]
-value = [ 12 ]
+physicalDmg = 8
+magicalDmg = 0
+heal = 0
 animation = "Test02"

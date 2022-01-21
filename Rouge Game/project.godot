@@ -15,6 +15,11 @@ _global_script_classes=[ {
 "path": "res://ScribtAble/ClassChracter.gd"
 }, {
 "base": "Resource",
+"class": "ClassInventory",
+"language": "GDScript",
+"path": "res://ScribtAble/ClassInventory.gd"
+}, {
+"base": "Resource",
 "class": "ClassItem",
 "language": "GDScript",
 "path": "res://ScribtAble/ClassItem.gd"
@@ -22,18 +27,31 @@ _global_script_classes=[ {
 "base": "Resource",
 "class": "ClassMove",
 "language": "GDScript",
-"path": "res://ScribtAble/Attacks/ClassMove.gd"
+"path": "res://ScribtAble/ClassMove.gd"
 }, {
 "base": "Resource",
 "class": "ClassStatus",
 "language": "GDScript",
 "path": "res://ScribtAble/ClassStatus.gd"
+}, {
+"base": "Resource",
+"class": "ScriptableRoomLoad",
+"language": "GDScript",
+"path": "res://ScribtAble/ClassRoomList.gd"
+}, {
+"base": "Node",
+"class": "TargetFindScript",
+"language": "GDScript",
+"path": "res://ScribtAble/TargetFindScript.gd"
 } ]
 _global_script_class_icons={
 "ClassChracter": "",
+"ClassInventory": "",
 "ClassItem": "",
 "ClassMove": "",
-"ClassStatus": ""
+"ClassStatus": "",
+"ScriptableRoomLoad": "",
+"TargetFindScript": ""
 }
 
 [application]
@@ -42,12 +60,17 @@ config/name="RougeLike"
 run/main_scene="res://scenes/Stuff/test.tscn"
 config/icon="res://icon.png"
 
+[autoload]
+
+CharacterAutoLoad="*res://ScribtAble/ClassChracter.gd"
+
 [display]
 
 window/size/width=1080
 window/size/height=1920
 window/size/test_width=270
 window/size/test_height=480
+window/handheld/orientation="portrait"
 window/stretch/mode="viewport"
 window/stretch/aspect="keep"
 
@@ -66,6 +89,4 @@ ui_mouse_right={
 
 [rendering]
 
-quality/driver/driver_name="GLES2"
 vram_compression/import_etc=true
-vram_compression/import_etc2=false

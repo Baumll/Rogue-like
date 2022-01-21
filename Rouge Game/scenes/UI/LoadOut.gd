@@ -1,59 +1,54 @@
 extends Control
 
+signal needDescription(state)
+signal loadChars(chars)
+signal exit()
 
-onready var lableName = $HBoxContainer/VBoxContainer/Label
-onready var lableHp = $HBoxContainer/VBoxContainer/Label2
-onready var lableDef = $HBoxContainer/VBoxContainer/Label3
-onready var lableStr = $HBoxContainer/VBoxContainer/Label4
-onready var lableMag = $HBoxContainer/VBoxContainer/Label5
-onready var lableDex = $HBoxContainer/VBoxContainer/Label6
-onready var lableSpd = $HBoxContainer/VBoxContainer/Label7
+onready var lableName = $VBoxContainer/HBoxContainer/VBoxContainer/Label
+onready var expProgess = $VBoxContainer/TextureProgress
+onready var acktive_character = null
 
-onready var rect = $HBoxContainer/CenterContainer/TextureRect
+onready var rect = $VBoxContainer/HBoxContainer/CenterContainer/TextureRect
+onready var gold = $GoldSign
+
+onready var ui_under = $VBoxContainer/Ui_Under
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	pass # Replace with function body.
+	emit_signal("needDescription",true)
+	var chars = get_node("/root/Main").get_fighters()
+	emit_signal("loadChars",chars)
+	load_all_chracters(chars)
 
+func _process(delta):
+	if acktive_character != null:
+		load_character(acktive_character)
 
 func load_character(character):
+	acktive_character = character
 	rect.texture = character.image
-	set_name(character.klass)
-	set_hp(character.health, character.maxHealth)
-	set_def(character.defence)
-	set_str(character.streng)
-	set_mag(character.magic)
-	set_dex(character.dexterity)
-	set_spd(character.speed)
-	
-
-
-func set_name(name):
-	lableName.text = name
+	lableName.text = (str(character.klass) 
+	+ "\nLevel: " + String(character.level)
+	+ "\nHealth: " + String(character.health) +"/" + String(character.maxHealth) 
+	+ "\nArmor: " + String(character.defence)
+	+ "\nStrength: " + String(character.strength)
+	+ "\nMagic: " + String(character.magic)
+	+ "\nDexterity: " + String(character.dexterity)
+	+ "\nSpeed: " + String(character.speed))
 	lableName.update()
-
-
-func set_hp(hp, maxHP):
-	var bla = "HP: " + String(hp) +"/" + String(maxHP)
-	lableHp.text = bla
-	lableHp.update()
-
-func set_def(def):
-	lableDef.text = "Def: " + String(def)
-	lableDef.update()
+	set_xp(character.experiencePoints, character.baseExpToLevel*character.level)
 	
-func set_str(streng):
-	lableStr.text = "Str: " + String(streng)
-	lableStr.update()
 
-func set_mag(mag):
-	lableMag.text = "Mag:" + String(mag)
-	lableMag.update()
-	
-func set_dex(dex):
-	lableDex.text = "Dex: " + String(dex)
-	lableDex.update()
-	
-func set_spd(spd):
-	lableSpd.text = "Spd: " + String(spd)
-	lableSpd.update()
+func load_all_chracters(args):
+	for x in args:
+		load_character(x)
+	#ui_under.load_characters(args)
+
+func set_xp(amount, maximal):
+	expProgess.set_value(round((float(amount)/float(maximal))*100.0))
+
+
+
+
+func _on_Ui_Under_back():
+	emit_signal("exit")

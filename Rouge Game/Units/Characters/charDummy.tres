@@ -5,6 +5,9 @@
 [resource]
 script = ExtResource( 1 )
 klass = "Dummy"
+level = 1
+baseExpToLevel = 20
+deathExp = 5
 baseMaxHealth = 5
 baseStreng = 0
 baseDefence = 0
@@ -15,4 +18,3 @@ baseCritChance = 0
 baseCritModifier = 0
 moves = [  ]
 equip = [ null, null ]
-status = [  ]

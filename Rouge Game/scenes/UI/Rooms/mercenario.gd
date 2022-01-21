@@ -2,7 +2,7 @@ extends Control
 
 
 signal mercenario
-
+signal exit
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -16,3 +16,4 @@ func _ready():
 
 func _on_Button_pressed():
 	emit_signal("mercenario")
+	emit_signal("exit")

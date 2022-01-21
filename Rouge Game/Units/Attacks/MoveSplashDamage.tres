@@ -1,0 +1,16 @@
+[gd_resource type="Resource" load_steps=3 format=2]
+
+[ext_resource path="res://ScribtAble/ClassMove.gd" type="Script" id=1]
+[ext_resource path="res://Assets/images/Icons/Moves/yellow_42.png" type="Texture" id=2]
+
+[resource]
+script = ExtResource( 1 )
+name = "Splash Dmg"
+description = "Ein Angriff der Auch die Partner betrifft"
+image = ExtResource( 2 )
+cost = 4
+targets = 1
+physicalDmg = 2
+magicalDmg = 2
+heal = 0
+animation = "TestStrike"

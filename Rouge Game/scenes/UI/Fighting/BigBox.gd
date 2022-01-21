@@ -61,3 +61,70 @@ func _on_Button6_button_down():
 
 func _on_Button6_button_up():
 	emit_signal("up",5)
+
+
+func _on_CharacterContainer_pressed():
+	pass # Replace with function body.
+
+
+func _on_CharacterContainer2_pressed():
+	pass # Replace with function body.
+
+
+func _on_CharacterContainer3_pressed():
+	pass # Replace with function body.
+
+
+func _on_CharacterContainer4_pressed():
+	pass # Replace with function body.
+
+
+func _on_CharacterContainer5_pressed():
+	pass # Replace with function body.
+
+
+func _on_CharacterContainer6_pressed():
+	pass # Replace with function body.
+
+
+func _on_CharacterContainer7_pressed():
+	pass # Replace with function body.
+
+
+func _on_CharacterContainer8_pressed():
+	pass # Replace with function body.
+
+
+func _on_CharacterContainer_pressed_down():
+	pass # Replace with function body.
+
+func _on_CharacterContainer_pressed_up():
+	emit_signal("up",0)
+
+func _on_CharacterContainer2_pressed_up():
+	emit_signal("up",1)
+
+
+func _on_CharacterContainer3_pressed_up():
+	emit_signal("up",2)
+
+
+func _on_CharacterContainer4_pressed_up():
+	emit_signal("up",3)
+
+
+func _on_CharacterContainer5_pressed_up():
+	emit_signal("up",4)
+
+func _on_CharacterContainer6_pressed_up():
+	emit_signal("up",5)
+
+
+func _on_CharacterContainer7_pressed_up():
+	emit_signal("up",6)
+
+
+func _on_CharacterContainer8_pressed_up():
+	emit_signal("up",7)
+
+

@@ -3,5 +3,5 @@
 [ext_resource path="res://fonts/Dramaga Demo.ttf" type="DynamicFontData" id=1]
 
 [resource]
-size = 80
+size = 160
 font_data = ExtResource( 1 )

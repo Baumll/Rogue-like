@@ -1,19 +1,48 @@
 extends Control
 
 
-signal char_selected(num)
+signal mun_selected(num)
+signal char_selected(character)
+signal move_pressed(move)
 
-
-onready var recktList = [$CenterContainer/HBoxContainer/char03/TextureRect3, $CenterContainer/HBoxContainer/char02/TextureRect2, $CenterContainer/HBoxContainer/char01/TextureRect]
-onready var buttonList = [$CenterContainer/HBoxContainer/char03, $CenterContainer/HBoxContainer/char02, $CenterContainer/HBoxContainer/char01]
-onready var extraButton = $CenterContainer/HBoxContainer/char04
+onready var recktList = []
+onready var buttonList = []
 var characterList = []
+var activeCharacter = null
+
+var mouse_off = null
+var switchMove = -1
+
+onready var container = $CenterContainer/HBoxContainer
+var preButton = preload("res://scenes/UI/Inventory/ButtonWithImage.tscn")
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	for x in recktList:
 		x.texture = null
+		
+func _process(delta):
+	if switchMove != -1:
+		buttonList[switchMove].change_pos(clamp(get_local_mouse_position().x-mouse_off.x,-20,864),buttonList[switchMove].rect_position.y) 
+		for i in range(0,buttonList.size()):
+			if i != switchMove:
+				if(get_local_mouse_position().x > buttonList[i].rect_position.x and get_local_mouse_position().x < buttonList[i].rect_position.x+(864/buttonList.size())):
+					container.move_child(buttonList[switchMove],buttonList[i].get_index () )
+					"""
+					var tmpSwitch = buttonList[switchMove]
+					buttonList[switchMove] = buttonList[i]
+					buttonList[i] = buttonList[switchMove]
+					tmpSwitch = characterList[switchMove]
+					characterList[switchMove] = characterList[i]
+					characterList[i] = tmpSwitch
+					"""
+					var tmpSwitch = get_node("/root/Main").characterList[switchMove] 
+					get_node("/root/Main").characterList[switchMove] = get_node("/root/Main").characterList[i]
+					get_node("/root/Main").characterList[i]  = tmpSwitch
 
+func set_char_active(character):
+	emit_signal("char_selected", character)
+	activeCharacter = character
 
 func reset():
 	characterList = []
@@ -21,10 +50,20 @@ func reset():
 		x.texture = null
 
 func add_character(character):
-	
-	if characterList.size() < 3:
+	if characterList.size() < 4:
+		activeCharacter = character
 		characterList.append(character)
-		recktList[characterList.size()-1].texture = character.icon
+		emit_signal("char_selected",character)
+		var newButton = preButton.instance()
+		newButton.connect("buttonNum", self, "_on_button_down")
+		newButton.connect("buttonPressedNum", self, "_on_button_pressed")
+		newButton.set_image(character.icon)
+		newButton.set_number(characterList.size()-1)
+		buttonList.append(newButton)
+		container.add_child(newButton)
+		container.move_child(newButton,newButton.get_index()-1 )
+		for i in buttonList:
+			i.change_size(864/buttonList.size(), 216 )
 
 func remove_character(character):
 	for x in range(characterList.size()):
@@ -33,17 +72,34 @@ func remove_character(character):
 			pass
 
 
-func _on_char03_pressed():
-	emit_signal("char_selected", 0)
+func _on_button_down(num):
+	emit_signal("mun_selected", num)
+	if characterList.size() > num:
+		emit_signal("char_selected", characterList[num])
+		activeCharacter = characterList[num]
+		mouse_off = Vector2(get_local_mouse_position()-buttonList[num].rect_position)
+		switchMove = num
 
 
-func _on_char02_pressed():
-	emit_signal("char_selected", 1)
-
-
-func _on_char01_pressed():
-	emit_signal("char_selected", 2)
-
+#Hier für das verschieben
+func _on_button_pressed(num):
+	buttonList[num].change_pos(864/buttonList.size()*buttonList[num].get_index(),0)
+	switchMove = -1
+		
 
 func _on_char04_pressed():
-	emit_signal("char_selected", -1)
+	emit_signal("mun_selected", -1)
+
+
+func _on_AttackButtons_attackUP(num):
+	if activeCharacter != null:
+		if activeCharacter.moves.size() > num:
+			if activeCharacter.moves[num] != null:
+				emit_signal("move_pressed",activeCharacter.moves[num])
+
+
+func _on_AttackButtons_attackDown(num):
+	if activeCharacter != null:
+		if activeCharacter.moves.size() > num:
+			if activeCharacter.moves[num] != null:
+				emit_signal("move_pressed",activeCharacter.moves[num])

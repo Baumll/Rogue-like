@@ -8,13 +8,15 @@ enum statusTypes {buff, heal, dmg}
 export(statusTypes) var statusTyp
 
 export(StreamTexture) var icon = null
+export(String) var name
 var turns = 0
 export(int) var maxTurns = 3
 export(float) var value = 0.0
 
 export(int) var maxHealth = 0
-export(int) var streng = 0
+export(int) var strength = 0
 export(int) var defence = 0
+export(int) var magicDefence = 0
 export(int) var dexterity = 0
 export(int) var magic = 0
 export(int) var speed = 0
@@ -25,13 +27,17 @@ export(float) var healProcent = 0.0
 export(float) var damgeProcent = 0.0
 export(float) var protectProcent = 0.0
 export(float) var maxHealthProcent = 0.0
-export(float) var strengProcent = 0.0
+export(float) var strengthProcent = 0.0
 export(float) var defenceProcent = 0.0
+export(float) var magicDefenceProcent = 0.0
 export(float) var dexterityProcent = 0.0
 export(float) var magicProcent = 0.0
 export(float) var speedProcent = 0.0
 
-
-
-
-
+export(Array, String) var gameStartTrigger = []
+export(Array, String) var gameEndTrigger = []
+export(Array, String) var getDmgTigger = []
+export(Array, String) var dealDmgTigger = []
+export(Array, String) var getHealTigger = []
+export(Array, String) var dealHealTigger = []
+export(Array, String) var afterMoveTrigger = []
