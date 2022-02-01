@@ -11,7 +11,8 @@ export(int) var maxCharacters = 4
 var characterList = []
 var activeChracter = null
 
-var inventory = null
+var inventory = [null,null,null,null,null,null,null,null,null]
+var gold = 20
 var roomList = []
 var room = null
 
@@ -25,7 +26,7 @@ onready var ui_under = $VBoxContainer/Ui_Under
 onready var two_choise = $VBoxContainer/TwoChoise
 onready var win_screen = $WinSzene
 onready var lose_screen = $LoseSzene
-onready var load_screen = preload("res://scenes/UI/LoadOut.tscn")
+onready var load_screen = preload("res://scenes/UI/LoadOut/LoadOut.tscn")
 
 func roomList():
 	#Rist Path, Icon, Rarity
@@ -40,8 +41,13 @@ func _ready():
 	rng.randomize()
 	setup_start()
 	roomList()
-	inventory = load("res://ScribtAble/ClassInventory.gd")
-	inventory = inventory.new()
+
+func _process(delta):
+	if(Input.is_action_just_pressed("ui_down")):
+		room = load(roomList[2][0]).instance()
+		add_child(room)
+		room.connect("exit", self,"_on_exit")
+		room.visible = true
 
 func setup_start():
 	disable_all()

@@ -4,17 +4,19 @@ signal move_num_up(num)
 signal move_num_down(num)
 signal move_clicked(move)
 signal selected_character(character)
+signal merchant(broker)
 signal back
 
 onready var charSelect = $VBoxContainer/CharSelect
 onready var attackButtons = $VBoxContainer/AttackButtons
-onready var inventory = $VBoxContainer/inventorySlots
+onready var inventory = $VBoxContainer/NewInventory
 onready var description = $VBoxContainer/DecriptinText
 
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	inventory.enable_inventory = false
+	
+	inventory.set_active_state(false)
 	pass # Replace with function body.
 	
 
@@ -55,16 +57,20 @@ func _on_inventorySlots_inventoryButton():
 func set_description_move(move):
 	description.set_move_text(move)
 
+func set_inventory():
+	attackButtons.visible = false
+	inventory.set_active_state(true)
+
 
 func _on_CharSelect_mun_selected(num):
 	#zwischen inventar und buttons toggeln
 	if num == -1:
 		if attackButtons.visible == true:
 			attackButtons.visible = false
-			inventory.enable_inventory = true
+			inventory.set_active_state(true)
 		else:
 			attackButtons.visible = true
-			inventory.enable_inventory = false
+			inventory.set_active_state(false)
 
 
 func _on_CharSelect_char_selected(character):
@@ -77,3 +83,10 @@ func _on_AttackButtons_attackUP(num):
 
 func _on_AttackButtons_attackDown(num):
 	emit_signal("move_num_down",num)
+
+
+
+
+func _on_merchant_merchant(broker):
+	set_inventory()
+	emit_signal("merchant",broker)

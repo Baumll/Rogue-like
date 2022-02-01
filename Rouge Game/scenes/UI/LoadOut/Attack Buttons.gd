@@ -5,7 +5,7 @@ signal attackDown(num) #Drücken
 signal moveDown(move) #Drücken
 signal back #Drücken
 
-onready var reckList = [$HBoxContainer/Attack01/TextureRect, $HBoxContainer/Attack02/TextureRect, $HBoxContainer2/Attack03/TextureRect, $HBoxContainer2/Attack04/TextureRect]
+onready var reckList = [$Attack01/Light2D, $Attack02/Light2D, $Attack03/Light2D, $Attack04/Light2D]
 onready var descriptionText = get_node("/root/Main/Control/VBoxContainer/DecriptinText")
 var aktive_moves = null
 

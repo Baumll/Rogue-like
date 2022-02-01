@@ -1,0 +1,20 @@
+[gd_resource type="Shader" format=2]
+
+[resource]
+code = "shader_type canvas_item;
+
+/*
+void fragment(){
+	vec4 bg = texture(TEXTURE,UV);
+	float avg = (bg.r + bg.g + bg.b) / 3f;
+	COLOR = vec4(avg,avg,avg,1f);
+}
+*/
+
+varying vec2 world_pos;
+
+
+void vertex(){
+	VERTEX.y += UV.x*60f;
+}
+"

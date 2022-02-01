@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=2]
+[gd_scene load_steps=13 format=2]
 
 [ext_resource path="res://Assets/images/Fight/Backgroumnd.png" type="Texture" id=1]
 [ext_resource path="res://scenes/UI/Fighting/FightScene.gd" type="Script" id=2]
@@ -9,6 +9,7 @@
 [ext_resource path="res://scenes/UI/Fighting/FighterTimeLine.tscn" type="PackedScene" id=7]
 [ext_resource path="res://scenes/UI/Inventory/Ui_Under.tscn" type="PackedScene" id=8]
 [ext_resource path="res://scenes/Stuff/ShakeCamera2D.tscn" type="PackedScene" id=9]
+[ext_resource path="res://scenes/UI/Fighting/FriendlyCharacterContainer.tscn" type="PackedScene" id=10]
 
 [sub_resource type="Shader" id=1]
 code = "shader_type canvas_item;
@@ -44,113 +45,165 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="BigBox" type="MarginContainer" parent="."]
+[node name="BigBox" type="Container" parent="."]
 margin_right = 1080.0
 margin_bottom = 980.0
 script = ExtResource( 6 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
-[node name="Teams" type="VBoxContainer" parent="BigBox"]
-margin_right = 1080.0
-margin_bottom = 980.0
-custom_constants/separation = 10
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="FighterTimeLine" parent="BigBox/Teams" instance=ExtResource( 7 )]
+[node name="FighterTimeLine" parent="BigBox" instance=ExtResource( 7 )]
 anchor_right = 0.0
 anchor_bottom = 0.0
 margin_right = 1080.0
-margin_bottom = 80.0
+margin_bottom = 1058.0
 rect_min_size = Vector2( 0, 80 )
 
-[node name="TopTeam" type="MarginContainer" parent="BigBox/Teams"]
-margin_top = 90.0
-margin_right = 1080.0
-margin_bottom = 530.0
-rect_min_size = Vector2( 0, 440 )
+[node name="T" type="MarginContainer" parent="BigBox"]
+margin_top = 100.0
+margin_right = 1079.0
+margin_bottom = 564.0
+rect_min_size = Vector2( 0, 400 )
+size_flags_horizontal = 3
+size_flags_vertical = 3
 
-[node name="FightersRoster" type="HBoxContainer" parent="BigBox/Teams/TopTeam"]
-margin_right = 1080.0
-margin_bottom = 440.0
+[node name="FR" type="HBoxContainer" parent="BigBox/T"]
+margin_right = 1079.0
+margin_bottom = 554.0
 grow_horizontal = 0
 grow_vertical = 0
 custom_constants/separation = 20
-alignment = 2
 
-[node name="CharacterContainer" parent="BigBox/Teams/TopTeam/FightersRoster" instance=ExtResource( 3 )]
-margin_left = 200.0
-margin_top = 0.0
-margin_right = 400.0
-margin_bottom = 440.0
-flip = true
+[node name="MarginContainer" type="MarginContainer" parent="BigBox/T/FR"]
+margin_bottom = 554.0
 
-[node name="CharacterContainer2" parent="BigBox/Teams/TopTeam/FightersRoster" instance=ExtResource( 3 )]
-margin_left = 420.0
-margin_top = 0.0
-margin_right = 620.0
-margin_bottom = 440.0
-flip = true
-
-[node name="CharacterContainer3" parent="BigBox/Teams/TopTeam/FightersRoster" instance=ExtResource( 3 )]
-margin_left = 640.0
-margin_top = 0.0
-margin_right = 840.0
-margin_bottom = 440.0
-flip = true
-
-[node name="CharacterContainer4" parent="BigBox/Teams/TopTeam/FightersRoster" instance=ExtResource( 3 )]
-margin_left = 860.0
-margin_top = 0.0
-margin_right = 1060.0
-margin_bottom = 440.0
-flip = true
-
-[node name="MarginContainer" type="MarginContainer" parent="BigBox/Teams/TopTeam/FightersRoster"]
-margin_left = 1080.0
-margin_right = 1080.0
-margin_bottom = 440.0
-
-[node name="TopTeam2" type="MarginContainer" parent="BigBox/Teams"]
-margin_top = 540.0
-margin_right = 1080.0
-margin_bottom = 980.0
-rect_min_size = Vector2( 0, 440 )
-
-[node name="FightersRoster" type="HBoxContainer" parent="BigBox/Teams/TopTeam2"]
-margin_right = 1080.0
-margin_bottom = 440.0
-custom_constants/separation = 20
-
-[node name="MarginContainer" type="MarginContainer" parent="BigBox/Teams/TopTeam2/FightersRoster"]
-margin_bottom = 440.0
-
-[node name="CharacterContainer5" parent="BigBox/Teams/TopTeam2/FightersRoster" instance=ExtResource( 3 )]
+[node name="V" type="VBoxContainer" parent="BigBox/T/FR"]
 margin_left = 20.0
-margin_top = 0.0
 margin_right = 220.0
-margin_bottom = 440.0
+margin_bottom = 554.0
 
-[node name="CharacterContainer6" parent="BigBox/Teams/TopTeam2/FightersRoster" instance=ExtResource( 3 )]
+[node name="MarginContainer" type="MarginContainer" parent="BigBox/T/FR/V"]
+margin_right = 200.0
+margin_bottom = 150.0
+rect_min_size = Vector2( 0, 150 )
+
+[node name="C" parent="BigBox/T/FR/V" instance=ExtResource( 3 )]
+margin_top = 154.0
+margin_bottom = 554.0
+flip = true
+
+[node name="V2" type="VBoxContainer" parent="BigBox/T/FR"]
 margin_left = 240.0
-margin_top = 0.0
 margin_right = 440.0
-margin_bottom = 440.0
+margin_bottom = 554.0
 
-[node name="CharacterContainer7" parent="BigBox/Teams/TopTeam2/FightersRoster" instance=ExtResource( 3 )]
+[node name="MarginContainer" type="MarginContainer" parent="BigBox/T/FR/V2"]
+margin_right = 200.0
+margin_bottom = 100.0
+rect_min_size = Vector2( 1, 100 )
+
+[node name="C2" parent="BigBox/T/FR/V2" instance=ExtResource( 3 )]
+margin_top = 104.0
+margin_bottom = 504.0
+flip = true
+
+[node name="V3" type="VBoxContainer" parent="BigBox/T/FR"]
 margin_left = 460.0
-margin_top = 0.0
 margin_right = 660.0
-margin_bottom = 440.0
+margin_bottom = 554.0
 
-[node name="CharacterContainer8" parent="BigBox/Teams/TopTeam2/FightersRoster" instance=ExtResource( 3 )]
+[node name="MarginContainer" type="MarginContainer" parent="BigBox/T/FR/V3"]
+margin_right = 200.0
+margin_bottom = 50.0
+rect_min_size = Vector2( 0, 50 )
+
+[node name="C3" parent="BigBox/T/FR/V3" instance=ExtResource( 3 )]
+margin_top = 54.0
+margin_bottom = 454.0
+flip = true
+
+[node name="C4" parent="BigBox/T/FR" instance=ExtResource( 3 )]
 margin_left = 680.0
 margin_top = 0.0
 margin_right = 880.0
-margin_bottom = 440.0
+margin_bottom = 554.0
+flip = true
+
+[node name="T2" type="MarginContainer" parent="BigBox"]
+margin_top = 483.0
+margin_right = 1080.0
+margin_bottom = 1058.0
+rect_min_size = Vector2( 0, 350 )
+
+[node name="FR" type="HBoxContainer" parent="BigBox/T2"]
+margin_right = 1080.0
+margin_bottom = 575.0
+custom_constants/separation = 20
+alignment = 2
+
+[node name="V3" type="VBoxContainer" parent="BigBox/T2/FR"]
+margin_left = 200.0
+margin_right = 400.0
+margin_bottom = 575.0
+
+[node name="MarginContainer" type="MarginContainer" parent="BigBox/T2/FR/V3"]
+margin_right = 200.0
+margin_bottom = 150.0
+rect_min_size = Vector2( 0, 150 )
+
+[node name="C5" parent="BigBox/T2/FR/V3" instance=ExtResource( 10 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 0.0
+margin_top = 154.0
+margin_right = 200.0
+margin_bottom = 504.0
+
+[node name="V" type="VBoxContainer" parent="BigBox/T2/FR"]
+margin_left = 420.0
+margin_right = 620.0
+margin_bottom = 575.0
+
+[node name="MarginContainer2" type="MarginContainer" parent="BigBox/T2/FR/V"]
+margin_right = 200.0
+margin_bottom = 100.0
+rect_min_size = Vector2( 0, 100 )
+
+[node name="C6" parent="BigBox/T2/FR/V" instance=ExtResource( 10 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 0.0
+margin_top = 104.0
+margin_right = 200.0
+margin_bottom = 454.0
+
+[node name="V2" type="VBoxContainer" parent="BigBox/T2/FR"]
+margin_left = 640.0
+margin_right = 840.0
+margin_bottom = 575.0
+
+[node name="MarginContainer" type="MarginContainer" parent="BigBox/T2/FR/V2"]
+margin_right = 200.0
+margin_bottom = 50.0
+rect_min_size = Vector2( 0, 50 )
+
+[node name="C7" parent="BigBox/T2/FR/V2" instance=ExtResource( 10 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 0.0
+margin_top = 54.0
+margin_right = 200.0
+margin_bottom = 404.0
+
+[node name="C8" parent="BigBox/T2/FR" instance=ExtResource( 10 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 860.0
+margin_right = 1060.0
+margin_bottom = 575.0
+
+[node name="MarginContainer" type="MarginContainer" parent="BigBox/T2/FR"]
+margin_left = 1080.0
+margin_right = 1080.0
+margin_bottom = 575.0
 
 [node name="Ui_Under" parent="." instance=ExtResource( 8 )]
 margin_top = 984.0
@@ -180,23 +233,15 @@ mouse_filter = 2
 [connection signal="useCharSelect" from="." to="Ui_Under" method="set_charSelect"]
 [connection signal="down" from="BigBox" to="." method="_on_BigBox_down"]
 [connection signal="up" from="BigBox" to="." method="_on_BigBox_up"]
-[connection signal="pressed" from="BigBox/Teams/TopTeam/FightersRoster/CharacterContainer" to="BigBox" method="_on_CharacterContainer_pressed"]
-[connection signal="pressed_down" from="BigBox/Teams/TopTeam/FightersRoster/CharacterContainer" to="BigBox" method="_on_CharacterContainer_pressed_down"]
-[connection signal="pressed_up" from="BigBox/Teams/TopTeam/FightersRoster/CharacterContainer" to="BigBox" method="_on_CharacterContainer_pressed_up"]
-[connection signal="pressed" from="BigBox/Teams/TopTeam/FightersRoster/CharacterContainer2" to="BigBox" method="_on_CharacterContainer2_pressed"]
-[connection signal="pressed_up" from="BigBox/Teams/TopTeam/FightersRoster/CharacterContainer2" to="BigBox" method="_on_CharacterContainer2_pressed_up"]
-[connection signal="pressed" from="BigBox/Teams/TopTeam/FightersRoster/CharacterContainer3" to="BigBox" method="_on_CharacterContainer3_pressed"]
-[connection signal="pressed_up" from="BigBox/Teams/TopTeam/FightersRoster/CharacterContainer3" to="BigBox" method="_on_CharacterContainer3_pressed_up"]
-[connection signal="pressed" from="BigBox/Teams/TopTeam/FightersRoster/CharacterContainer4" to="BigBox" method="_on_CharacterContainer4_pressed"]
-[connection signal="pressed_up" from="BigBox/Teams/TopTeam/FightersRoster/CharacterContainer4" to="BigBox" method="_on_CharacterContainer4_pressed_up"]
-[connection signal="pressed" from="BigBox/Teams/TopTeam2/FightersRoster/CharacterContainer5" to="BigBox" method="_on_CharacterContainer5_pressed"]
-[connection signal="pressed_up" from="BigBox/Teams/TopTeam2/FightersRoster/CharacterContainer5" to="BigBox" method="_on_CharacterContainer5_pressed_up"]
-[connection signal="pressed" from="BigBox/Teams/TopTeam2/FightersRoster/CharacterContainer6" to="BigBox" method="_on_CharacterContainer6_pressed"]
-[connection signal="pressed_up" from="BigBox/Teams/TopTeam2/FightersRoster/CharacterContainer6" to="BigBox" method="_on_CharacterContainer6_pressed_up"]
-[connection signal="pressed" from="BigBox/Teams/TopTeam2/FightersRoster/CharacterContainer7" to="BigBox" method="_on_CharacterContainer7_pressed"]
-[connection signal="pressed_up" from="BigBox/Teams/TopTeam2/FightersRoster/CharacterContainer7" to="BigBox" method="_on_CharacterContainer7_pressed_up"]
-[connection signal="pressed" from="BigBox/Teams/TopTeam2/FightersRoster/CharacterContainer8" to="BigBox" method="_on_CharacterContainer8_pressed"]
-[connection signal="pressed_up" from="BigBox/Teams/TopTeam2/FightersRoster/CharacterContainer8" to="BigBox" method="_on_CharacterContainer8_pressed_up"]
+[connection signal="pressed" from="BigBox/T/FR/V/C" to="BigBox" method="_on_CharacterContainer_pressed"]
+[connection signal="pressed_down" from="BigBox/T/FR/V/C" to="BigBox" method="_on_CharacterContainer_pressed_down"]
+[connection signal="pressed_up" from="BigBox/T/FR/V/C" to="BigBox" method="_on_CharacterContainer_pressed_up"]
+[connection signal="pressed" from="BigBox/T/FR/V2/C2" to="BigBox" method="_on_CharacterContainer2_pressed"]
+[connection signal="pressed_up" from="BigBox/T/FR/V2/C2" to="BigBox" method="_on_CharacterContainer2_pressed_up"]
+[connection signal="pressed" from="BigBox/T/FR/V3/C3" to="BigBox" method="_on_CharacterContainer3_pressed"]
+[connection signal="pressed_up" from="BigBox/T/FR/V3/C3" to="BigBox" method="_on_CharacterContainer3_pressed_up"]
+[connection signal="pressed" from="BigBox/T/FR/C4" to="BigBox" method="_on_CharacterContainer4_pressed"]
+[connection signal="pressed_up" from="BigBox/T/FR/C4" to="BigBox" method="_on_CharacterContainer4_pressed_up"]
 [connection signal="move_num_down" from="Ui_Under" to="." method="_on_AttackButtons_attackDown"]
 [connection signal="move_num_up" from="Ui_Under" to="." method="_on_AttackButtons_attackUP"]
 [connection signal="selected_character" from="Ui_Under" to="." method="_on_Ui_Under_selected_character"]

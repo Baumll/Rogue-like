@@ -1,8 +1,7 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=3 format=2]
 
 [ext_resource path="res://fonts/UI/FontBig.tres" type="DynamicFont" id=1]
 [ext_resource path="res://scenes/UI/Rooms/ItemRoom.gd" type="Script" id=2]
-[ext_resource path="res://scenes/UI/Inventory/Ui_Under.tscn" type="PackedScene" id=3]
 
 [node name="ItemRoom" type="Control"]
 anchor_right = 1.0
@@ -21,7 +20,4 @@ text = "New item"
 __meta__ = {
 "_edit_use_anchors_": false
 }
-
-[node name="Ui_Under" parent="." instance=ExtResource( 3 )]
-visible = false
 [connection signal="button_up" from="Button" to="." method="_on_Button_button_up"]

@@ -1,12 +1,13 @@
 [gd_resource type="Resource" load_steps=3 format=2]
 
 [ext_resource path="res://ScribtAble/ClassItem.gd" type="Script" id=1]
-[ext_resource path="res://Assets/images/Icons/Books/book_08_b.png" type="Texture" id=2]
+[ext_resource path="res://Assets/images/Icons/Books/book_13_b.png" type="Texture" id=2]
 
 [resource]
 script = ExtResource( 1 )
-type = "Buch"
+name = "Book"
 description = "ein Dummes Buch"
+icon = ExtResource( 2 )
 value = 10
 maxHealth = 5
 strength = 0
@@ -27,4 +28,3 @@ defenceProcent = 0.0
 dexterityProcent = 0.0
 magicProcent = 0.0
 speedProcent = 0.0
-image = ExtResource( 2 )

@@ -9,8 +9,13 @@ signal exit()
 
 onready var blur = $Blur
 onready var MoveAnimationPanel = $MoveAnimationPanel
-onready var timeLine = $BigBox/Teams/FighterTimeLine
-
+onready var timeLine = $BigBox/FighterTimeLine
+var preFighter = preload("res://ScribtAble/ClassChracter.gd")
+var preMove = preload("res://ScribtAble/ClassMove.gd")
+var preCombatAttackScript = preload("res://ScribtAble/CombatScrips/CombatScriptPreAttackOffence.gd")
+var preCombatDefenseScript = preload("res://ScribtAble/CombatScrips/CombatScriptPreAttackDefence.gd")
+var afterCombatDefenseScript = preload("res://ScribtAble/CombatScrips/CombatScriptAfterAttackDefense.gd")
+var afterCombatAttackScript = preload("res://ScribtAble/CombatScrips/CombatScriptAfterAttackOffence.gd")
 
 var rng = RandomNumberGenerator.new()
 
@@ -38,6 +43,11 @@ var button_time_start = 0 #Die timer Ab wann das halten nicht mehr als klicken g
 var ep = 0 #Wie viel EP zwischend en Charaktären aufgeteilt wird
 
 func _ready():
+	preCombatAttackScript = preCombatAttackScript.new()
+	preCombatDefenseScript = preCombatDefenseScript.new()
+	afterCombatDefenseScript = afterCombatDefenseScript.new()
+	afterCombatAttackScript = afterCombatAttackScript.new()
+	
 	setup_fight()
 	start_fight()
 
@@ -364,21 +374,66 @@ func select_targets(move):
 func use_move_on_fighter(target, source, move):
 	var target2 = get_fighter(target)
 	var source2 = get_fighter(source)
+	var target3 = copy_fighter(target2)
+	var source3 = copy_fighter(source2)
+	var move3 = copyMove(move)
+	
+	#Hier kommen die Pre Combat Effekte
+	for i in source3.statusList:
+		if i.statusTyp == 3: #combat
+			if(i.preMove != null):
+				if preCombatAttackScript.has_method(i.preMove):
+					preCombatAttackScript.call(i.preMove,target3,source3,move3)
+				else:
+					print("Warning: PreCombatAttack Source method: " + i.preMove + " dose not exist")
+	for i in target3.statusList:
+		if i.statusTyp == 3: #combat
+			if(i.preMove != null):
+				if preCombatDefenseScript.has_method(i.preMove):
+					preCombatDefenseScript.preMove(target3,source3,move3)
+				else:
+					print("Warning: PreCombatDefense Source method: " + i.preMove + "dose not exist")
+	
 	var rtn = []
 	if move.physicalDmg > 0:
-		rtn.append(target2.get_magic_dmg(floor(move.physicalDmg + source2.strength -source2.defence)))
+		rtn.append(target2.get_magic_dmg(floor(move3.physicalDmg + source3.strength -source3.defence)))
 		source2.has_dealt_magic(rtn[0])
 	if move.magicalDmg > 0:
-		rtn.append(target2.get_dmg(floor(move.magicalDmg + source2.magic -source2.magicDefence)))
+		rtn.append(target2.get_dmg(floor(move3.magicalDmg + source3.magic -source3.magicDefence)))
 		source2.has_dealt_physical(rtn[1])
 	if move.heal > 0:
-		rtn.append((target2.get_heal(floor(move.heal*(1+source2.healProcent)))))
+		rtn.append((target2.get_heal(floor(move3.heal*(1+source3.healProcent)))))
 		source2.has_healed(rtn[2])
+	
+	#Hier kommen die After Combat Effekte
+	for i in source3.statusList:
+		if i.statusTyp == 3: #combat
+			if(i.preMove != null):
+				if afterCombatDefenseScript.has_method(i.preMove):
+					afterCombatDefenseScript.call(i.preMove,target3,source3,move3)
+				else:
+					print("Warning: AfterCombatDefense Source method: " + i.preMove + " dose not exist")
+	for i in target3.statusList:
+		if i.statusTyp == 3: #combat
+			if(i.preMove != null):
+				if afterCombatAttackScript.has_method(i.preMove):
+					afterCombatAttackScript.preMove(target3,source3,move3)
+				else:
+					print("Warning: AfterCombatAttack Source method: " + i.preMove + "dose not exist")
 	buff(target, move.status)
 	update_health(target)
 	update_health(source)
 	return rtn
 
+func copy_fighter(fighter):
+	var newFighter = preFighter.new()
+	newFighter.loadStats(fighter)
+	return newFighter
+
+func copyMove(move):
+	var newMove = preMove.new()
+	newMove.load_move(move)
+	return newMove
 
 #Spielt die Animation bei kämpfer num von move ab OLD
 func play_move_animation(num, move):
@@ -438,15 +493,15 @@ func customComparison(a,b):
 
 func find_CharacterContainer() -> Array:
 	var fighterRectList = []
-	fighterRectList.append($BigBox/Teams/TopTeam/FightersRoster/CharacterContainer)
-	fighterRectList.append($BigBox/Teams/TopTeam/FightersRoster/CharacterContainer2)
-	fighterRectList.append($BigBox/Teams/TopTeam/FightersRoster/CharacterContainer3)
-	fighterRectList.append($BigBox/Teams/TopTeam/FightersRoster/CharacterContainer4)
+	fighterRectList.append($BigBox/T/FR/V/C)
+	fighterRectList.append($BigBox/T/FR/V2/C2)
+	fighterRectList.append($BigBox/T/FR/V3/C3)
+	fighterRectList.append($BigBox/T/FR/C4)
 	
-	fighterRectList.append($BigBox/Teams/TopTeam2/FightersRoster/CharacterContainer5)
-	fighterRectList.append($BigBox/Teams/TopTeam2/FightersRoster/CharacterContainer6)
-	fighterRectList.append($BigBox/Teams/TopTeam2/FightersRoster/CharacterContainer7)
-	fighterRectList.append($BigBox/Teams/TopTeam2/FightersRoster/CharacterContainer8)
+	fighterRectList.append($BigBox/T2/FR/V3/C5)
+	fighterRectList.append($BigBox/T2/FR/V/C6)
+	fighterRectList.append($BigBox/T2/FR/V2/C7)
+	fighterRectList.append($BigBox/T2/FR/C8)
 	return fighterRectList
 
 
@@ -483,7 +538,7 @@ func _on_AttackButtons_attackDown(num):
 			button_time_start = OS.get_ticks_msec()
 			#Ziele Zeigen
 			var targets = select_targets(get_fighter(activeFighter).moves[num])
-			timeLine.set_order(set_time_line(initative), get_fighter(activeFighter).moves[num])
+			timeLine.set_order(set_time_line(initative), get_fighter(activeFighter).moves[num],get_fighter(activeFighter).icon)
 			for i in targets:
 				fighterRectList[i].set_selection(true)
 		else:

@@ -16,6 +16,7 @@ var speed = 5
 var momentum = 0
 var critChance = 0
 var critModifier = 0 #Wie viel schade meher ein Kriischer treffer macht 0 = 200%
+
 export(int) var baseExpToLevel = 20 #Wie viel Exp pro level draufgeschlagen wird damit er aufleved
 export(int) var deathExp = 5 #Wie viel Exp der Chracter gibt wenn man ihn besiegt mal Level
 
@@ -40,7 +41,7 @@ var defenceProcent = 0.0
 var dexterityProcent = 0.0
 var magicProcent = 0.0
 var speedProcent = 0.0
-
+var skillPoints = 0
 
 
 export(Texture) var image = null
@@ -52,7 +53,11 @@ export(Array, Resource) var equip = [null,null]
 var statusList = []
 
 func loadStats(path):
-	var item = load(path)
+	var item
+	if typeof(path) == TYPE_STRING:
+		item = load(path)
+	else:
+		item = path
 	baseMaxHealth = item.baseMaxHealth
 	baseStrength = item.baseStrength
 	baseDefence = item.baseDefence
@@ -81,6 +86,7 @@ func loadStats(path):
 	
 	moves = item.moves
 	equip = item.equip
+	statusList = item.statusList
 
 
 
@@ -145,25 +151,41 @@ func iterate_status():
 	calculate_all_stats()
 	for i in range(statusList.size()):
 		if statusList[i] != null:
-			statusList[i].turns -= 1
+			if(statusList[i].turns > 1):
+				statusList[i].turns -= 1
 			if statusList[i].statusTyp == statusList[i].statusTypes.dmg:
 				get_dmg(statusList[i].value)
 			if statusList[i].statusTyp == statusList[i].statusTypes.heal:
 				get_heal(statusList[i].value)
-			if statusList[i].turns <= 0:
+			if statusList[i].turns == 0:
 				removeList.append(i)
 	for i in removeList:
 		statusList.remove(i)
 		
 
 func append_status(status):
-	for i in statusList:
-		if i.name == status.name:
-			if i.turns < status.maxTurns:
-				i.turns = status.maxTurns
-			return
-	statusList.append(status)
-	
+	if status != null:
+		for i in statusList:
+			if i.name == status.name:
+				if i.turns < status.maxTurns:
+					i.turns = status.maxTurns
+				return
+		statusList.append(status)
+
+func remove_status(status):
+	if status != null:
+		for i in range(statusList.size()):
+			if statusList[i].name == status.name:
+				statusList.remove(i)
+
+func remove_item(item):
+	if item != null:
+		remove_status(item.status)
+
+func add_item(item):
+	if item != null:
+		append_status(item.status)
+
 """
 old
 func iterate_status():
@@ -207,6 +229,7 @@ func give_exp(amount):
 	experiencePoints += amount
 	if experiencePoints > level*baseExpToLevel:
 		experiencePoints -= level*baseExpToLevel
+		skillPoints += 2
 		level += 1
 
 func has_dealt_magic(amount):

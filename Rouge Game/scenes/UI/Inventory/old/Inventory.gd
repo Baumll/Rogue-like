@@ -2,7 +2,7 @@ extends Control
 
 signal inventoryButton
 signal itemSold(item)
-signal descriptionText(text)
+signal ItemDescription(text)
 
 export(int) var gold = 0
 
@@ -42,12 +42,12 @@ func _process(delta):
 					remove_child(carry_item[1])
 					add_child(carry_item[1])
 					carry_prev_pos = slots.get_slot(get_global_mouse_position())
-					emit_signal("descriptionText", carry_item[0].description)
+					emit_signal("ItemDescription", carry_item[0])
 					button.icon = trashIcon
 					button.text = ""
 			elif merchant != null:
 				carry_item = merchant.drag(get_global_mouse_position())
-				if carry_item != null:
+				if carry_item != [null,null]:
 					remove_child(carry_item[1])
 					add_child(carry_item[1])
 					carry_prev_pos = Vector2(-2,-2)
@@ -57,7 +57,7 @@ func _process(delta):
 			
 	#item wird losgelassen
 		if(Input.is_action_just_released("ui_mouse_left")):
-			if(carry_item != null):
+			if(carry_item != [null,null]):
 				if carry_prev_pos != Vector2(-2,-2): #Vector2
 					if (get_global_mouse_position().x >= slots.rect_global_position.x && get_global_mouse_position().y >= slots.rect_global_position.y): #Equipen, umräumen etc
 						print("Move")
@@ -66,7 +66,7 @@ func _process(delta):
 							carry_prev_pos = Vector2(-1,-1)
 					elif merchant != null: #Verkaufen
 						print("sell")
-						gold += carry_item.value
+						gold += carry_item[0].value
 						carry_item[1].queue_free()
 						carry_item = [null,null]
 						carry_prev_pos = Vector2(-1,-1)
@@ -106,6 +106,7 @@ func create_item():
 		add_child(item_instance2)
 		item_instance2.set_image(item_instance.image)
 		slots.add_item(item_instance,item_instance2)
+		set_gold(true)
 		
 
 func create_item_to_sell():
@@ -113,7 +114,12 @@ func create_item_to_sell():
 		var new_item = load("res://ScribtAble/ClassItem.gd")
 		var item_instance = new_item.new()
 		item_instance._ready()
-		merchant.add_item(item_instance)
+		new_item = load("res://scenes/UI/Inventory/Item.tscn")
+		var item_instance2 = new_item.instance()
+		item_instance2.set_image(item_instance.image)
+		merchant.add_item(item_instance2)
+		add_child(item_instance2)
+		set_gold(true)
 
 func load_equip(character):
 	slots.activeCharacter = character
@@ -151,15 +157,12 @@ func _on_set_gold_descr(gold, description):
 	descriptionText = description
 	goldSign.set_gold(gold)
 
-func _on_mercant_start(merc, gold, description):
-	set_gold(true)
+func _on_mercant_start(merc):
 	merchant = merc
-	goldSign = gold
-	descriptionText = description
-	goldSign.set_gold(gold)
 	create_item_to_sell()
 	create_item_to_sell()
 	create_item_to_sell()
+	set_gold(true)
 
 func set_gold(state):
 	for i in get_children():

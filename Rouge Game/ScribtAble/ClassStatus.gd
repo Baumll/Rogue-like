@@ -4,7 +4,7 @@ extends Resource
 class_name ClassStatus
 
 
-enum statusTypes {buff, heal, dmg}
+enum statusTypes {buff, heal, dmg, combat}
 export(statusTypes) var statusTyp
 
 export(StreamTexture) var icon = null
@@ -34,10 +34,7 @@ export(float) var dexterityProcent = 0.0
 export(float) var magicProcent = 0.0
 export(float) var speedProcent = 0.0
 
-export(Array, String) var gameStartTrigger = []
-export(Array, String) var gameEndTrigger = []
-export(Array, String) var getDmgTigger = []
-export(Array, String) var dealDmgTigger = []
-export(Array, String) var getHealTigger = []
-export(Array, String) var dealHealTigger = []
-export(Array, String) var afterMoveTrigger = []
+export(String) var combatStartTrigger = null
+export(String) var combatEndTrigger = null
+export(String) var preMove = null
+export(String) var afterMove = null

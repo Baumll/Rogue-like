@@ -5,8 +5,9 @@ class_name ClassItem
 var rng = RandomNumberGenerator.new()
 var source
 
-export(String) var type = "Dagger"
+export(String) var name = "Dagger"
 export(String) var description = ""
+export(StreamTexture) var icon = null
 export(int) var value = 10
 export(int) var maxHealth = 5
 export(int) var strength = 0
@@ -27,7 +28,8 @@ export(float) var defenceProcent = 0.0
 export(float) var dexterityProcent = 0.0
 export(float) var magicProcent = 0.0
 export(float) var speedProcent = 0.0
-export(StreamTexture) var image = null
+export(Resource) var status = null
+
 
 
 func _ready():
@@ -35,19 +37,20 @@ func _ready():
 	var ran = rng.randi_range(0,2)
 	match ran:
 		0:
-			load_item("res://ScribtAble/Items/ItemDagger.tres")
+			load_item("res://Units/Items/ItemDagger.tres")
 			continue
 		1:
-			load_item("res://ScribtAble/Items/ItemHammer.tres")
+			load_item("res://Units/Items/ItemHammer.tres")
 			continue
 		2:
-			load_item("res://ScribtAble/Items/ItemBook.tres")
+			load_item("res://Units/Items/ItemBook.tres")
 			continue
+	
 
 func load_item(path):
 	if path != "" and path != null:
 		var item = load(path)
-		type = item.type
+		name = item.name
 		description = item.description
 		value = item.value
 		maxHealth = item.maxHealth
@@ -69,4 +72,5 @@ func load_item(path):
 		dexterityProcent = item.dexterityProcent
 		magicProcent = item.magicProcent
 		speedProcent = item.speedProcent
-		image = item.image
+		icon = item.icon
+		status = item.status

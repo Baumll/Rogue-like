@@ -62,7 +62,7 @@ config/icon="res://icon.png"
 
 [autoload]
 
-CharacterAutoLoad="*res://ScribtAble/ClassChracter.gd"
+SaveData="*res://Data/ImportSave.gd"
 
 [display]
 

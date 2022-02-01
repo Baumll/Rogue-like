@@ -1,0 +1,44 @@
+{
+  "Tabellenblatt1": {
+    "Helmet": {
+      "ItemValue": 3,
+      "ItemRarity": 1,
+      "ItemMaxHP": 0,
+      "ItemPhysical": 0,
+      "ItemMagic": 0,
+      "ItemArmor": 1,
+      "ItemMagicDefense": 0,
+      "ItemSpeed": 0
+    },
+    "Boots": {
+      "ItemValue": 3,
+      "ItemRarity": 1,
+      "ItemMaxHP": 0,
+      "ItemPhysical": 0,
+      "ItemMagic": 0,
+      "ItemArmor": 0,
+      "ItemMagicDefense": 0,
+      "ItemSpeed": 1
+    },
+    "Book": {
+      "ItemValue": 4,
+      "ItemRarity": 1,
+      "ItemMaxHP": 0,
+      "ItemPhysical": 0,
+      "ItemMagic": 1,
+      "ItemArmor": 0,
+      "ItemMagicDefense": 0,
+      "ItemSpeed": 0
+    },
+    "Sword": {
+      "ItemValue": 7,
+      "ItemRarity": 2,
+      "ItemMaxHP": 0,
+      "ItemPhysical": 2,
+      "ItemMagic": 0,
+      "ItemArmor": 0,
+      "ItemMagicDefense": 0,
+      "ItemSpeed": 0
+    }
+  }
+}

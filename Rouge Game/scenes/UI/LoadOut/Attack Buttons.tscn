@@ -1,0 +1,177 @@
+[gd_scene load_steps=13 format=2]
+
+[ext_resource path="res://scenes/UI/Inventory/TargetMiniShow.tscn" type="PackedScene" id=2]
+[ext_resource path="res://scenes/UI/LoadOut/Attack Buttons.gd" type="Script" id=3]
+[ext_resource path="res://fonts/UI/FontSmal.tres" type="DynamicFont" id=4]
+[ext_resource path="res://Assets/images/UI_under/ObenRechts.png" type="Texture" id=5]
+[ext_resource path="res://Assets/images/UI_under/UntenLinks.png" type="Texture" id=6]
+[ext_resource path="res://Assets/images/UI_under/UntenRechts.png" type="Texture" id=7]
+[ext_resource path="res://Assets/images/UI_under/ObenLinks.png" type="Texture" id=8]
+[ext_resource path="res://Assets/images/UI_under/Screenshot (61).png" type="Texture" id=9]
+[ext_resource path="res://Assets/images/Icons/Moves/red_13.PNG" type="Texture" id=10]
+[ext_resource path="res://Assets/images/Icons/Moves/violet_07.PNG" type="Texture" id=11]
+[ext_resource path="res://Assets/images/Icons/Moves/green_20.PNG" type="Texture" id=12]
+[ext_resource path="res://Assets/images/Icons/Moves/yellow_42.png" type="Texture" id=13]
+
+[node name="AttackButtons" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+rect_min_size = Vector2( 720, 720 )
+script = ExtResource( 3 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+margin_right = 1080.0
+margin_bottom = 360.0
+rect_min_size = Vector2( 360, 0 )
+custom_constants/separation = 0
+alignment = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TargetMiniShow" parent="HBoxContainer" instance=ExtResource( 2 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 720.0
+margin_right = 1080.0
+margin_bottom = 116.0
+rect_min_size = Vector2( 360, 116 )
+hint_tooltip = "ToolTip"
+size_flags_horizontal = 0
+size_flags_vertical = 0
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="."]
+margin_top = 360.0
+margin_right = 1080.0
+margin_bottom = 720.0
+rect_min_size = Vector2( 360, 0 )
+custom_constants/separation = 0
+alignment = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer2"]
+margin_left = 720.0
+margin_right = 1080.0
+margin_bottom = 360.0
+alignment = 2
+
+[node name="Button" type="Button" parent="HBoxContainer2/VBoxContainer"]
+margin_top = 120.0
+margin_right = 360.0
+margin_bottom = 360.0
+rect_min_size = Vector2( 360, 240 )
+custom_fonts/font = ExtResource( 4 )
+text = "Back"
+
+[node name="TextureRect" type="TextureRect" parent="."]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_top = -226.0
+margin_bottom = -226.0
+mouse_filter = 2
+texture = ExtResource( 9 )
+expand = true
+stretch_mode = 5
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Attack03" type="TextureButton" parent="."]
+light_mask = 2
+margin_left = -8.0
+margin_top = 62.0
+margin_right = 573.0
+margin_bottom = 523.0
+rect_min_size = Vector2( 360, 360 )
+texture_normal = ExtResource( 8 )
+expand = true
+stretch_mode = 5
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Light2D" type="Light2D" parent="Attack03"]
+light_mask = 3
+position = Vector2( 297.35, 234.3 )
+scale = Vector2( 1.79153, 1.77531 )
+texture = ExtResource( 11 )
+mode = 3
+range_item_cull_mask = 2
+
+[node name="Attack04" type="TextureButton" parent="."]
+light_mask = -2147483644
+margin_left = 362.0
+margin_top = 16.0
+margin_right = 758.0
+margin_bottom = 497.0
+rect_min_size = Vector2( 360, 360 )
+texture_normal = ExtResource( 5 )
+expand = true
+stretch_mode = 5
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Light2D" type="Light2D" parent="Attack04"]
+position = Vector2( 196.509, 234.141 )
+scale = Vector2( 1.26917, 1.78632 )
+texture = ExtResource( 12 )
+mode = 3
+range_item_cull_mask = 4
+
+[node name="Attack01" type="TextureButton" parent="."]
+light_mask = 8
+margin_left = 399.0
+margin_top = 373.0
+margin_right = 764.0
+margin_bottom = 714.0
+texture_normal = ExtResource( 7 )
+expand = true
+stretch_mode = 4
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Light2D" type="Light2D" parent="Attack01"]
+position = Vector2( 167.437, 174.186 )
+scale = Vector2( 1.24864, 1.23515 )
+texture = ExtResource( 10 )
+mode = 3
+range_item_cull_mask = 8
+
+[node name="Attack02" type="TextureButton" parent="."]
+light_mask = 16
+margin_left = 6.0
+margin_top = 344.0
+margin_right = 509.0
+margin_bottom = 754.0
+rect_min_size = Vector2( 360, 360 )
+texture_normal = ExtResource( 6 )
+expand = true
+stretch_mode = 5
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Light2D" type="Light2D" parent="Attack02"]
+position = Vector2( 252.335, 207 )
+scale = Vector2( 1.94531, 1.24219 )
+texture = ExtResource( 13 )
+mode = 3
+range_item_cull_mask = 16
+[connection signal="moveDown" from="." to="HBoxContainer/TargetMiniShow" method="_on_set_move"]
+[connection signal="button_up" from="HBoxContainer2/VBoxContainer/Button" to="." method="_on_Button_button_up"]
+[connection signal="button_down" from="Attack03" to="." method="_on_Attack03_button_down"]
+[connection signal="button_up" from="Attack03" to="." method="_on_Attack03_button_up"]
+[connection signal="button_down" from="Attack04" to="." method="_on_Attack04_button_down"]
+[connection signal="button_up" from="Attack04" to="." method="_on_Attack04_button_up"]
+[connection signal="button_down" from="Attack01" to="." method="_on_Attack01_button_down"]
+[connection signal="button_up" from="Attack01" to="." method="_on_Attack01_button_up"]
+[connection signal="button_down" from="Attack02" to="." method="_on_Attack02_button_down"]
+[connection signal="button_up" from="Attack02" to="." method="_on_Attack02_button_up"]

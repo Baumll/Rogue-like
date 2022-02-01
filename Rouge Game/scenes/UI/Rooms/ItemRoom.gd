@@ -1,7 +1,7 @@
 extends Control
 
 signal exit
-
+onready var preitem = preload("res://ScribtAble/ClassItem.gd")
 onready var ui_under = $Ui_Under
 
 
@@ -16,4 +16,11 @@ func _ready():
 
 
 func _on_Button_button_up():
+	for i in range(get_node("/root/Main").inventory.size()):
+		if get_node("/root/Main").inventory[i] == null:
+			var item = preitem.new()
+			item._ready()
+			get_node("/root/Main").inventory[i] = item
+			emit_signal("exit")
+			return
 	emit_signal("exit")
