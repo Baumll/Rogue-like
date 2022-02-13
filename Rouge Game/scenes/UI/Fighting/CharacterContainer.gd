@@ -12,6 +12,8 @@ onready var HP_bar = $HPImage/HealthBar
 onready var status_bar = $HPImage/StatusBar
 onready var animator = $HPImage/CenterContainer/TextureRect/AnimatedSprite
 
+var charaacter = null
+
 export(bool) var flip = false
 # Called when the node enters the scene tree for the first time.
 func _ready():

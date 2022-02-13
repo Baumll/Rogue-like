@@ -1,7 +1,7 @@
 extends Control
 
 signal setCharActive(character)
-signal endFight(team)
+signal endFight(chars,items,ep)
 signal playSound(sound)
 signal loadChars(chars)
 signal useCharSelect(arg)
@@ -83,18 +83,15 @@ func start_fight():
 func end_fight(team):
 	pacifism = true
 	initative = []
-	for x in fighterRectList:
-		x = null
-	for x in fighterRectList:
-		x.set_health(0,0)
+	#for x in fighterRectList:
+	#	x = null
+	#for x in fighterRectList:
+	#	x.set_health(0,0)
+	var chars = null
 	if team == 1:
-		for i in range(teamSize, teamSize*2):
-			if get_fighter(i) != null:
-				get_fighter(i).give_exp(ep/friendlyFighterCount)
-				get_fighter(i).health = get_fighter(i).maxHealth
-	emit_signal("endFight", team, ep)
-	emit_signal("exit")
-	
+		chars = get_node("/root/Main").characterList
+	emit_signal("endFight",chars ,[], ep)
+
 
 #Wenn Momemtum < 0
 func next_round():
@@ -394,6 +391,7 @@ func use_move_on_fighter(target, source, move):
 				else:
 					print("Warning: PreCombatDefense Source method: " + i.preMove + "dose not exist")
 	
+	
 	var rtn = []
 	if move.physicalDmg > 0:
 		rtn.append(target2.get_magic_dmg(floor(move3.physicalDmg + source3.strength -source3.defence)))
@@ -424,6 +422,7 @@ func use_move_on_fighter(target, source, move):
 	update_health(target)
 	update_health(source)
 	return rtn
+
 
 func copy_fighter(fighter):
 	var newFighter = preFighter.new()
@@ -571,3 +570,7 @@ func _on_MoveAnimationPanel_playSound(sound):
 
 func _on_Ui_Under_selected_character(character):
 	selectedFighter = character
+
+
+func _on_FightEnd_exit():
+	emit_signal("exit")

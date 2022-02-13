@@ -11,7 +11,7 @@ onready var fighter_reckt_list = [
 	$VBoxContainer/HBoxContainer2/TextureRect4,
 ]
 
-var targetFindScript = preload("res://ScribtAble/TargetFindScript.gd")
+var targetFindScript = preload("res://Scripts/TargetFindScript.gd")
 var activeMove = null
 var activePos = -1
 var teamSize = 4

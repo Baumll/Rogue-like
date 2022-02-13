@@ -3,7 +3,7 @@
 [ext_resource path="res://ScribtAble/ClassChracter.gd" type="Script" id=1]
 [ext_resource path="res://Units/Attacks/MoveStrike.tres" type="Resource" id=2]
 [ext_resource path="res://Assets/images/Icons/PrehistoricIcon_08_t.PNG" type="Texture" id=3]
-[ext_resource path="res://Assets/images/fantasy_beasts_monster_pack/zombie.png" type="Texture" id=4]
+[ext_resource path="res://Assets/images/enemys/bear.png" type="Texture" id=4]
 [ext_resource path="res://Units/Attacks/MoveTeamHeal.tres" type="Resource" id=5]
 
 [resource]

@@ -214,8 +214,9 @@ func play_Move(move, numbers):
 	play_move_sound(move)
 	emit_signal("shake")
 	for i in range(0, targets):
-		targetAnimList[i].frame = 0
-		targetAnimList[i].play(move.animation)
+		if move != null:
+			targetAnimList[i].frame = 0
+			targetAnimList[i].play(move.animation)
 		if i != 0:
 			for j in range(0,numbers[i-1].size()):
 				match j:
@@ -243,8 +244,10 @@ func create_floaty_text(amount, position, color = Color('33040b') ):
 		
 		if amount > 0:
 			floaty_text.text = floaty_text.text
-		
 		add_child(floaty_text)
+
+func create_floaty_text_fighter(fighter, type, amount):
+	pass
 
 func play_move_sound(move):
 	emit_signal("playSound", move.sound)

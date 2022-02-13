@@ -3,10 +3,9 @@
 [ext_resource path="res://fonts/UI/FontSmal.tres" type="DynamicFont" id=1]
 [ext_resource path="res://scenes/UI/Inventory/DecriptinText.gd" type="Script" id=2]
 [ext_resource path="res://Assets/images/bars/DescriptionOutline.png" type="Texture" id=3]
-[ext_resource path="res://Assets/Shader/TestShaderMaterial.tres" type="Material" id=4]
+[ext_resource path="res://Assets/images/UI_under/ui_upper.png" type="Texture" id=4]
 
 [node name="DecriptinText" type="Control"]
-material = ExtResource( 4 )
 anchor_right = 1.0
 anchor_bottom = 1.0
 rect_min_size = Vector2( 1080, 240 )
@@ -41,16 +40,17 @@ __meta__ = {
 }
 
 [node name="Label" type="Label" parent="Panel/HBoxContainer"]
-material = ExtResource( 4 )
+margin_top = 11.0
 margin_right = 675.0
-margin_bottom = 244.0
+margin_bottom = 233.0
 rect_min_size = Vector2( 675, 0 )
 custom_fonts/font = ExtResource( 1 )
-custom_constants/line_spacing = 2
+custom_constants/line_spacing = -9
 custom_constants/shadow_offset_y = 0
 text = "Hier könnte ihre Werbung stehen
 fcgvhg
 cfbfghgnvgngvgvgvggvgv"
+clip_text = true
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -62,8 +62,23 @@ margin_bottom = 244.0
 rect_min_size = Vector2( 0, 120 )
 size_flags_vertical = 1
 custom_fonts/font = ExtResource( 1 )
+custom_constants/line_spacing = -9
+custom_constants/shadow_offset_y = 0
 text = "Mgc dmg: 40 DMG:"
 align = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TextureRect" type="TextureRect" parent="."]
+anchor_right = 0.038
+anchor_bottom = 0.016
+margin_left = 2.1748
+margin_top = -21.0
+margin_right = 1052.13
+margin_bottom = 288.28
+texture = ExtResource( 4 )
+expand = true
 __meta__ = {
 "_edit_use_anchors_": false
 }

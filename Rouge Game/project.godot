@@ -42,7 +42,7 @@ _global_script_classes=[ {
 "base": "Node",
 "class": "TargetFindScript",
 "language": "GDScript",
-"path": "res://ScribtAble/TargetFindScript.gd"
+"path": "res://Scripts/TargetFindScript.gd"
 } ]
 _global_script_class_icons={
 "ClassChracter": "",
@@ -63,6 +63,7 @@ config/icon="res://icon.png"
 [autoload]
 
 SaveData="*res://Data/ImportSave.gd"
+GlobalFunktions="*res://Scripts/GlobalFunktions.gd"
 
 [display]
 

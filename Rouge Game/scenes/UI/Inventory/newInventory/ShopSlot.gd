@@ -10,7 +10,7 @@ onready var textureRect = $TextureRect
 
 func get_drag_data(position):
 	if item != null and active:
-		if( get_node("/root/Main").gold > item.value):
+		if( get_node("/root/Main").gold >= item.value):
 			var data = {}
 			data["origin_kind"] = "shop"
 			data["origin_item"] = item
