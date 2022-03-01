@@ -10,9 +10,9 @@ config_version=4
 
 _global_script_classes=[ {
 "base": "Resource",
-"class": "ClassChracter",
+"class": "ClassChracterStats",
 "language": "GDScript",
-"path": "res://ScribtAble/ClassChracter.gd"
+"path": "res://ScribtAble/ClassCharacterStats.gd"
 }, {
 "base": "Resource",
 "class": "ClassInventory",
@@ -45,7 +45,7 @@ _global_script_classes=[ {
 "path": "res://Scripts/TargetFindScript.gd"
 } ]
 _global_script_class_icons={
-"ClassChracter": "",
+"ClassChracterStats": "",
 "ClassInventory": "",
 "ClassItem": "",
 "ClassMove": "",

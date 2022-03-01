@@ -1,156 +1,105 @@
-extends Resource
-
-class_name ClassChracter
-
-export(String) var klass = "Mage"
-export(int) var level = 1
-var experiencePoints = 0
-var maxHealth = 5
-var health = 5
-var strength = 0
-var defence = 0
-var magicDefence = 0
-var dexterity = 0
-var magic = 0
-var speed = 5
-var momentum = 0
-var critChance = 0
-var critModifier = 0 #Wie viel schade meher ein Kriischer treffer macht 0 = 200%
-
-export(int) var baseExpToLevel = 20 #Wie viel Exp pro level draufgeschlagen wird damit er aufleved
-export(int) var deathExp = 5 #Wie viel Exp der Chracter gibt wenn man ihn besiegt mal Level
-
-export(int) var baseMaxHealth = 5
-export(int) var baseStrength = 0
-export(int) var baseDefence = 0
-export(int) var baseMagicDefence = 0
-export(int) var baseDexterity = 0
-export(int) var baseMagic = 0
-export(int) var baseSpeed = 5
-export(int) var baseCritChance = 0
-export(int) var baseCritModifier = 0
-
-#hidden Prozentuale modifier stats:
-var healProcent = 0.0
-var damgeProcent = 0.0
-var magicDefenceProcent = 0
-var protectProcent = 0.0
-var maxHealthProcent = 0.0
-var strengthProcent = 0.0
-var defenceProcent = 0.0
-var dexterityProcent = 0.0
-var magicProcent = 0.0
-var speedProcent = 0.0
-var skillPoints = 0
+extends Node
 
 
-export(Texture) var image = null
-export(Texture) var icon = null
-
-export(Array, Resource) var moves = []
-export(Array, Resource) var equip = [null,null]
-#export(Array, Resource) var status = []
-var statusList = []
-
-func loadStats(path):
+func loadStats(path, character):
 	var item
 	if typeof(path) == TYPE_STRING:
 		item = load(path)
 	else:
 		item = path
-	baseMaxHealth = item.baseMaxHealth
-	baseStrength = item.baseStrength
-	baseDefence = item.baseDefence
-	baseMagicDefence = item.baseMagicDefence
-	baseDexterity = item.baseDexterity
-	baseMagic = item.baseMagic
-	baseSpeed = item.baseSpeed
+	character.baseMaxHealth = item.baseMaxHealth
+	character.baseStrength = item.baseStrength
+	character.baseDefence = item.baseDefence
+	character.baseMagicDefence = item.baseMagicDefence
+	character.baseDexterity = item.baseDexterity
+	character.baseMagic = item.baseMagic
+	character.baseSpeed = item.baseSpeed
 	
-	healProcent = item.healProcent
-	damgeProcent = item.damgeProcent
-	protectProcent = item.protectProcent
+	character.healProcent = item.healProcent
+	character.damgeProcent = item.damgeProcent
+	character.protectProcent = item.protectProcent
 	
-	maxHealth = baseMaxHealth
-	strength = baseStrength
-	defence = baseDefence
-	dexterity = baseDexterity
-	magic = baseMagic
-	speed = baseSpeed
+	character.maxHealth = character.baseMaxHealth
+	character.strength = character.baseStrength
+	character.defence = character.baseDefence
+	character.dexterity = character.baseDexterity
+	character.magic = character.baseMagic
+	character.speed = character.baseSpeed
 	
-	health = maxHealth
+	character.health = character.maxHealth
 	
-	klass = item.klass
+	character.klass = character.item.klass
 	
-	image = item.image
-	icon = item.icon
+	character.image = character.item.image
+	character.icon = character.item.icon
 	
-	moves = item.moves
-	equip = item.equip
-	statusList = item.statusList
+	character.moves = character.item.moves
+	character.equip = character.item.equip
+	character.statusList = character.item.statusList
 
 
 
-func reset_stats():
-	maxHealth = baseMaxHealth
-	strength = baseStrength
-	dexterity = baseDexterity
-	defence = baseDefence
-	magicDefence = baseMagicDefence
-	magic = baseMagic
-	speed = baseSpeed
-	healProcent = 0
-	damgeProcent = 0
-	maxHealthProcent = 0
-	strengthProcent = 0
-	defenceProcent = 0
-	magicProcent = 0
-	speedProcent = 0
-	critChance = baseCritChance
-	critModifier = baseCritModifier
+func reset_stats(character):
+	character.maxHealth = character.baseMaxHealth
+	character.strength = character.baseStrength
+	character.dexterity = character.baseDexterity
+	character.defence = character.baseDefence
+	character.magicDefence = character.baseMagicDefence
+	character.magic = character.baseMagic
+	character.speed = character.baseSpeed
+	character.healProcent = 0
+	character.damgeProcent = 0
+	character.maxHealthProcent = 0
+	character.strengthProcent = 0
+	character.defenceProcent = 0
+	character.magicProcent = 0
+	character.speedProcent = 0
+	character.critChance = character.baseCritChance
+	character.critModifier = character.baseCritModifier
 
 
 
-func calculate_all_stats():
-	reset_stats()
-	for i in equip:
+func calculate_all_stats(character):
+	reset_stats(character)
+	for i in character.equip:
 		if i != null:
-			calculate_stats(i)
-	for i in statusList:
+			calculate_stats(i,character)
+	for i in character.statusList:
 		if i != null:
-			calculate_stats(i)
-	maxHealth = (1+maxHealthProcent) * maxHealth
-	strength = (1+strengthProcent) * strength
-	dexterity = (1+dexterityProcent) * dexterity
-	defence = (1+defenceProcent) * defence
-	magicDefence = (1+magicDefenceProcent) * magicDefence
-	magic = (1+magicProcent) * magic
-	speed = (1+speedProcent) * speed
+			calculate_stats(i,character)
+	character.maxHealth = (1+character.maxHealthProcent) * character.maxHealth
+	character.strength = (1+character.strengthProcent) * character.strength
+	character.dexterity = (1+character.dexterityProcent) * character.dexterity
+	character.defence = (1+character.defenceProcent) * character.defence
+	character.magicDefence = (1+character.magicDefenceProcent) * character.magicDefence
+	character.magic = (1+character.magicProcent) * character.magic
+	character.speed = (1+character.speedProcent) * character.speed
 	
 
 
-func calculate_stats(i):
-		maxHealth += i.maxHealth
-		strength += i.strength
-		dexterity += i.dexterity
-		defence += i.defence
-		magicDefence += i.magicDefence
-		magic += i.magic
-		speed += i.speed
-		healProcent += i.healProcent
-		damgeProcent += i.damgeProcent
-		maxHealthProcent += i.maxHealthProcent
-		strengthProcent += i.strengthProcent
-		defenceProcent += i.defenceProcent
-		magicProcent += i.magicProcent
-		speedProcent += i.speedProcent
-		critChance += i.critChance
-		critModifier += i.critModifier
+func calculate_stats(status,character):
+		character.maxHealth += status.maxHealth
+		character.strength += status.strength
+		character.dexterity += status.dexterity
+		character.defence += status.defence
+		character.magicDefence += status.magicDefence
+		character.magic += status.magic
+		character.speed += status.speed
+		character.healProcent += status.healProcent
+		character.damgeProcent += status.damgeProcent
+		character.maxHealthProcent += status.maxHealthProcent
+		character.strengthProcent += status.strengthProcent
+		character.defenceProcent += status.defenceProcent
+		character.magicProcent += status.magicProcent
+		character.speedProcent += status.speedProcent
+		character.critChance += status.critChance
+		character.critModifier += status.critModifier
 
-func iterate_status():
+func iterate_status(character):
 	var removeList = []
-	calculate_all_stats()
-	for i in range(statusList.size()):
-		if statusList[i] != null:
+	calculate_all_stats(character)
+	for i in range(character.statusList.size()):
+		if character.statusList[i] != null:
 			if(statusList[i].turns > 1):
 				statusList[i].turns -= 1
 			if statusList[i].statusTyp == statusList[i].statusTypes.dmg:
@@ -186,22 +135,7 @@ func add_item(item):
 	if item != null:
 		append_status(item.status)
 
-"""
-old
-func iterate_status():
-	var removeList = []
-	calculate_all_stats()
-	for i in range(status.size()):
-		status[i].turns -= 1
-		if status.statusTyp == status.statusTypes.dmg:
-			get_dmg(status.value)
-		if status.statusTyp == status.statusTypes.heal:
-			get_heal(status.value)
-		if status[i].turns <= 0:
-			removeList.append(i)
-	for i in removeList:
-		status.remove(i)
-"""
+
 #0 = physisch
 #1 = magisch
 #2 = heal

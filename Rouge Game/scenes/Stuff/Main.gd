@@ -28,6 +28,8 @@ onready var win_screen = $WinSzene
 onready var lose_screen = $LoseSzene
 onready var load_screen = preload("res://scenes/UI/LoadOut/LoadOut.tscn")
 
+var save_file = "user://rough.save" #Der Pfad wo gespeichert wird
+
 func roomList():
 	#Rist Path, Icon, Rarity
 	roomList.append(["res://scenes/UI/Rooms/HealRoom.tscn","res://Assets/images/Icons/Rooms/green_14.PNG", 2])
@@ -71,6 +73,7 @@ func setup_doors():
 		doors.append(num)
 	door.setup_doors(load(roomList[doors[0]][1]), load(roomList[doors[1]][1]))
 	two_choise.visible = true
+	save_game()
 
 func enter_door():
 	var num = 0
@@ -195,15 +198,11 @@ func load_chracter(num):
 		print(characterList)
 
 
-
-
-
 func _on_HealRoom_full_team_heal():
 	for i in characterList:
 		i.health = i.maxHealth
 	setup_doors()
 
-		
 
 func _on_exit():
 	#checkt ob noch alle chars amleben sind
@@ -221,3 +220,12 @@ func _on_exit():
 		room.queue_free()
 		room = null
 	setup_doors()
+
+#Save Game
+func save_game():
+	var file = File.new()
+	file.open(save_file, File.WRITE)
+	file.store_var(inventory)
+	for i in characterList:
+		file.store_var(i, true)
+	file.close()
