@@ -38,13 +38,14 @@ func get_drag_data(position):
 	
 func can_drop_data(position, data):
 	#Check if we can drop an item in this slot
-	if(data["origin_kind"] != "shop" and item != null):
+	if(data["origin_kind"] == "shop" and item != null):
 		return false
 	return true
 	
 	
 func drop_data(_pos,data):
 	#What happens when we srop an item in this slot
+
 	data["origin_slot"].set_item(item)
 	set_item(data["origin_item"])
 	if(data["origin_kind"] == "shop"):
@@ -53,14 +54,14 @@ func drop_data(_pos,data):
 func set_item(newItem):
 	
 	if(newItem != null):
-		emit_signal("ItemSet",newItem,num)
+		#emit_signal("ItemSet",newItem,num)
 		item = newItem
 		texture = item.icon
 		if forSale:
 			label.text = str(item.value) + "G"
 			textureRect.visible = true
 	else:
-		emit_signal("ItemSet",null,num)
+		#emit_signal("ItemSet",null,num)
 		item = null
 		texture = null
 		label.text = ""

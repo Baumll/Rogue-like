@@ -54,11 +54,6 @@ func set_xp(amount, maximal):
 	expProgess.set_value(round((float(amount)/float(maximal))*100.0))
 
 
-
-func _on_Ui_Under_back():
-	emit_signal("exit")
-
-
 func _on_LoadOutSkill_levelUp(num):
 	pass # Replace with function body.
 
@@ -73,3 +68,7 @@ func _on_LoadOutSkill3_levelUp(num):
 
 func _on_LoadOutSkill4_levelUp(num):
 	pass # Replace with function body.
+
+
+func _on_Ui_Under_back():
+	emit_signal("exit")

@@ -4,7 +4,6 @@
 [ext_resource path="res://scenes/UI/TwoChoise.gd" type="Script" id=2]
 [ext_resource path="res://Assets/images/Icons/Books/book_02_b.png" type="Texture" id=3]
 
-
 [node name="TwoChoise" type="Control"]
 anchor_right = 1.0
 anchor_bottom = 1.0

@@ -12,7 +12,7 @@ _global_script_classes=[ {
 "base": "Resource",
 "class": "ClassChracterStats",
 "language": "GDScript",
-"path": "res://ScribtAble/ClassCharacterStats.gd"
+"path": "res://ScribtAble/ClassCharacterContainer.gd"
 }, {
 "base": "Resource",
 "class": "ClassInventory",
@@ -64,6 +64,7 @@ config/icon="res://icon.png"
 
 SaveData="*res://Data/ImportSave.gd"
 GlobalFunktions="*res://Scripts/GlobalFunktions.gd"
+ChrFunc="*res://ScribtAble/ClassChracterFunctions.gd"
 
 [display]
 

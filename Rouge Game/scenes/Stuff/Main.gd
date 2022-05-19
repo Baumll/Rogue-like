@@ -2,9 +2,6 @@ extends Node
 
 var rng = RandomNumberGenerator.new()
 
-signal selectCharacter(chracter)
-
-
 var doors = []
 
 export(int) var maxCharacters = 4
@@ -22,7 +19,6 @@ export(int) var collums = 3
 onready var door = $VBoxContainer/DoorScene
 onready var start = $Start
 onready var character_screen = $CharSelectScreen
-onready var ui_under = $VBoxContainer/Ui_Under
 onready var two_choise = $VBoxContainer/TwoChoise
 onready var win_screen = $WinSzene
 onready var lose_screen = $LoseSzene
@@ -30,7 +26,7 @@ onready var load_screen = preload("res://scenes/UI/LoadOut/LoadOut.tscn")
 
 var save_file = "user://rough.save" #Der Pfad wo gespeichert wird
 
-func roomList():
+func roomListSetup():
 	#Rist Path, Icon, Rarity
 	roomList.append(["res://scenes/UI/Rooms/HealRoom.tscn","res://Assets/images/Icons/Rooms/green_14.PNG", 2])
 	roomList.append(["res://scenes/UI/Rooms/mercenario.tscn","res://Assets/images/Icons/Rooms/yellow_40.png", 2])
@@ -42,7 +38,7 @@ func roomList():
 func _ready():
 	rng.randomize()
 	setup_start()
-	roomList()
+	roomListSetup()
 
 func _process(delta):
 	if(Input.is_action_just_pressed("ui_down")):
@@ -75,13 +71,6 @@ func setup_doors():
 	two_choise.visible = true
 	save_game()
 
-func enter_door():
-	var num = 0
-	rng.randomize()
-	num = rng.randi_range(0,3)
-	#hier raum laden
-
-
 func disable_all():
 	door.visible = false
 	start.visible = false
@@ -94,14 +83,12 @@ func load_enemy() -> Resource:
 	#var preChar = load("res://Units/CharacterSzene.tscn")
 	#var character = preChar.instance()
 	var i = rng.randi_range(-1.0,1.0)
-	var scene = load("res://ScribtAble/ClassChracter.gd")
+	var scene = load("res://ScribtAble/ClassCharacterContainer.gd")
 	scene = scene.new()
-	
-	var character
 	if i > 0:
-		scene.loadStats("res://Units/enemys/UnitSkelett.tres")
+		ChrFunc.loadStats(scene,"res://Units/enemys/enemySkeleton.tres")
 	else:
-		scene.loadStats("res://Units/enemys/UnitZombie.tres")
+		ChrFunc.loadStats(scene,"res://Units/enemys/enemyZombie.tres")
 	return scene
 
 func load_characters_fight():
@@ -176,24 +163,24 @@ func _on_mercenario_mercenario():
 
 
 func load_chracter(num):
-		var preChar = load("res://ScribtAble/ClassChracter.gd")
+		var preChar = load("res://ScribtAble/ClassCharacterContainer.gd")
 		var character = preChar.new()
 		
 		match num:
 			0: 
-				character.loadStats("res://Units/Characters/charMage.tres")
+				ChrFunc.loadStats(character, "res://Units/Characters/charNewMage.tres")
 			1: 
-				character.loadStats("res://Units/Characters/charWarrier.tres")
+				ChrFunc.loadStats(character, "res://Units/Characters/charWarrior.tres")
 			2: 
-				character.loadStats("res://Units/Characters/charRanger.tres")
+				ChrFunc.loadStats(character, "res://Units/Characters/charRanger.tres")
 			3: 
-				character.loadStats("res://Units/Characters/charNecro.tres")
+				ChrFunc.loadStats(character, "res://Units/Characters/charNecron.tres")
 		
 		characterList.append(character)
 		activeChracter = characterList[characterList.size()-1]
 		activeChracter.health = activeChracter.maxHealth
 		#character_reset_stats(activeChracter)
-		activeChracter.reset_stats()
+		ChrFunc.reset_stats(activeChracter)
 		#inventory.load_equip(activeChracter)
 		print(characterList)
 

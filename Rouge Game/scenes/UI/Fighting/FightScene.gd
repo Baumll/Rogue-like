@@ -10,7 +10,7 @@ signal exit()
 onready var blur = $Blur
 onready var MoveAnimationPanel = $MoveAnimationPanel
 onready var timeLine = $BigBox/FighterTimeLine
-var preFighter = preload("res://ScribtAble/ClassChracter.gd")
+var preFighter = load("res://ScribtAble/ClassCharacterContainer.gd")
 var preMove = preload("res://ScribtAble/ClassMove.gd")
 var preCombatAttackScript = preload("res://ScribtAble/CombatScrips/CombatScriptPreAttackOffence.gd")
 var preCombatDefenseScript = preload("res://ScribtAble/CombatScrips/CombatScriptPreAttackDefence.gd")
@@ -166,7 +166,7 @@ func set_active_fighter(num):
 		i.set_selection(false)
 	print("Momentum: " + String(get_fighter(num).momentum))
 	activeFighter = num
-	get_fighter(num).iterate_status()
+	ChrFunc.iterate_status(get_fighter(num))
 	if num < teamSize: #Wenn ein gegner dran ist nutz eine zufällige attacke
 		npc_move(activeFighter)
 	else: #Wenn ein Verbündeter dran ist
@@ -208,6 +208,14 @@ func press_move_button(move):
 			#Wenn ausgewählt wurde
 
 func npc_move(npc):
+	#Wenn er kein Move hat
+	if get_fighter(npc).moves.size() == 0:
+		print("KEINE MOVES")
+		var dummy_move = load("res://Units/Attacks/MoveDummy.tres")
+		var fighterTargetList = select_targets(dummy_move)
+		make_move(dummy_move, fighterTargetList)
+		return
+	#Macht einen Zufälligen Move
 	var num = rng.randi_range(0,get_fighter(npc).moves.size()-1)
 	while get_fighter(npc).moves[num] == null:
 		num = rng.randi_range(0,get_fighter(npc).moves.size()-1)
@@ -369,6 +377,7 @@ func select_targets(move):
 #1 = magisch
 #2 = heal
 func use_move_on_fighter(target, source, move):
+	print(get_fighter(source).klass + " used " + move.name + " on " + get_fighter(target).klass)
 	var target2 = get_fighter(target)
 	var source2 = get_fighter(source)
 	var target3 = copy_fighter(target2)
@@ -387,21 +396,21 @@ func use_move_on_fighter(target, source, move):
 		if i.statusTyp == 3: #combat
 			if(i.preMove != null):
 				if preCombatDefenseScript.has_method(i.preMove):
-					preCombatDefenseScript.preMove(target3,source3,move3)
+					preCombatDefenseScript.call(i.preMove,target3,source3,move3)
 				else:
 					print("Warning: PreCombatDefense Source method: " + i.preMove + "dose not exist")
 	
 	
 	var rtn = []
 	if move.physicalDmg > 0:
-		rtn.append(target2.get_magic_dmg(floor(move3.physicalDmg + source3.strength -source3.defence)))
-		source2.has_dealt_magic(rtn[0])
+		rtn.append(ChrFunc.get_magic_dmg(target2,floor(move3.physicalDmg + source3.strength -source3.defence)))
+		ChrFunc.has_dealt_magic(source2,rtn[0])
 	if move.magicalDmg > 0:
-		rtn.append(target2.get_dmg(floor(move3.magicalDmg + source3.magic -source3.magicDefence)))
-		source2.has_dealt_physical(rtn[1])
+		rtn.append(ChrFunc.get_dmg(target2,floor(move3.magicalDmg + source3.magic -source3.magicDefence)))
+		ChrFunc.has_dealt_physical(source2,rtn[1])
 	if move.heal > 0:
-		rtn.append((target2.get_heal(floor(move3.heal*(1+source3.healProcent)))))
-		source2.has_healed(rtn[2])
+		rtn.append((ChrFunc.get_heal(target2,floor(move3.heal*(1+source3.healProcent)))))
+		ChrFunc.has_healed(source2,rtn[2])
 	
 	#Hier kommen die After Combat Effekte
 	for i in source3.statusList:
@@ -426,7 +435,7 @@ func use_move_on_fighter(target, source, move):
 
 func copy_fighter(fighter):
 	var newFighter = preFighter.new()
-	newFighter.loadStats(fighter)
+	ChrFunc.loadStats(newFighter,fighter)
 	return newFighter
 
 func copyMove(move):
@@ -536,10 +545,11 @@ func _on_AttackButtons_attackDown(num):
 		if(button_time_start == 0):
 			button_time_start = OS.get_ticks_msec()
 			#Ziele Zeigen
-			var targets = select_targets(get_fighter(activeFighter).moves[num])
-			timeLine.set_order(set_time_line(initative), get_fighter(activeFighter).moves[num],get_fighter(activeFighter).icon)
-			for i in targets:
-				fighterRectList[i].set_selection(true)
+			if(get_fighter(activeFighter).moves.size() > num):
+				var targets = select_targets(get_fighter(activeFighter).moves[num])
+				timeLine.set_order(set_time_line(initative), get_fighter(activeFighter).moves[num],get_fighter(activeFighter).icon)
+				for i in targets:
+					fighterRectList[i].set_selection(true)
 		else:
 			button_time_start = -1
 	

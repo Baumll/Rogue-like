@@ -43,7 +43,7 @@ func show_inventory():
 	attackButtons.visible = false
 
 func add_item(item = null):
-	inventory.create_item()
+	inventory.create_item(item)
 
 func _on_CharSelect_move_pressed(move):
 	emit_signal("move_clicked",move)

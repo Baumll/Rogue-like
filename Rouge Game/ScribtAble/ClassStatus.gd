@@ -9,6 +9,7 @@ export(statusTypes) var statusTyp
 
 export(StreamTexture) var icon = null
 export(String) var name
+export var unique = true
 var turns = 0
 export(int) var maxTurns = 3
 export(float) var value = 0.0

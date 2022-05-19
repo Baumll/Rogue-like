@@ -2,7 +2,7 @@
 
 [ext_resource path="res://ScribtAble/ClassItem.gd" type="Script" id=1]
 [ext_resource path="res://Assets/images/Icons/Armor/m_t_05.png" type="Texture" id=2]
-[ext_resource path="res://Units/States/StatusPreAttackTest.tres" type="Resource" id=3]
+[ext_resource path="res://Units/States/statusDagger.tres" type="Resource" id=3]
 
 [resource]
 script = ExtResource( 1 )
@@ -10,23 +10,4 @@ name = "Dagger"
 description = "Ein Schwarfer dolch"
 icon = ExtResource( 2 )
 value = 8
-maxHealth = 5
-strength = 0
-defence = 0
-magicDefence = 0
-dexterity = 3
-magic = 0
-speed = 0
-critChance = 0
-critModifier = 0
-healProcent = 0.0
-damgeProcent = 0.0
-protectProcent = 0.0
-magicDefenceProcent = 0.0
-maxHealthProcent = 0.0
-strengthProcent = 0.0
-defenceProcent = 0.0
-dexterityProcent = 0.0
-magicProcent = 0.0
-speedProcent = 0.0
 status = ExtResource( 3 )

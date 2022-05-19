@@ -31,11 +31,13 @@ func get_drag_data(position):
 		var control = Control.new()
 		control.add_child(drag_texture)
 		drag_texture.rect_position = -0.5 * drag_texture.rect_size
-
+		
 		set_drag_preview(control)
 		texture = null
 		textureRect.visible = false
 		label.text = ""
+		
+		ChrFunc.remove_item(activeCaracter, item)
 		return data
 	
 func can_drop_data(position, data):
@@ -43,35 +45,40 @@ func can_drop_data(position, data):
 	if(data["origin_kind"] == "shop" and item != null):
 		return false
 	if activeCaracter != null:
-		for i in range(activeCaracter.equip.size()):
-			if activeCaracter.equip[i] != null and i != num and data["origin_kind"] != "equip":
-				if activeCaracter.equip[i].name == data["origin_item"].name:
-					return false
+		#for i in range(activeCaracter.equip.size()):
+		#	if activeCaracter.equip[i] != null and i != num and data["origin_kind"] != "equip":
+		#		if activeCaracter.equip[i].name == data["origin_item"].name:
+		#			return false
 		return true
 	else:
 		return false
-	return true
 	
 	
 func drop_data(_pos,data):
-	#What happens when we srop an item in this slot
+	#What happens when we drop an item in this slot
+	ChrFunc.remove_item(activeCaracter, item)
+	
+	
 	data["origin_slot"].set_item(item)
 	set_item(data["origin_item"])
+
 	if(data["origin_kind"] == "shop"):
 		emit_signal("bought",data["origin_item"])
-	
+
+func remove_item(item):
+	ChrFunc.remove_item(activeCaracter, item)
 	
 func set_item(newItem):
-	
 	if(newItem != null):
-		emit_signal("ItemSet",newItem,num)
+		#emit_signal("ItemSet",newItem,num)
 		item = newItem
 		texture = item.icon
 		if forSale:
 			label.text = str(item.value) + "G"
 			textureRect.visible = true
+		ChrFunc.add_item(activeCaracter,item)
 	else:
-		emit_signal("ItemSet",null,num)
+		#emit_signal("ItemSet",null,num)
 		item = null
 		texture = null
 		label.text = ""
