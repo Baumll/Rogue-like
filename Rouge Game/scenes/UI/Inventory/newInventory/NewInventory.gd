@@ -3,7 +3,7 @@ extends Control
 signal inventoryButton
 signal ItemDescription(item)
 
-onready var grid = $HBoxContainer/NinePatchRect/M/V/GridContainer
+onready var grid = $HBoxContainer/GridContainer
 onready var equip = $HBoxContainer/VBoxContainer/EquipSlots
 
 onready var itemContainer = preload("res://scenes/UI/Inventory/newInventory/InvSlot1.tscn")
@@ -43,6 +43,7 @@ func add_item():
 			var tmpitem = preItem.new()
 			tmpitem._ready()
 			i.set_item(tmpitem)
+			
 			return
 
 func set_active_state(state):
@@ -50,13 +51,9 @@ func set_active_state(state):
 		i.active = state
 	equip.set_active_state(state)
 
-func _on_Button_pressed():
-	emit_signal("inventoryButton")
-
-func _on_item_pressed(item,num):
+func _on_item_pressed(item):
 	if item != null:
 		emit_signal("ItemDescription", item)
-	inf[num] = item
 
 func _on_item_bought(item):
 	get_node("/root/Main").gold -= item.value

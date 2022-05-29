@@ -1,6 +1,6 @@
-extends TextureRect
+extends Button
 
-signal ItemSet(item,num)
+signal ItemSet(item)
 signal bought(item)
 
 var item
@@ -10,6 +10,9 @@ var forSale = true
 
 onready var label = $Label
 onready var textureRect = $TextureRect
+onready var texIcon = $TexIcon
+
+var activeCaracter = null 
 
 func _ready():
 	label.text = ""
@@ -29,41 +32,46 @@ func get_drag_data(position):
 		var control = Control.new()
 		control.add_child(drag_texture)
 		drag_texture.rect_position = -0.5 * drag_texture.rect_size
-
+		
 		set_drag_preview(control)
-		texture = null
+		texIcon.texture = null
 		textureRect.visible = false
 		label.text = ""
+		
+		emit_signal("ItemSet",item,num)
+		
 		return data
 	
 func can_drop_data(position, data):
 	#Check if we can drop an item in this slot
 	if(data["origin_kind"] == "shop" and item != null):
 		return false
-	return true
+	else:
+		return true
 	
 	
 func drop_data(_pos,data):
-	#What happens when we srop an item in this slot
-
+	#What happens when we drop an item in this slot
+	#Bei tausch
 	data["origin_slot"].set_item(item)
+	#Das ziel wird besetzt
 	set_item(data["origin_item"])
+	
 	if(data["origin_kind"] == "shop"):
 		emit_signal("bought",data["origin_item"])
 	
 func set_item(newItem):
-	
 	if(newItem != null):
 		#emit_signal("ItemSet",newItem,num)
 		item = newItem
-		texture = item.icon
+		texIcon.texture = item.icon
 		if forSale:
 			label.text = str(item.value) + "G"
 			textureRect.visible = true
 	else:
 		#emit_signal("ItemSet",null,num)
 		item = null
-		texture = null
+		texIcon.texture = null
 		label.text = ""
 		textureRect.visible = false
 
@@ -71,7 +79,7 @@ func set_item(newItem):
 func _process(delta):
 	if Input.is_action_just_released("ui_mouse_left"):
 		if(item != null):
-			texture = item.icon
+			texIcon.texture = item.icon
 			if forSale:
 				label.text = str(item.value) + "G"
 				textureRect.visible = true
@@ -79,6 +87,6 @@ func _process(delta):
 func set_sale(state):
 	forSale = state
 
-func _on_Button_button_down():
+func _on_InvSlot1_button_down():
 	if item != null:
-		emit_signal("ItemSet",item,num)
+		emit_signal("ItemSet",item)

@@ -12,7 +12,7 @@ onready var attackButtons = $VBoxContainer/AttackButtons
 onready var inventory = $VBoxContainer/NewInventory
 onready var description = $VBoxContainer/DecriptinText
 
-
+#Alles was der unter teil des Bildschirms ist.
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	

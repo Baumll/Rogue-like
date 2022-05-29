@@ -4,24 +4,27 @@
 [ext_resource path="res://Assets/images/bars/ItemCorner.png" type="Texture" id=2]
 [ext_resource path="res://scenes/UI/Inventory/newInventory/InvEquipSlot.gd" type="Script" id=3]
 
-[node name="InvEquipSlot1" type="TextureRect"]
-margin_right = 1072.0
-margin_bottom = 954.0
-rect_min_size = Vector2( 200, 200 )
-size_flags_horizontal = 3
-size_flags_vertical = 3
-expand = true
-stretch_mode = 5
+[node name="InvEquipSlot1" type="Button"]
+anchor_right = 0.333
+anchor_bottom = 0.115
+margin_right = 0.360016
+margin_bottom = -0.799988
+rect_min_size = Vector2( 360, 240 )
+action_mode = 0
+expand_icon = true
 script = ExtResource( 3 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Button" type="Button" parent="."]
+[node name="TexIcon" type="TextureRect" parent="."]
 anchor_right = 1.0
 anchor_bottom = 1.0
-mouse_filter = 1
-flat = true
+rect_min_size = Vector2( 360, 220 )
+size_flags_horizontal = 3
+size_flags_vertical = 3
+expand = true
+stretch_mode = 5
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -31,6 +34,10 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 texture = ExtResource( 2 )
 expand = true
+stretch_mode = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="Label" type="Label" parent="."]
 anchor_right = 1.0
@@ -42,4 +49,4 @@ valign = 2
 __meta__ = {
 "_edit_use_anchors_": false
 }
-[connection signal="button_down" from="Button" to="." method="_on_Button_button_down"]
+[connection signal="button_down" from="." to="." method="_on_InvEquipSlot1_button_down"]

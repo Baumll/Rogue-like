@@ -36,6 +36,7 @@ export(float) var speedProcent = 0.0
 
 func _ready():
 	rng.randomize()
+	
 	var ran = rng.randi_range(0,2)
 	match ran:
 		0:

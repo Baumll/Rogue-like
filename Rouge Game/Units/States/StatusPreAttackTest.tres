@@ -8,6 +8,7 @@ script = ExtResource( 1 )
 statusTyp = 3
 icon = ExtResource( 2 )
 name = "PreMoveTest"
+unique = true
 maxTurns = -1
 value = 0.0
 maxHealth = 0

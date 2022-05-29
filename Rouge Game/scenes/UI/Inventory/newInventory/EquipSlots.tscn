@@ -6,6 +6,8 @@
 [node name="EquipSlots" type="Control"]
 anchor_right = 1.0
 anchor_bottom = 1.0
+margin_right = -720.0
+margin_bottom = -1440.0
 script = ExtResource( 1 )
 __meta__ = {
 "_edit_use_anchors_": false
@@ -21,24 +23,26 @@ __meta__ = {
 [node name="M" type="MarginContainer" parent="."]
 anchor_right = 1.0
 anchor_bottom = 1.0
-custom_constants/margin_right = 4
-custom_constants/margin_top = 4
-custom_constants/margin_left = 4
-custom_constants/margin_bottom = 4
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="VBoxContainer" type="VBoxContainer" parent="M"]
-margin_left = 4.0
-margin_top = 4.0
-margin_right = 1076.0
-margin_bottom = 1916.0
+margin_right = 360.0
+margin_bottom = 480.0
+custom_constants/separation = 0
 
 [node name="InvEquipSlot1" parent="M/VBoxContainer" instance=ExtResource( 2 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_right = 360.0
+margin_bottom = 240.0
 
 [node name="InvEquipSlot2" parent="M/VBoxContainer" instance=ExtResource( 2 )]
-margin_top = 958.0
-margin_bottom = 1912.0
-[connection signal="ItemSet" from="M/VBoxContainer/InvEquipSlot1" to="." method="_on_Equip1_ItemSet"]
-[connection signal="ItemSet" from="M/VBoxContainer/InvEquipSlot2" to="." method="_on_Equip2_ItemSet"]
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_top = 240.0
+margin_right = 360.0
+margin_bottom = 480.0
+[connection signal="ItemSet" from="M/VBoxContainer/InvEquipSlot1" to="." method="_on_ItemSet"]
+[connection signal="ItemSet" from="M/VBoxContainer/InvEquipSlot2" to="." method="_on_ItemSet"]

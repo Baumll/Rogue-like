@@ -61,13 +61,20 @@ func calculate_all_stats(character):
 	#for i in character.equip:
 	#	if i != null:
 	#		calculate_stats(character,i.status)
+	
+	#Nur für die Statusse
+	var usedList = []
 	for i in character.statusList:
 		if i != null:
-			if typeof(i) == TYPE_ARRAY:
-				#Wenn unique und unendlich 
-				calculate_stats(character,i[0])
-			else:
-				calculate_stats(character,i)
+			if i.unique:
+				if usedList.has(i):
+					continue
+				else:
+					usedList.append(i)
+			calculate_stats(character,i)
+	
+
+	
 	character.maxHealth = (1+character.maxHealthProcent) * character.maxHealth
 	character.strength = (1+character.strengthProcent) * character.strength
 	character.dexterity = (1+character.dexterityProcent) * character.dexterity
@@ -115,51 +122,38 @@ func iterate_status(character):
 
 func append_status(character, status):
 	if status != null:
-		if status.unique == true:
-			for i in character.statusList:
-				#Wenn unique und unendlich
-				#Wenn vorhanden
-				if typeof(i) == TYPE_ARRAY:
-					if i[0].name == status.name:
-						i[1] += 1
-						return
-				if i.name == status.name:
-					if status.maxTurns > 0:
-						#Wenn endlich unique und vorhanden wird der wert zurrück gesetzt
-						if i.turns < status.maxTurns:
-							i.turns = status.maxTurns
-						return
-			#Unenldich und unique hinzugefügt
-			character.statusList.append([status,1])
-		else:
-			#enldich hinzugefügt
-			character.statusList.append(status)
+		for i in character.statusList:
+			#Wenn unique und unendlich
+			if i.name == status.name:
+				if status.maxTurns > 0:
+					#Wenn endlich unique und vorhanden wird der wert zurrück gesetzt
+					if i.turns < status.maxTurns:
+						i.turns = status.maxTurns
+					return
+		#Unenldich und unique hinzugefügt
+		character.statusList.append(status)
 	calculate_all_stats(character)
 
 func remove_status(character, status):
 	if status != null:
 		for i in character.statusList:
 			#Hier der Fall für nicht einzigartige Staten
-			if typeof(i) == TYPE_ARRAY:
-				#Unique und unenlich
-				if i[0].name == status.name:
-					i[1] -=1 
-				if i[1] <= 0:
-					character.statusList.erase(i)
-					break
-			else:
-				if i.name == status.name:
-					character.statusList.erase(i)
-					break
+			if i.name == status.name:
+				character.statusList.erase(i)
+				break
 	calculate_all_stats(character)
 
 func remove_item(character, item):
 	if item != null:
-		remove_status(character, item.status)
+		character.equip.erase(item)
+		if item.status != null:
+			remove_status(character, item.status)
 
 func add_item(character, item):
 	if item != null:
-		append_status(character, item.status)
+		character.equip.append(item)
+		if item.status != null:
+			append_status(character, item.status)
 		
 	
 

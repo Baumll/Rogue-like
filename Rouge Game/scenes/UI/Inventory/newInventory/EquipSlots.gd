@@ -22,19 +22,7 @@ func set_equip(character):
 		
 
 
-func _on_Equip2_ItemSet(item,num):
-	if activeCharacter.equip.size() > 1:
-		#löscht das Alte item und macht das neue
-		ChrFunc.remove_item(activeCharacter,slotList[1].item)
-		activeCharacter.equip[1] = item
-		ChrFunc.add_item(activeCharacter,item)
-		ChrFunc.calculate_all_stats(activeCharacter)
-		emit_signal("ItemSet",item)
+func _on_ItemSet(item):
+	emit_signal("ItemSet",item)
+	pass
 
-func _on_Equip1_ItemSet(item,num):
-	if activeCharacter.equip.size() > 0:
-		ChrFunc.remove_item(activeCharacter,slotList[0].item)
-		activeCharacter.equip[0] = item
-		ChrFunc.add_item(activeCharacter,item)
-		ChrFunc.calculate_all_stats(activeCharacter)
-		emit_signal("ItemSet",item)
