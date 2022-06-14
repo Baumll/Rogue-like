@@ -4,21 +4,21 @@
 [ext_resource path="res://Assets/images/Icons/Armor/hm_t_01.png" type="Texture" id=2]
 [ext_resource path="res://Assets/images/chars/pngguru.com.png" type="Texture" id=3]
 
-
-
 [resource]
 script = ExtResource( 1 )
-klass = "Mage"
-level = 1
-baseExpToLevel = 20
-deathExp = 5
-baseMaxHealth = 5
+name = "Alex"
+klass = "Warrier"
+description = "Can tank damge"
+level = 0
+baseExpToLevel = 0
+deathExp = 0
+baseMaxHealth = 0
 baseStrength = 0
 baseDefence = 0
 baseMagicDefence = 0
 baseDexterity = 0
 baseMagic = 0
-baseSpeed = 5
+baseSpeed = 0
 baseCritChance = 0
 baseCritModifier = 0
 image = ExtResource( 3 )

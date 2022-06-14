@@ -1,8 +1,7 @@
 [gd_scene load_steps=3 format=2]
 
-[ext_resource path="res://Assets/images/Icons/Armor/staff_05_t.png" type="Texture" id=1]
+[ext_resource path="res://Assets/images/Icons/characters/staff_05_t.png" type="Texture" id=1]
 [ext_resource path="res://scenes/UI/CharacterSelectScreen/CharSelectButton.gd" type="Script" id=2]
-
 
 [node name="Char0" type="Button"]
 margin_right = 360.0
@@ -22,3 +21,4 @@ expand = true
 __meta__ = {
 "_edit_use_anchors_": false
 }
+[connection signal="button_down" from="." to="." method="_on_Char0_button_down"]

@@ -1,7 +1,7 @@
 [gd_resource type="Resource" load_steps=8 format=2]
 
 [ext_resource path="res://ScribtAble/ClassCharacterContainer.gd" type="Script" id=1]
-[ext_resource path="res://Assets/images/Icons/Armor/staff_05_t.png" type="Texture" id=2]
+[ext_resource path="res://Assets/images/Icons/characters/staff_05_t.png" type="Texture" id=2]
 [ext_resource path="res://Assets/images/chars/NicePng_mage-png_3499950.png" type="Texture" id=3]
 [ext_resource path="res://Units/Attacks/MoveSplashDamage.tres" type="Resource" id=4]
 [ext_resource path="res://Units/Attacks/MoveInstaKill.tres" type="Resource" id=5]
@@ -10,20 +10,22 @@
 
 [resource]
 script = ExtResource( 1 )
+name = "Chantal"
 klass = "Mage"
+description = "Kann feuerbälle schißen"
 level = 1
 baseExpToLevel = 20
 deathExp = 5
-baseMaxHealth = 5
-baseStrength = 0
-baseDefence = 0
-baseMagicDefence = 0
-baseDexterity = 0
-baseMagic = 2
+baseMaxHealth = 10
+baseStrength = 1
+baseDefence = 1
+baseMagicDefence = 2
+baseDexterity = 2
+baseMagic = 3
 baseSpeed = 5
-baseCritChance = 0
+baseCritChance = 5
 baseCritModifier = 0
 image = ExtResource( 3 )
 icon = ExtResource( 2 )
 moves = [ ExtResource( 5 ), ExtResource( 6 ), ExtResource( 4 ), ExtResource( 7 ) ]
-equip = [ null, null ]
+equip = [  ]

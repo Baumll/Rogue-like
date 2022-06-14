@@ -1,40 +1,106 @@
 extends Node
 
+func new_character(data = null):
+	var preChar = load("res://ScribtAble/ClassCharacterContainer.gd")
+	var character = preChar.new()
+	if data != null:
+		loadStats(character, data)
+	
+	return character
 
-func loadStats(character, path):
-	if typeof(path) == TYPE_STRING:
-		path = load(path)
-	character.baseMaxHealth = path.baseMaxHealth
-	character.baseStrength = path.baseStrength
-	character.baseDefence = path.baseDefence
-	character.baseMagicDefence = path.baseMagicDefence
-	character.baseDexterity = path.baseDexterity
-	character.baseMagic = path.baseMagic
-	character.baseSpeed = path.baseSpeed
+func loadStats(character, charLib):
 	
-	character.healProcent = path.healProcent
-	character.damgeProcent = path.damgeProcent
-	character.protectProcent = path.protectProcent
+	#Laden von einer Libery
+	if typeof(charLib) == TYPE_DICTIONARY :
+		character.baseMaxHealth = charLib["Health"]
+		character.baseStrength = charLib["Strengh"]
+		character.baseDefence = charLib["BaseDefence"]
+		character.baseMagicDefence = charLib["Magic_Defence"]
+		character.baseDexterity = charLib["Dexterity"]
+		character.baseMagic = charLib["Magic"]
+		character.baseSpeed = charLib["Speed"]
+		
+		character.healProcent = 0
+		character.damgeProcent = 0
+		character.protectProcent = 0
+		
+		character.maxHealth = character.baseMaxHealth
+		character.strength = character.baseStrength
+		character.defence = character.baseDefence
+		character.dexterity = character.baseDexterity
+		character.magic = character.baseMagic
+		character.speed = character.baseSpeed
+		
+		character.health = character.maxHealth
+		
+		
+		character.name = charLib["Name"]
+		character.description = charLib["Description"]
+		character.klass = charLib["Class"]
+		character.level = charLib["Level"]
+		
+		character.image = load(charLib["Image"])
+		character.icon = load(charLib["Icon"])
+		
+		character.momentum = charLib["Momentum"]
+		character.experiencePoints = charLib["ExperiencePoints"]
+		character.skillPoints = charLib["SkillPoints"]
+		#charLib["position"] = 0
+		
+		print(charLib["Moves"])
+		character.moves = []
+		for i in charLib["Moves"]:
+			character.moves.append(load(i))
 	
-	character.maxHealth = character.baseMaxHealth
-	character.strength = character.baseStrength
-	character.defence = character.baseDefence
-	character.dexterity = character.baseDexterity
-	character.magic = character.baseMagic
-	character.speed = character.baseSpeed
+		character.equip = []
+		for i in charLib["Equip"]:
+			character.equip.append(load(i))
+		
+		for i in charLib["Status"]:
+			character.statusList.append(load(i))
+			
+		calculate_all_stats(character)
 	
-	character.health = character.maxHealth
+	#Das alte Laden
 	
-	character.klass = path.klass
-	
-	character.image = path.image
-	character.icon = path.icon
-	
-	character.moves = path.moves
-	character.equip = path.equip
-	character.statusList = path.statusList
-
-
+	else:
+		print(typeof(charLib))
+		var path = charLib
+		character.baseMaxHealth = path.baseMaxHealth
+		character.baseStrength = path.baseStrength
+		character.baseDefence = path.baseDefence
+		character.baseMagicDefence = path.baseMagicDefence
+		character.baseDexterity = path.baseDexterity
+		character.baseMagic = path.baseMagic
+		character.baseSpeed = path.baseSpeed
+		
+		character.healProcent = path.healProcent
+		character.damgeProcent = path.damgeProcent
+		character.protectProcent = path.protectProcent
+		
+		character.maxHealth = character.baseMaxHealth
+		character.strength = character.baseStrength
+		character.defence = character.baseDefence
+		character.dexterity = character.baseDexterity
+		character.magic = character.baseMagic
+		character.speed = character.baseSpeed
+		
+		character.health = character.maxHealth
+		
+		character.name = path.name
+		character.klass = path.klass
+		character.description = path.description
+		
+		character.image = path.image
+		character.icon = path.icon
+		
+		character.moves = path.moves
+		character.equip = path.equip
+		character.statusList = path.statusList
+		
+		calculate_all_stats(character)
+	#else:
+	#	print("Cant load Character")
 
 func reset_stats(character):
 	character.maxHealth = character.baseMaxHealth
@@ -54,7 +120,49 @@ func reset_stats(character):
 	character.critChance = character.baseCritChance
 	character.critModifier = character.baseCritModifier
 
-
+func character_to_lib(character, pos):
+	var lib = {}
+	lib["MaxHealth"] = character.baseMaxHealth
+	lib["Health"] = character.health
+	lib["Strengh"] = character.baseStrength
+	lib["BaseDefence"] = character.baseDefence
+	lib["Magic_Defence"] = character.baseMagicDefence
+	lib["Dexterity"] = character.baseDexterity
+	lib["Magic"] = character.baseMagic
+	lib["Speed"] = character.baseSpeed
+	
+	lib["Name"] = character.name
+	lib["Class"] = character.klass
+	lib["Level"] = character.level
+	lib["Description"] = character.description
+	
+	
+	lib["Image"] = character.image.resource_path
+	lib["Icon"] = character.icon.resource_path
+	
+	#other stats:
+	lib["Momentum"] = character.momentum
+	lib["ExperiencePoints"] = character.experiencePoints
+	lib["SkillPoints"] = character.skillPoints
+	lib["Position"] = pos
+	
+	
+	lib["Moves"] = []
+	for i in character.moves:
+		if i != null:
+			lib["Moves"].append(i.resource_path)
+		
+	lib["Equip"] = []
+	for i in character.equip:
+		if i != null:
+			lib["Equip"].append(i.resource_path)
+	
+	lib["Status"] = []
+	for i in character.statusList:
+		if i != null:
+			lib["Status"].append(i.resource_path)
+	
+	return lib
 
 func calculate_all_stats(character):
 	reset_stats(character)
@@ -187,8 +295,11 @@ func give_exp(character, amount):
 	character.experiencePoints += amount
 	if character.experiencePoints > character.level*character.baseExpToLevel:
 		character.experiencePoints -= character.level*character.baseExpToLevel
-		character.skillPoints += 2
-		character.level += 1
+		level_up(character)
+
+func level_up(character):
+	character.skillPoints += 2
+	character.level += 1
 
 func has_dealt_magic(character,amount):
 	pass

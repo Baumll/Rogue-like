@@ -18,32 +18,10 @@ func _ready():
 
 
 func _on_Start_pressed():
-	if(charcater == -1):
-		#hier noch random einfügen
-		emit_signal("Chosen",0)
-	else:
-		emit_signal("Chosen",charcater)
+	emit_signal("Chosen",ChrFunc.new_character(charcater))
 
 
-func _on_Button0_pressed():
-	charcater = 0
-	desciption_label.text = mage_text
-	desciption_label.update()
-
-
-func _on_Button1_pressed():
-	charcater = 1
-	desciption_label.text = warrier_text
-	desciption_label.update()
-
-
-func _on_Button2_pressed():
-	charcater = 2
-	desciption_label.text = ranger_text
-	desciption_label.update()
-
-
-func _on_Button3_pressed():
-	charcater = 3
-	desciption_label.text = necro_text
+func _on_Char_charButtonDown(character):
+	charcater = character
+	desciption_label.text = character.description
 	desciption_label.update()

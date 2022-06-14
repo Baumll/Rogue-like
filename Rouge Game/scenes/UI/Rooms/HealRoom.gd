@@ -17,3 +17,4 @@ func _ready():
 func _on_Button_pressed():
 	emit_signal("full_team_heal")
 	emit_signal("exit")
+

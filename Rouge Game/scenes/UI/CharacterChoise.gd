@@ -32,13 +32,13 @@ func _process(delta):
 					var tmpSwitch = buttonList[switchMove]
 					buttonList[switchMove] = buttonList[i]
 					buttonList[i] = buttonList[switchMove]
-					tmpSwitch = characterList[switchMove]
-					characterList[switchMove] = characterList[i]
-					characterList[i] = tmpSwitch
+					tmpSwitch = get_fighters()[switchMove]
+					get_fighters()[switchMove] = get_fighters()[i]
+					get_fighters()[i] = tmpSwitch
 					"""
-					var tmpSwitch = get_node("/root/Main").characterList[switchMove] 
-					get_node("/root/Main").characterList[switchMove] = get_node("/root/Main").characterList[i]
-					get_node("/root/Main").characterList[i]  = tmpSwitch
+					var tmpSwitch = get_node("/root/Main").get_fighters()[switchMove] 
+					get_node("/root/Main").get_fighters()[switchMove] = get_node("/root/Main").get_fighters()[i]
+					get_node("/root/Main").get_fighters()[i]  = tmpSwitch
 
 func set_char_active(character):
 	emit_signal("char_selected", character)
@@ -50,7 +50,7 @@ func reset():
 		x.texture = null
 
 func add_character(character):
-	if characterList.size() < 4:
+	if characterList.size() < GlobalFunktions.teamSize:
 		activeCharacter = character
 		characterList.append(character)
 		emit_signal("char_selected",character)

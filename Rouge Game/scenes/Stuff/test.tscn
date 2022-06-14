@@ -1,13 +1,14 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=12 format=2]
 
+[ext_resource path="res://scenes/Stuff/CheatNode.tscn" type="PackedScene" id=1]
 [ext_resource path="res://scenes/UI/StartScene.tscn" type="PackedScene" id=2]
 [ext_resource path="res://scenes/UI/Decision.tscn" type="PackedScene" id=3]
 [ext_resource path="res://scenes/UI/DoorScene.tscn" type="PackedScene" id=6]
 [ext_resource path="res://scenes/Stuff/Main.gd" type="Script" id=7]
 [ext_resource path="res://scenes/UI/TwoChoise.tscn" type="PackedScene" id=8]
 [ext_resource path="res://scenes/UI/CharacterSelectScreen/CharSelectScreen.tscn" type="PackedScene" id=10]
-[ext_resource path="res://scenes/UI/Fighting/WinSzene.tscn" type="PackedScene" id=11]
-[ext_resource path="res://scenes/UI/Fighting/LoseSzene.tscn" type="PackedScene" id=12]
+[ext_resource path="res://scenes/UI/Rooms/Fighting/WinSzene.tscn" type="PackedScene" id=11]
+[ext_resource path="res://scenes/UI/Rooms/Fighting/LoseSzene.tscn" type="PackedScene" id=12]
 [ext_resource path="res://scenes/Stuff/AudioStreamPlayer.tscn" type="PackedScene" id=21]
 [ext_resource path="res://Assets/Sounds/TestSounds/Cave_01_Loop.wav" type="AudioStream" id=22]
 
@@ -63,9 +64,12 @@ bus = "Musik"
 
 [node name="AudioEffect" parent="." instance=ExtResource( 21 )]
 bus = "Master"
+
+[node name="CheatNode" parent="." instance=ExtResource( 1 )]
 [connection signal="door_enter" from="VBoxContainer/DoorScene" to="." method="_on_DoorScene_door_enter"]
 [connection signal="choise_made" from="VBoxContainer/TwoChoise" to="." method="_on_TwoChoise_choise_made"]
 [connection signal="winSzene" from="WinSzene" to="." method="_on_WinSzene_winSzene"]
 [connection signal="loseSzene" from="LoseSzene" to="." method="_on_LoseSzene_loseSzene"]
 [connection signal="Chosen" from="CharSelectScreen" to="." method="_on_CharSelectScreen_Chosen"]
+[connection signal="load_pressed" from="Start" to="." method="_on_Start_load_pressed"]
 [connection signal="start_pressed" from="Start" to="." method="_on_Start_start_pressed"]

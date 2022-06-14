@@ -1,14 +1,14 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://scenes/UI/CharacterSelectScreen/CharSelectScreen.gd" type="Script" id=1]
-[ext_resource path="res://Assets/images/Icons/Armor/b_t_05.png" type="Texture" id=2]
-[ext_resource path="res://Assets/images/Icons/Armor/hm_t_01.png" type="Texture" id=3]
-[ext_resource path="res://Assets/images/Icons/Armor/NecromancerIcons_54_t.png" type="Texture" id=4]
-[ext_resource path="res://Assets/images/Icons/Armor/staff_05_t.png" type="Texture" id=5]
+[ext_resource path="res://scenes/UI/CharacterSelectScreen/CharSelectButton.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Units/Characters/charNewMage.tres" type="Resource" id=3]
+[ext_resource path="res://Units/Characters/charNecron.tres" type="Resource" id=4]
+[ext_resource path="res://Units/Characters/charRanger.tres" type="Resource" id=5]
 [ext_resource path="res://fonts/testFont.tres" type="DynamicFont" id=6]
 [ext_resource path="res://fonts/CharSelectScreen/fontCharDescription.tres" type="DynamicFont" id=7]
 [ext_resource path="res://fonts/CharSelectScreen/fontCharSelectHead.tres" type="DynamicFont" id=8]
-
+[ext_resource path="res://Units/Characters/charWarrior.tres" type="Resource" id=9]
 
 [node name="CharSelectScreen" type="Control"]
 anchor_right = 1.0
@@ -40,79 +40,39 @@ text = "Wähle deinen
 [node name="CenterContainer2" type="CenterContainer" parent="VBoxContainer"]
 margin_top = 379.0
 margin_right = 1080.0
-margin_bottom = 895.0
+margin_bottom = 1103.0
 
 [node name="GridContainer" type="GridContainer" parent="VBoxContainer/CenterContainer2"]
-margin_left = 282.0
-margin_right = 798.0
-margin_bottom = 516.0
+margin_left = 178.0
+margin_right = 902.0
+margin_bottom = 724.0
 rect_min_size = Vector2( 480, 480 )
 columns = 2
 
-[node name="Button0" type="Button" parent="VBoxContainer/CenterContainer2/GridContainer"]
-margin_right = 256.0
-margin_bottom = 256.0
-rect_min_size = Vector2( 256, 256 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
+[node name="Char0" parent="VBoxContainer/CenterContainer2/GridContainer" instance=ExtResource( 2 )]
+character = ExtResource( 3 )
 
-[node name="TextureRect" type="TextureRect" parent="VBoxContainer/CenterContainer2/GridContainer/Button0"]
-anchor_right = 1.0
-anchor_bottom = 1.0
-texture = ExtResource( 5 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
+[node name="Char1" parent="VBoxContainer/CenterContainer2/GridContainer" instance=ExtResource( 2 )]
+margin_left = 364.0
+margin_right = 724.0
+character = ExtResource( 5 )
 
-[node name="Button1" type="Button" parent="VBoxContainer/CenterContainer2/GridContainer"]
-margin_left = 260.0
-margin_right = 516.0
-margin_bottom = 256.0
-rect_min_size = Vector2( 256, 256 )
+[node name="Char2" parent="VBoxContainer/CenterContainer2/GridContainer" instance=ExtResource( 2 )]
+margin_top = 364.0
+margin_bottom = 724.0
+character = ExtResource( 9 )
 
-[node name="TextureRect" type="TextureRect" parent="VBoxContainer/CenterContainer2/GridContainer/Button1"]
-margin_right = 40.0
-margin_bottom = 40.0
-texture = ExtResource( 3 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="Button2" type="Button" parent="VBoxContainer/CenterContainer2/GridContainer"]
-margin_top = 260.0
-margin_right = 256.0
-margin_bottom = 516.0
-rect_min_size = Vector2( 256, 256 )
-
-[node name="TextureRect" type="TextureRect" parent="VBoxContainer/CenterContainer2/GridContainer/Button2"]
-margin_right = 40.0
-margin_bottom = 40.0
-texture = ExtResource( 2 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="Button3" type="Button" parent="VBoxContainer/CenterContainer2/GridContainer"]
-margin_left = 260.0
-margin_top = 260.0
-margin_right = 516.0
-margin_bottom = 516.0
-rect_min_size = Vector2( 256, 256 )
-
-[node name="TextureRect" type="TextureRect" parent="VBoxContainer/CenterContainer2/GridContainer/Button3"]
-anchor_right = 1.0
-anchor_bottom = 1.0
-texture = ExtResource( 4 )
-expand = true
-__meta__ = {
-"_edit_use_anchors_": false
-}
+[node name="Char3" parent="VBoxContainer/CenterContainer2/GridContainer" instance=ExtResource( 2 )]
+margin_left = 364.0
+margin_top = 364.0
+margin_right = 724.0
+margin_bottom = 724.0
+character = ExtResource( 4 )
 
 [node name="CenterContainer4" type="CenterContainer" parent="VBoxContainer"]
-margin_top = 899.0
+margin_top = 1107.0
 margin_right = 1080.0
-margin_bottom = 1184.0
+margin_bottom = 1392.0
 
 [node name="Description" type="Label" parent="VBoxContainer/CenterContainer4"]
 margin_left = 540.0
@@ -122,9 +82,9 @@ rect_min_size = Vector2( 0, 285 )
 custom_fonts/font = ExtResource( 7 )
 
 [node name="CenterContainer" type="CenterContainer" parent="VBoxContainer"]
-margin_top = 1188.0
+margin_top = 1396.0
 margin_right = 1080.0
-margin_bottom = 1566.0
+margin_bottom = 1774.0
 
 [node name="Start" type="Button" parent="VBoxContainer/CenterContainer"]
 margin_left = 79.0
@@ -139,8 +99,8 @@ margin_bottom = 40.0
 __meta__ = {
 "_edit_use_anchors_": false
 }
-[connection signal="pressed" from="VBoxContainer/CenterContainer2/GridContainer/Button0" to="." method="_on_Button0_pressed"]
-[connection signal="pressed" from="VBoxContainer/CenterContainer2/GridContainer/Button1" to="." method="_on_Button1_pressed"]
-[connection signal="pressed" from="VBoxContainer/CenterContainer2/GridContainer/Button2" to="." method="_on_Button2_pressed"]
-[connection signal="pressed" from="VBoxContainer/CenterContainer2/GridContainer/Button3" to="." method="_on_Button3_pressed"]
+[connection signal="charButtonDown" from="VBoxContainer/CenterContainer2/GridContainer/Char0" to="." method="_on_Char_charButtonDown"]
+[connection signal="charButtonDown" from="VBoxContainer/CenterContainer2/GridContainer/Char1" to="." method="_on_Char_charButtonDown"]
+[connection signal="charButtonDown" from="VBoxContainer/CenterContainer2/GridContainer/Char2" to="." method="_on_Char_charButtonDown"]
+[connection signal="charButtonDown" from="VBoxContainer/CenterContainer2/GridContainer/Char3" to="." method="_on_Char_charButtonDown"]
 [connection signal="pressed" from="VBoxContainer/CenterContainer/Start" to="." method="_on_Start_pressed"]

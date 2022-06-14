@@ -83,8 +83,6 @@ func set_item(newItem):
 		if forSale:
 			label.text = str(item.value) + "G"
 			textureRect.visible = true
-		#ChrFunc.add_item(activeCaracter,item)
-		#ChrFunc.calculate_all_stats(activeCaracter)
 	else:
 		#emit_signal("ItemSet",null,num)
 		item = null

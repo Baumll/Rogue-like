@@ -61,3 +61,7 @@ func _on_item_bought(item):
 func _on_CharSelect_char_selected(character):
 	equip.set_equip(character)
 	#character = activeCharacter
+
+
+func _on_BackButton_pressed():
+	emit_signal("inventoryButton")

@@ -1,11 +1,10 @@
 extends Node
 
-var rng = RandomNumberGenerator.new()
+
 
 var doors = []
 
 export(int) var maxCharacters = 4
-var characterList = []
 var activeChracter = null
 
 var inventory = [null,null,null,null,null,null,null,null,null]
@@ -16,6 +15,10 @@ var room = null
 export(int) var rows = 3
 export(int) var collums = 3
 
+#Create Data to save:
+var characterList = []
+
+
 onready var door = $VBoxContainer/DoorScene
 onready var start = $Start
 onready var character_screen = $CharSelectScreen
@@ -24,7 +27,7 @@ onready var win_screen = $WinSzene
 onready var lose_screen = $LoseSzene
 onready var load_screen = preload("res://scenes/UI/LoadOut/LoadOut.tscn")
 
-var save_file = "user://rough.save" #Der Pfad wo gespeichert wird
+
 
 func roomListSetup():
 	#Rist Path, Icon, Rarity
@@ -36,7 +39,7 @@ func roomListSetup():
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	rng.randomize()
+	GlobalFunktions.set_up_rng()
 	setup_start()
 	roomListSetup()
 
@@ -63,9 +66,8 @@ func setup_doors():
 	door.visible = true
 	var num = 0
 	doors = []
-	rng.randomize()
 	for i in range(2):
-		num = rng.randi_range(0,roomList.size()-1)
+		num = GlobalFunktions.rng.randi_range(0,roomList.size()-1)
 		doors.append(num)
 	door.setup_doors(load(roomList[doors[0]][1]), load(roomList[doors[1]][1]))
 	two_choise.visible = true
@@ -82,7 +84,7 @@ func disable_all():
 func load_enemy() -> Resource:
 	#var preChar = load("res://Units/CharacterSzene.tscn")
 	#var character = preChar.instance()
-	var i = rng.randi_range(-1.0,1.0)
+	var i = GlobalFunktions.rng.randi_range(-1.0,1.0)
 	var scene = load("res://ScribtAble/ClassCharacterContainer.gd")
 	scene = scene.new()
 	if i > 0:
@@ -93,9 +95,9 @@ func load_enemy() -> Resource:
 
 func load_characters_fight():
 	var enemys = []
-	for x in range(0,rng.randi_range(1,4)):
+	for x in range(0,GlobalFunktions.rng.randi_range(1,4)):
 		enemys.append(load_enemy())
-	var friends = characterList
+	var friends = get_fighters()
 	return [enemys, friends]
 	
 func _on_Start_start_pressed():
@@ -121,11 +123,11 @@ func setup_load_out():
 	disable_all()
 	room = load_screen.instance()
 	add_child(room)
-	#room.load_all_chracters(characterList)
+	#room.load_all_chracters(get_fighters())
 	room.connect("exit", self,"_on_exit")
 
 func _on_CharSelectScreen_Chosen(num):
-	load_chracter(num)
+	select_chracter(num)
 	setup_doors()
 	
 
@@ -134,8 +136,8 @@ func _on_CharSelectScreen_Chosen(num):
 func _on_FightScene_endFight(team, ep):
 	if(team == 1):
 		#xp veteilen:
-		for i in characterList:
-			i.give_exp(ep/characterList.size())
+		for i in get_fighters():
+			i.give_exp(ep/get_fighters().size())
 		#inventory.create_item()
 
 
@@ -155,38 +157,29 @@ func _on_inventory_inventoryButton():
 
 
 func _on_mercenario_mercenario():
-	if characterList.size() <= maxCharacters:
-		rng.randomize()
-		var num = rng.randi_range(0,3)
-		load_chracter(num)
+	if get_fighters().size() <= maxCharacters:
+		var num = GlobalFunktions.rng.randi_range(0,3)
+		select_chracter(num)
 	setup_doors()
 
 
-func load_chracter(num):
-		var preChar = load("res://ScribtAble/ClassCharacterContainer.gd")
-		var character = preChar.new()
-		
-		match num:
-			0: 
-				ChrFunc.loadStats(character, "res://Units/Characters/charNewMage.tres")
-			1: 
-				ChrFunc.loadStats(character, "res://Units/Characters/charWarrior.tres")
-			2: 
-				ChrFunc.loadStats(character, "res://Units/Characters/charRanger.tres")
-			3: 
-				ChrFunc.loadStats(character, "res://Units/Characters/charNecron.tres")
-		
-		characterList.append(character)
-		activeChracter = characterList[characterList.size()-1]
-		activeChracter.health = activeChracter.maxHealth
-		#character_reset_stats(activeChracter)
-		ChrFunc.reset_stats(activeChracter)
-		#inventory.load_equip(activeChracter)
-		print(characterList)
+	
+func select_chracter(preCharacter):
+	#Erstellt den character
+	var character = ChrFunc.new_character(preCharacter)
+
+
+	get_fighters().append(character)
+	activeChracter = get_fighters()[get_fighters().size()-1]
+	activeChracter.health = activeChracter.maxHealth
+	#character_reset_stats(activeChracter)
+	ChrFunc.reset_stats(activeChracter)
+	#inventory.load_equip(activeChracter)
+	print(get_fighters())
 
 
 func _on_HealRoom_full_team_heal():
-	for i in characterList:
+	for i in get_fighters():
 		i.health = i.maxHealth
 	setup_doors()
 
@@ -195,9 +188,10 @@ func _on_exit():
 	#checkt ob noch alle chars amleben sind
 	if room != null:
 		if room.name == "FightScene":
-			for x in characterList:
+			for x in get_fighters():
 				if x.health > 0:
 					#win screen hier noch besser machen
+					save_game()
 					win_screen.visible
 					room.queue_free()
 					return
@@ -210,9 +204,53 @@ func _on_exit():
 
 #Save Game
 func save_game():
-	var file = File.new()
-	file.open(save_file, File.WRITE)
-	file.store_var(inventory)
-	for i in characterList:
-		file.store_var(i, true)
-	file.close()
+	#Check if folder ecists:
+	var dir = Directory.new()
+	if !dir.dir_exists(GlobalFunktions.save_dir):
+		dir.make_dir_recursive(GlobalFunktions.save_dir)
+	
+	#Save Data:
+	var save_game = File.new()
+	var error = save_game.open_encrypted_with_pass(GlobalFunktions.save_file, File.WRITE, GlobalFunktions.password)
+	if error == OK:
+		
+		#Speicher bis jtzt nur die Charactere
+		var saveChars = []
+		var data = {"Characters" : saveChars,
+		"Version" : "PreAlpha"}
+		for i in range(characterList.size()):
+			saveChars.append(ChrFunc.character_to_lib(characterList[i],i))
+		
+		save_game.store_var(data)
+		save_game.close()
+		print("Data saved")
+	else:
+		print("Can't open file")
+
+func load_game():
+	var save_game = File.new()
+	if save_game.file_exists(GlobalFunktions.save_file):
+		var error = save_game.open_encrypted_with_pass(GlobalFunktions.save_file, File.READ, GlobalFunktions.password)
+		if error == OK:
+			#Hier laden
+			var player_data = save_game.get_var()
+			var characterList = [null,null,null,null]
+			for i in player_data["Characters"]:
+				characterList[i["Position"]] = ChrFunc.new_character(i)
+			save_game.close()
+			print("Data loaded")
+			return player_data
+		else:
+			print("Can't open file")
+	else:
+		print("No Save File")
+
+
+func _on_Start_load_pressed():
+	var data = load_game()
+	for i in data["Characters"]:
+		var preChar = ChrFunc.new_character(i)
+		characterList.append(preChar)
+		select_chracter(preChar)
+		print(preChar.moves)
+	setup_doors()

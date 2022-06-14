@@ -1,0 +1,159 @@
+{
+	"sheets": [
+		{
+			"name": "CharacterList",
+			"columns": [
+				{
+					"typeStr": "1",
+					"name": "Name"
+				},
+				{
+					"typeStr": "3",
+					"name": "Power"
+				},
+				{
+					"typeStr": "1",
+					"name": "Description",
+					"opt": true,
+					"display": null
+				},
+				{
+					"typeStr": "3",
+					"name": "Level"
+				},
+				{
+					"typeStr": "3",
+					"name": "Health"
+				},
+				{
+					"typeStr": "3",
+					"name": "Strengh"
+				},
+				{
+					"typeStr": "3",
+					"name": "Dexterity"
+				},
+				{
+					"typeStr": "3",
+					"name": "Magic"
+				},
+				{
+					"typeStr": "3",
+					"name": "Armor"
+				},
+				{
+					"typeStr": "3",
+					"name": "Magic_Defence"
+				},
+				{
+					"typeStr": "3",
+					"name": "Speed"
+				},
+				{
+					"typeStr": "3",
+					"name": "Crit_Chance"
+				},
+				{
+					"typeStr": "3",
+					"name": "Crit_Dmg"
+				},
+				{
+					"typeStr": "8",
+					"name": "Moves",
+					"opt": true,
+					"display": null
+				},
+				{
+					"typeStr": "8",
+					"name": "Equip",
+					"opt": true,
+					"display": null
+				},
+				{
+					"typeStr": "1",
+					"name": "Image",
+					"display": null
+				},
+				{
+					"typeStr": "1",
+					"name": "Icon",
+					"display": null
+				}
+			],
+			"lines": [
+				{
+					"Name": "Mage",
+					"Power": 5,
+					"Description": "Schleudert feuerkugeln",
+					"Moves": [
+						{
+							"Move": "Strike"
+						}
+					],
+					"Health": 10,
+					"Strengh": 0,
+					"Dexterity": 1,
+					"Magic": 3,
+					"Armor": 1,
+					"Magic_Defence": 3,
+					"Speed": 7,
+					"Crit_Chance": 5,
+					"Crit_Dmg": 1,
+					"Level": 1,
+					"Image": "hero-mage.png",
+					"Icon": "hero-mage.png"
+				},
+				{
+					"Name": "Knight",
+					"Power": 10,
+					"Level": 2,
+					"Health": 12,
+					"Strengh": 2,
+					"Dexterity": 1,
+					"Magic": 0,
+					"Armor": 3,
+					"Magic_Defence": 2,
+					"Speed": 8,
+					"Crit_Chance": 5,
+					"Crit_Dmg": 1,
+					"Image": "guard.png",
+					"Icon": "guard.png",
+					"Description": "Ist robust",
+					"Moves": [
+						{
+							"Move": "Strike"
+						}
+					]
+				}
+			],
+			"separators": [],
+			"props": {}
+		},
+		{
+			"name": "EnemyList@Moves",
+			"props": {
+				"hide": true
+			},
+			"separators": [],
+			"lines": [],
+			"columns": [
+				{
+					"typeStr": "1",
+					"name": "Move",
+					"display": null
+				}
+			]
+		},
+		{
+			"name": "EnemyList@Equip",
+			"props": {
+				"hide": true
+			},
+			"separators": [],
+			"lines": [],
+			"columns": []
+		}
+	],
+	"customTypes": [],
+	"compress": false
+}

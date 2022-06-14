@@ -14,12 +14,15 @@ func set_active_state(state):
 		i.active = state
 
 func set_equip(character):
+	#Setzt die ausgerüsteten Item in die Equip slots
 	activeCharacter = character
 	for i in range(0,slotList.size()):
-		if(activeCharacter.equip.size() > i ):
-			slotList[i].set_item(activeCharacter.equip[i])
+		if activeCharacter.equip.size()-1 >= i:
 			slotList[i].activeCaracter = character
-		
+			slotList[i].set_item(activeCharacter.equip[i])
+		else:
+			slotList[i].activeCaracter = character
+			slotList[i].set_item(null)
 
 
 func _on_ItemSet(item):
