@@ -171,10 +171,10 @@ func select_chracter(preCharacter):
 
 	get_fighters().append(character)
 	activeChracter = get_fighters()[get_fighters().size()-1]
-	activeChracter.health = activeChracter.maxHealth
-	#character_reset_stats(activeChracter)
-	ChrFunc.reset_stats(activeChracter)
-	#inventory.load_equip(activeChracter)
+	#activeChracter.health = activeChracter.maxHealth
+	
+	ChrFunc.calculate_all_stats(activeChracter)
+	
 	print(get_fighters())
 
 
@@ -211,7 +211,7 @@ func save_game():
 	
 	#Save Data:
 	var save_game = File.new()
-	var error = save_game.open_encrypted_with_pass(GlobalFunktions.save_file, File.WRITE, GlobalFunktions.password)
+	var error = save_game.open(GlobalFunktions.save_file, File.WRITE)
 	if error == OK:
 		
 		#Speicher bis jtzt nur die Charactere
@@ -230,7 +230,7 @@ func save_game():
 func load_game():
 	var save_game = File.new()
 	if save_game.file_exists(GlobalFunktions.save_file):
-		var error = save_game.open_encrypted_with_pass(GlobalFunktions.save_file, File.READ, GlobalFunktions.password)
+		var error = save_game.open(GlobalFunktions.save_file, File.READ)
 		if error == OK:
 			#Hier laden
 			var player_data = save_game.get_var()
@@ -249,8 +249,6 @@ func load_game():
 func _on_Start_load_pressed():
 	var data = load_game()
 	for i in data["Characters"]:
-		var preChar = ChrFunc.new_character(i)
-		characterList.append(preChar)
-		select_chracter(preChar)
-		print(preChar.moves)
+		select_chracter(i)
 	setup_doors()
+	

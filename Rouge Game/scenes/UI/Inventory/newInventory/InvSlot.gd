@@ -7,6 +7,7 @@ var item
 var num = -1
 var active = true
 var forSale = true
+var inf = null
 
 onready var label = $Label
 onready var textureRect = $TextureRect
@@ -32,8 +33,10 @@ func get_drag_data(position):
 		var control = Control.new()
 		control.add_child(drag_texture)
 		drag_texture.rect_position = -0.5 * drag_texture.rect_size
-		
 		set_drag_preview(control)
+		
+		if inf != null:
+			inf[num] = null
 		texIcon.texture = null
 		textureRect.visible = false
 		label.text = ""
@@ -65,9 +68,12 @@ func set_item(newItem):
 		#emit_signal("ItemSet",newItem,num)
 		item = newItem
 		texIcon.texture = item.icon
+		if inf != null:
+			inf[num] = item
 		if forSale:
 			label.text = str(item.value) + "G"
 			textureRect.visible = true
+			
 	else:
 		#emit_signal("ItemSet",null,num)
 		item = null

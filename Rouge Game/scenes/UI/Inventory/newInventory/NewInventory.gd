@@ -26,6 +26,7 @@ func _ready():
 		container.connect("ItemSet", self,"_on_item_pressed")
 		container.connect("bought", self,"_on_item_bought")
 		container.num = i
+		container.inf = inf
 		if inf.size() > i:
 			if inf[i] != null:
 				container.set_item(inf[i])
@@ -40,7 +41,7 @@ func _process(delta):
 func add_item():
 	for i in grid.get_children():
 		if i.item == null:
-			var tmpitem = preItem.new()
+			var tmpitem = preItem #.new()
 			tmpitem._ready()
 			i.set_item(tmpitem)
 			

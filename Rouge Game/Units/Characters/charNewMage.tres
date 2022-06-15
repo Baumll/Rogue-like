@@ -28,4 +28,4 @@ baseCritModifier = 0
 image = ExtResource( 3 )
 icon = ExtResource( 2 )
 moves = [ ExtResource( 5 ), ExtResource( 6 ), ExtResource( 4 ), ExtResource( 7 ) ]
-equip = [  ]
+equip = [ null, null ]

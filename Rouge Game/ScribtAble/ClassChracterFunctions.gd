@@ -153,9 +153,11 @@ func character_to_lib(character, pos):
 			lib["Moves"].append(i.resource_path)
 		
 	lib["Equip"] = []
+	var eq = []
 	for i in character.equip:
 		if i != null:
 			lib["Equip"].append(i.resource_path)
+			eq.append(i.resource_path)
 	
 	lib["Status"] = []
 	for i in character.statusList:
@@ -251,15 +253,15 @@ func remove_status(character, status):
 				break
 	calculate_all_stats(character)
 
-func remove_item(character, item):
-	if item != null:
-		character.equip.erase(item)
-		if item.status != null:
-			remove_status(character, item.status)
+func remove_item(character, slot):
+	if slot < character.equip.size():
+		if character.equip[slot] != null:
+			remove_status(character, character.equip[slot].status)
+			character.equip[slot] = null
 
-func add_item(character, item):
-	if item != null:
-		character.equip.append(item)
+func add_item(character, slot, item):
+	if slot < character.equip.size():
+		character.equip[slot] = item
 		if item.status != null:
 			append_status(character, item.status)
 		

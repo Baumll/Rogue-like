@@ -56,7 +56,7 @@ export(Texture) var image = null
 export(Texture) var icon = null
 
 export(Array, Resource) var moves = []
-export(Array, Resource) var equip = []
+export(Array, Resource) var equip = [null,null] #max quipp
 #export(Array, Resource) var status = []
 var statusList = []
 

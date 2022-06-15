@@ -44,7 +44,7 @@ func get_drag_data(position):
 		
 		emit_signal("ItemSet",item)
 		
-		ChrFunc.remove_item(activeCaracter, item)
+		ChrFunc.remove_item(activeCaracter, num)
 		item = null
 		return data
 	
@@ -75,11 +75,12 @@ func drop_data(_pos,data):
 func set_item(newItem):
 	if(newItem != null):
 		#emit_signal("ItemSet",newItem,num)
-		ChrFunc.remove_item(activeCaracter,item)
+		#löscht das aktuelle item
+		ChrFunc.remove_item(activeCaracter,num)
 		
 		item = newItem
 		texIcon.texture = item.icon
-		ChrFunc.add_item(activeCaracter,item)
+		ChrFunc.add_item(activeCaracter,num,item)
 		if forSale:
 			label.text = str(item.value) + "G"
 			textureRect.visible = true
