@@ -4,12 +4,11 @@
 [ext_resource path="res://Assets/images/sprites/enemies/skeletalwarrior.png" type="Texture" id=2]
 [ext_resource path="res://Assets/images/Icons/characters/NecromancerIcons_54_t.png" type="Texture" id=3]
 
-
-
-
 [resource]
 script = ExtResource( 1 )
+name = "Missing No"
 klass = "skeleton"
+description = "Ups Something went wrong"
 level = 1
 baseExpToLevel = 20
 deathExp = 6

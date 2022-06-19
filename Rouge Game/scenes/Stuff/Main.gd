@@ -33,7 +33,7 @@ func roomListSetup():
 	#Rist Path, Icon, Rarity
 	roomList.append(["res://scenes/UI/Rooms/HealRoom.tscn","res://Assets/images/Icons/Rooms/green_14.PNG", 2])
 	roomList.append(["res://scenes/UI/Rooms/mercenario.tscn","res://Assets/images/Icons/Rooms/yellow_40.png", 2])
-	roomList.append(["res://scenes/UI/Fighting/FightScene.tscn","res://Assets/images/Icons/Rooms/blue_12.png", 2])
+	roomList.append(["res://scenes/UI/Rooms/Fighting/FightScene.tscn","res://Assets/images/Icons/Rooms/blue_12.png", 2])
 	roomList.append(["res://scenes/UI/Rooms/merchantScene.tscn","res://Assets/images/Icons/Rooms/gray_07.PNG", 2])
 	roomList.append(["res://scenes/UI/Rooms/ItemRoom.tscn","res://Assets/images/Icons/Rooms/TradingIcons_08.png", 2])
 
@@ -88,9 +88,9 @@ func load_enemy() -> Resource:
 	var scene = load("res://ScribtAble/ClassCharacterContainer.gd")
 	scene = scene.new()
 	if i > 0:
-		ChrFunc.loadStats(scene,"res://Units/enemys/enemySkeleton.tres")
+		ChrFunc.loadStats(scene,load("res://Units/enemys/enemySkeleton.tres"))
 	else:
-		ChrFunc.loadStats(scene,"res://Units/enemys/enemyZombie.tres")
+		ChrFunc.loadStats(scene,load("res://Units/enemys/enemyZombie.tres"))
 	return scene
 
 func load_characters_fight():
@@ -109,7 +109,8 @@ func get_fighters():
 
 
 func _on_DoorScene_door_enter(num):
-	room = load(roomList[doors[num]][0]).instance()
+	room = load(roomList[doors[num]][0])
+	room = room.instance()
 	add_child(room)
 	room.connect("exit", self,"_on_exit")
 	room.visible = true

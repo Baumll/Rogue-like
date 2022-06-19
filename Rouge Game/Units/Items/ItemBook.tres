@@ -1,8 +1,9 @@
 [gd_resource type="Resource" load_steps=4 format=2]
 
 [ext_resource path="res://ScribtAble/ClassItem.gd" type="Script" id=1]
-[ext_resource path="res://Assets/images/Icons/Books/book_13_b.png" type="Texture" id=2]
+[ext_resource path="res://Assets/images/Icons/items/Books/book_13_b.png" type="Texture" id=2]
 [ext_resource path="res://Units/States/statusBook.tres" type="Resource" id=3]
+
 
 [resource]
 script = ExtResource( 1 )

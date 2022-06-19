@@ -66,7 +66,6 @@ bus = "Musik"
 bus = "Master"
 
 [node name="CheatNode" parent="." instance=ExtResource( 1 )]
-
 [connection signal="door_enter" from="VBoxContainer/DoorScene" to="." method="_on_DoorScene_door_enter"]
 [connection signal="choise_made" from="VBoxContainer/TwoChoise" to="." method="_on_TwoChoise_choise_made"]
 [connection signal="winSzene" from="WinSzene" to="." method="_on_WinSzene_winSzene"]

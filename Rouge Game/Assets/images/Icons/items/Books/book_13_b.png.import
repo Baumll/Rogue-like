@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/book_09_b.png-757dcc617938088d8496e690707aac32.stex"
+path="res://.import/book_13_b.png-a787935ee0cf5c55866515ca7944d69e.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/images/Icons/Books/book_09_b.png"
-dest_files=[ "res://.import/book_09_b.png-757dcc617938088d8496e690707aac32.stex" ]
+source_file="res://Assets/images/Icons/items/Books/book_13_b.png"
+dest_files=[ "res://.import/book_13_b.png-a787935ee0cf5c55866515ca7944d69e.stex" ]
 
 [params]
 
@@ -28,7 +28,6 @@ process/fix_alpha_border=true
 process/premult_alpha=false
 process/HDR_as_SRGB=false
 process/invert_color=false
-process/normal_map_invert_y=false
 stream=false
 size_limit=0
 detect_3d=true

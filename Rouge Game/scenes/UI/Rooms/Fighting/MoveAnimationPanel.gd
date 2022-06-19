@@ -16,7 +16,7 @@ var selfTarget = false
 var targets = 0
 
 export(Resource) var animations
-var floaty_text_scene = preload("res://scenes/UI/Fighting/Floating_Text.tscn")
+var floaty_text_scene = preload("res://scenes/UI/Rooms/Fighting/Floating_Text.tscn")
 
 onready var targetAnimList = [$AnimatedSprite,$AnimatedSprite2, $AnimatedSprite3,$AnimatedSprite4,$AnimatedSprite5]
 onready var targetTexList = [$TextureRect,$TextureRect2,$TextureRect3,$TextureRect4,$TextureRect5]

@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/dw_arm_t_01.PNG-03d8bb2f07b16c1376a037509c8ff652.stex"
+path="res://.import/book_12_b.png-690e8c73bae5352d163af67e1fbf7c7e.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/images/Icons/dw_arm_t_01.PNG"
-dest_files=[ "res://.import/dw_arm_t_01.PNG-03d8bb2f07b16c1376a037509c8ff652.stex" ]
+source_file="res://Assets/images/Icons/items/Books/book_12_b.png"
+dest_files=[ "res://.import/book_12_b.png-690e8c73bae5352d163af67e1fbf7c7e.stex" ]
 
 [params]
 
@@ -28,7 +28,6 @@ process/fix_alpha_border=true
 process/premult_alpha=false
 process/HDR_as_SRGB=false
 process/invert_color=false
-process/normal_map_invert_y=false
 stream=false
 size_limit=0
 detect_3d=true

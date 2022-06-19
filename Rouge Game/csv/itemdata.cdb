@@ -1,0 +1,49 @@
+{
+	"sheets": [
+		{
+			"name": "itemTest",
+			"columns": [
+				{
+					"typeStr": "1",
+					"name": "Name"
+				},
+				{
+					"typeStr": "1",
+					"name": "Description",
+					"display": null
+				},
+				{
+					"typeStr": "3",
+					"name": "cost"
+				},
+				{
+					"typeStr": "1",
+					"name": "icon"
+				},
+				{
+					"typeStr": "1",
+					"name": "status"
+				},
+				{
+					"typeStr": "5:common,uncommon,rare,epic,legendary",
+					"name": "Rarity",
+					"display": null
+				}
+			],
+			"lines": [
+				{
+					"Name": "dagger",
+					"Description": "A simple Dagger",
+					"status": "res://Units/States/statusDagger.tres",
+					"Rarity": 0,
+					"cost": 3,
+					"icon": "res://Assets/images/Icons/items/m_t_05.png"
+				}
+			],
+			"separators": [],
+			"props": {}
+		}
+	],
+	"customTypes": [],
+	"compress": false
+}

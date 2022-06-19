@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/hm_t_01.png-04a39f2829da2cd461ab7cd91802141d.stex"
+path="res://.import/book_04_b.png-61828080a43b9d7e099fca67f66facd9.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/images/Icons/Armor/hm_t_01.png"
-dest_files=[ "res://.import/hm_t_01.png-04a39f2829da2cd461ab7cd91802141d.stex" ]
+source_file="res://Assets/images/Icons/items/Books/book_04_b.png"
+dest_files=[ "res://.import/book_04_b.png-61828080a43b9d7e099fca67f66facd9.stex" ]
 
 [params]
 
@@ -28,7 +28,6 @@ process/fix_alpha_border=true
 process/premult_alpha=false
 process/HDR_as_SRGB=false
 process/invert_color=false
-process/normal_map_invert_y=false
 stream=false
 size_limit=0
 detect_3d=true

@@ -10,6 +10,7 @@ export(String) var description = ""
 export(StreamTexture) var icon = null
 export(int) var value = 10
 export(Resource) var status = null
+
 """
 export(int) var maxHealth = 5
 export(int) var strength = 0
@@ -31,7 +32,7 @@ export(float) var dexterityProcent = 0.0
 export(float) var magicProcent = 0.0
 export(float) var speedProcent = 0.0
 
-"""
+
 
 
 func _ready():
@@ -56,7 +57,7 @@ func load_item(path):
 		name = item.name
 		description = item.description
 		value = item.value
-		"""
+		
 		maxHealth = item.maxHealth
 		strength = item.strength
 		defence = item.defence
@@ -76,6 +77,7 @@ func load_item(path):
 		dexterityProcent = item.dexterityProcent
 		magicProcent = item.magicProcent
 		speedProcent = item.speedProcent
-		"""
+
 		icon = item.icon
 		status = item.status
+"""

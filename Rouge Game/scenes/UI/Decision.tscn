@@ -1,7 +1,8 @@
 [gd_scene load_steps=3 format=2]
 
-[ext_resource path="res://Assets/images/Icons/Armor/pirates_03_t.PNG" type="Texture" id=1]
+[ext_resource path="res://Assets/images/Icons/items/Armor/pirates_03_t.PNG" type="Texture" id=1]
 [ext_resource path="res://Assets/images/Icons/characters/helmets_23.png" type="Texture" id=2]
+
 
 
 

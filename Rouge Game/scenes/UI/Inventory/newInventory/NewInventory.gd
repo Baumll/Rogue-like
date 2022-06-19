@@ -38,14 +38,14 @@ func _process(delta):
 	if(Input.is_action_just_pressed("ui_up")):
 			add_item()
 
-func add_item():
-	for i in grid.get_children():
-		if i.item == null:
-			var tmpitem = preItem #.new()
-			tmpitem._ready()
-			i.set_item(tmpitem)
-			
-			return
+func add_item(item = null):
+	if item !=  null:
+		for i in grid.get_children():
+			if i.item == null:
+				i.set_item(item)
+				return
+	else: 
+		pass
 
 func set_active_state(state):
 	for i in slotList:

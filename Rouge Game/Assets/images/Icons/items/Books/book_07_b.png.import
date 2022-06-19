@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/pirates_03_t.PNG-1b1efbf20ef31fc672150fdd2c977f7f.stex"
+path="res://.import/book_07_b.png-de74c892b42ccaf9dcbe49bc7c3a358c.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/images/Icons/Armor/pirates_03_t.PNG"
-dest_files=[ "res://.import/pirates_03_t.PNG-1b1efbf20ef31fc672150fdd2c977f7f.stex" ]
+source_file="res://Assets/images/Icons/items/Books/book_07_b.png"
+dest_files=[ "res://.import/book_07_b.png-de74c892b42ccaf9dcbe49bc7c3a358c.stex" ]
 
 [params]
 
@@ -28,7 +28,6 @@ process/fix_alpha_border=true
 process/premult_alpha=false
 process/HDR_as_SRGB=false
 process/invert_color=false
-process/normal_map_invert_y=false
 stream=false
 size_limit=0
 detect_3d=true
