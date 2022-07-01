@@ -1,6 +1,6 @@
 [gd_scene load_steps=14 format=2]
 
-[ext_resource path="res://Assets/images/Fight/Backgroumnd.png" type="Texture" id=1]
+[ext_resource path="res://Assets/images/Fight/background example.png" type="Texture" id=1]
 [ext_resource path="res://scenes/UI/Rooms/Fighting/FightScene.gd" type="Script" id=2]
 [ext_resource path="res://scenes/UI/Rooms/Fighting/CharacterContainer.tscn" type="PackedScene" id=3]
 [ext_resource path="res://Assets/images/bars/healthbar.png" type="Texture" id=4]
@@ -11,7 +11,6 @@
 [ext_resource path="res://scenes/Stuff/ShakeCamera2D.tscn" type="PackedScene" id=9]
 [ext_resource path="res://scenes/UI/Rooms/Fighting/FriendlyCharacterContainer.tscn" type="PackedScene" id=10]
 [ext_resource path="res://scenes/UI/Rooms/Fighting/FightEnd.tscn" type="PackedScene" id=11]
-
 
 [sub_resource type="Shader" id=1]
 code = "shader_type canvas_item;
@@ -40,10 +39,11 @@ __meta__ = {
 current = true
 
 [node name="TextureRect" type="TextureRect" parent="."]
-margin_right = 1079.0
+margin_top = 56.0
+margin_right = 1088.0
 margin_bottom = 984.0
 texture = ExtResource( 1 )
-stretch_mode = 1
+expand = true
 __meta__ = {
 "_edit_use_anchors_": false
 }

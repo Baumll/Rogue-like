@@ -1,7 +1,7 @@
 [gd_resource type="Resource" load_steps=4 format=2]
 
 [ext_resource path="res://ScribtAble/ClassCharacterContainer.gd" type="Script" id=1]
-[ext_resource path="res://Assets/images/sprites/enemies/skeletalwarrior.png" type="Texture" id=2]
+[ext_resource path="res://Assets/images/enemys/skellletclip.png" type="Texture" id=2]
 [ext_resource path="res://Assets/images/Icons/characters/NecromancerIcons_54_t.png" type="Texture" id=3]
 
 [resource]
