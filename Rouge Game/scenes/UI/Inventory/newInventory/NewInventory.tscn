@@ -55,5 +55,6 @@ size_flags_horizontal = 3
 size_flags_vertical = 3
 custom_fonts/font = ExtResource( 4 )
 text = "Back"
+
 [connection signal="ItemSet" from="HBoxContainer/VBoxContainer/EquipSlots" to="." method="_on_item_pressed"]
 [connection signal="pressed" from="HBoxContainer/VBoxContainer/BackButton" to="." method="_on_BackButton_pressed"]

@@ -27,7 +27,7 @@ func load_move(source):
 		magical_dmg = source["Magical_Dmg"]
 		heal = source["Heal"]
 		status = GlobalFunktions.get_status(source["Status"])
-		animation = load(source["Animation"]) #0 = Value oder status
+		animation = source["Animation"] #0 = Value oder status
 		sound = load(source["Sound"]) #0 = Value oder status
 	else:
 		name = source.name

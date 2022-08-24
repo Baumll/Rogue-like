@@ -20,7 +20,7 @@ var afterCombatAttackScript = preload("res://ScribtAble/CombatScrips/CombatScrip
 var rng = RandomNumberGenerator.new()
 
 
-var fighterList = Array()  #Ein 2D array mit der Liste der Kämpfer geilt in die Teams
+var fighter_list = Array()  #Ein 2D array mit der Liste der Kämpfer geilt in die Teams
 var fighterRectList = Array()
 var friendlyFighterCount = -1
 var activeFighter
@@ -54,7 +54,7 @@ func _ready():
 # Called when the node enters the scene tree for the first time.
 func setup_fight():
 	#Set up the fighter List
-	fighterList = set_up_fighter_list()
+	fighter_list = set_up_fighter_list()
 	initative = []
 	fighterRectList = find_CharacterContainer()
 	for x in fighterRectList:
@@ -120,7 +120,7 @@ func add_all_fighters(args):
 
 #Fügt einen Fighter an ein
 func add_fighter_spot(fighterObj, spot):
-	fighterList[spot] = fighterObj
+	fighter_list[spot] = fighterObj
 	initative.append(spot)
 	initative.sort_custom(self, "customComparison")
 	update_fighter_image()
@@ -129,10 +129,10 @@ func add_fighter_spot(fighterObj, spot):
 
 func remove_fighter(num):
 	if(num < team_size and get_fighter(num) != null):
-		ep += get_fighter(num).deathExp
-	fighterList[num] = null
+		ep += get_fighter(num).death_exp
+	fighter_list[num] = null
 	initative = []
-	for x in range(fighterList.size()):
+	for x in range(fighter_list.size()):
 		if get_fighter(x) != null:
 			initative.append(x)
 	initative.sort_custom(self, "customComparison")
@@ -166,7 +166,7 @@ func set_active_fighter(num):
 		i.set_selection(false)
 	print("Momentum: " + String(get_fighter(num).momentum))
 	activeFighter = num
-	ChrFunc.iterate_status(get_fighter(num))
+	get_fighter(num).iterate_status()
 	if num < team_size: #Wenn ein gegner dran ist nutz eine zufällige attacke
 		npc_move(activeFighter)
 	else: #Wenn ein Verbündeter dran ist
@@ -176,8 +176,8 @@ func set_active_fighter(num):
 	fighterRectList[activeFighter].set_selection(true)
 
 func get_fighter(num) -> Resource:
-	if( fighterList[num] != null):
-		return fighterList[num]
+	if( fighter_list[num] != null):
+		return fighter_list[num]
 	else:
 		return null
 
@@ -261,7 +261,7 @@ func make_move(move, fighterTargetList):
 func set_time_line(list) -> Array:
 	var out = []
 	for i in list:
-		out.append(fighterList[i])
+		out.append(fighter_list[i])
 	return out
 
 
@@ -403,19 +403,19 @@ func use_move_on_fighter(target, source, move):
 	
 	var rtn = []
 	if move.physical_dmg > 0:
-		rtn.append(ChrFunc.get_magic_dmg(target2,floor(move3.physical_dmg + source3.strength -source3.defence)))
+		rtn.append(target2.get_magic_dmg(floor(move3.physical_dmg + source3.strength -source3.defence)))
 		ChrFunc.has_dealt_magic(source2,rtn[0])
 	else:
 		rtn.append(0)
 	if move.magical_dmg > 0:
-		var mgc_dmg = ChrFunc.get_dmg(target2,floor(move3.magical_dmg + source3.magic -source3.magic_defence))
+		var mgc_dmg = target2.get_dmg(floor(move3.magical_dmg + source3.magic -source3.magic_defence))
 		rtn.append(mgc_dmg)
-		ChrFunc.has_dealt_physical(source2,rtn[1])
+		source2.has_dealt_physical(rtn[1])
 	else:
 		rtn.append(0)
 	if move.heal > 0:
-		rtn.append((ChrFunc.get_heal(target2,floor(move3.heal*(1+source3.heal_procent)))))
-		ChrFunc.has_healed(source2,rtn[2])
+		rtn.append((target2.get_heal(floor(move3.heal*(1+source3.heal_procent)))))
+		source2.has_healed(rtn[2])
 	else:
 		rtn.append(0)
 		
@@ -478,7 +478,7 @@ func update_health(num):
 
 
 func update_fighter_image():
-	for x in range(fighterList.size()):
+	for x in range(fighter_list.size()):
 		if get_fighter(x) != null:
 			fighterRectList[x].set_image(get_fighter(x).image)
 			fighterRectList[x].visible = true

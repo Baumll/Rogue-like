@@ -23,7 +23,7 @@ var momentum = 0
 var skill_points = 0
 
 export(int) var base_exp_to_level = 0 #Wie viel Exp pro level draufgeschlagen wird damit er aufleved
-export(int) var deathExp = 0 #Wie viel Exp der Chracter gibt wenn man ihn besiegt mal Level
+export(int) var death_exp = 0 #Wie viel Exp der Chracter gibt wenn man ihn besiegt mal Level
 
 export(int) var base_max_health = 0
 export(int) var base_strength = 0

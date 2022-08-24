@@ -67,49 +67,49 @@ func set_level_up(state):
 func _on_levelUp_health(num):
 	acktive_character.base_max_health += 5
 	acktive_character.skill_points -= 1
-	ChrFunc.calculate_all_stats(acktive_character)
-	ChrFunc.reset_health(acktive_character)
+	acktive_character.calculate_all_stats()
+	acktive_character.reset_health()
 	if acktive_character.skill_points <= 0:
 		set_level_up(false)
 
 func _on_levelUp_defence(num):
 	acktive_character.Base_Defence += 1
 	acktive_character.skill_points -= 1
-	ChrFunc.calculate_all_stats(acktive_character)
+	acktive_character.calculate_all_stats()
 	if acktive_character.skill_points <= 0:
 		set_level_up(false)
 
 func _on_levelUp_magicDefence(num):
 	acktive_character.base_magic_defence += 1
 	acktive_character.skill_points -= 1
-	ChrFunc.calculate_all_stats(acktive_character)
+	acktive_character.calculate_all_stats()
 	if acktive_character.skill_points <= 0:
 		set_level_up(false)
 		
 func _on_levelUp_strenght(num):
 	acktive_character.base_strength += 1
 	acktive_character.skill_points -= 1
-	ChrFunc.calculate_all_stats(acktive_character)
+	acktive_character.calculate_all_stats()
 	if acktive_character.skill_points <= 0:
 		set_level_up(false)
 
 func _on_levelUp_magic(num):
 	acktive_character.base_magic += 1
 	acktive_character.skill_points -= 1
-	ChrFunc.calculate_all_stats(acktive_character)
+	acktive_character.calculate_all_stats()
 	if acktive_character.skill_points <= 0:
 		set_level_up(false)
 
 func _on_levelUp_dexterity(num):
 	acktive_character.base_dexterity += 1
 	acktive_character.skill_points -= 1
-	ChrFunc.calculate_all_stats(acktive_character)
+	acktive_character.calculate_all_stats()
 	if acktive_character.skill_points <= 0:
 		set_level_up(false)
 
 func _on_levelUp_speed(num):
 	acktive_character.base_speed += 1
 	acktive_character.skill_points -= 1
-	ChrFunc.calculate_all_stats(acktive_character)
+	acktive_character.calculate_all_stats()
 	if acktive_character.skill_points <= 0:
 		set_level_up(false)

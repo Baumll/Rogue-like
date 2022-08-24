@@ -165,7 +165,7 @@ func select_chracter(preCharacter):
 	activeChracter = get_fighters()[get_fighters().size()-1]
 	#activeChracter.health = activeChracter.max_health
 	
-	ChrFunc.calculate_all_stats(activeChracter)
+	activeChracter.calculate_all_stats()
 	
 	print(get_fighters())
 
@@ -211,7 +211,7 @@ func save_game():
 		var data = {"Characters" : saveChars,
 		"Version" : "PreAlpha"}
 		for i in range(characterList.size()):
-			saveChars.append(ChrFunc.character_to_lib(characterList[i],i))
+			saveChars.append(characterList[i].character_to_lib(i))
 		
 		save_game.store_var(data)
 		save_game.close()

@@ -282,7 +282,7 @@ func iterate_status():
 		status_list.remove(i)
 		
 
-func append_status( status):
+func append_status(status):
 	if status != null:
 		for i in status_list:
 			#Wenn unique und unendlich
@@ -296,7 +296,7 @@ func append_status( status):
 		status_list.append(status)
 	calculate_all_stats()
 
-func remove_status( status):
+func remove_status(status):
 	if status != null:
 		for i in status_list:
 			#Hier der Fall für nicht einzigartige Staten
@@ -305,13 +305,13 @@ func remove_status( status):
 				break
 	calculate_all_stats()
 
-func remove_item( slot):
+func remove_item(slot):
 	if slot < equip.size():
 		if equip[slot] != null:
 			remove_status( load(equip[slot].status))
 			equip[slot] = null
 
-func add_item( slot, item):
+func add_item(slot,item):
 	if slot < equip.size():
 		equip[slot] = item
 		if item.status != null:
@@ -320,13 +320,13 @@ func add_item( slot, item):
 #0 = physisch
 #1 = magisch
 #2 = heal
-func get_dmg( amount):
+func get_dmg(amount):
 	if(amount == 0):
 		return null
 	health -= amount
 	return amount
 
-func get_magic_dmg( amount):
+func get_magic_dmg(amount):
 	if(amount == 0):
 		return null
 	health -= amount

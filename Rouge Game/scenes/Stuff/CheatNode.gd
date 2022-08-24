@@ -15,4 +15,4 @@ func _input(event: InputEvent):
 			print("LEVEL UP!")
 			secret_string = ""
 			for i in main.characterList:
-				ChrFunc.level_up(i)
+				i.level_up()

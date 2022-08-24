@@ -23,8 +23,8 @@ func let_it_begin(chars, items, ep):
 			barlist[i].visible = true
 			barlist[i].get_child(1).set_bar(chars[i].base_exp_to_level*chars[i].level,chars[i].experience_points)
 			barlist[i].get_child(1).update_bar(chars[i].experience_points+ep)
-			ChrFunc.give_exp(chars[i],ep)
-			ChrFunc.reset_health(chars[i])
+			chars[i].give_exp(ep)
+			chars[i].reset_health()
 
 
 func _on_Button_button_down():
