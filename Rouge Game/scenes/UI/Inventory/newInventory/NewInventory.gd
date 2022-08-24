@@ -39,13 +39,10 @@ func _process(delta):
 			add_item()
 
 func add_item(item = null):
-	if item !=  null:
-		for i in grid.get_children():
-			if i.item == null:
-				i.set_item(item)
-				return
-	else: 
-		pass
+	for i in grid.get_children():
+		if i.item == null:
+			i.set_item(GlobalFunktions.create_item(item))
+			return
 
 func set_active_state(state):
 	for i in slotList:

@@ -8,7 +8,7 @@ var screen_width = 1080
 var screen_height = 960
 var image_height = 440
 var image_width = 280
-var teamSize = 4
+var team_size = 4
 var timeWait = 0.5
 
 var selfTarget = false
@@ -30,7 +30,7 @@ var healColor = Color('42ce00')
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	"""
-	for i in range(0, teamSize):
+	for i in range(0, team_size):
 		targetTexList.append(TextureRect.new())
 		add_child(targetTexList[i])
 		#targetAnimList.append(AnimatedSprite.new())

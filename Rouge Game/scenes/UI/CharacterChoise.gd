@@ -50,7 +50,7 @@ func reset():
 		x.texture = null
 
 func add_character(character):
-	if characterList.size() < GlobalFunktions.teamSize:
+	if characterList.size() < GlobalFunktions.team_size:
 		activeCharacter = character
 		characterList.append(character)
 		emit_signal("char_selected",character)

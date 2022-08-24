@@ -14,7 +14,7 @@ onready var fighter_reckt_list = [
 var targetFindScript = preload("res://Scripts/TargetFindScript.gd")
 var activeMove = null
 var activePos = -1
-var teamSize = 4
+var team_size = 4
 var posColor = Color("5dade2")
 var friendlyColor = Color("2ecc71")
 var enemyColor = Color("ec7063")
@@ -34,31 +34,31 @@ func _process(delta):
 			visible = true
 			var targetList = targetFindScript.select_targets(activePos, activeMove)
 			for i in targetList:
-				if i < teamSize:
+				if i < team_size:
 					fighter_reckt_list[i].set_modulate(enemyColor)
 				else:
 					fighter_reckt_list[i].set_modulate(friendlyColor)
 			fighter_reckt_list[activePos].set_modulate(posColor)
 			
 			#yield(get_tree().create_timer(2), "timeout")
-			activePos = fmod(activePos+1,teamSize)+4
+			activePos = fmod(activePos+1,team_size)+4
 
 func _on_set_move(move):
 	activeMove = move
-	activePos = teamSize
+	activePos = team_size
 	preTime = OS.get_ticks_msec()
 	for i in fighter_reckt_list:
 		i.set_modulate(Color("#ffffff"))
 	visible = true
 	var targetList = targetFindScript.select_targets(activePos, activeMove)
 	for i in targetList:
-		if i < teamSize:
+		if i < team_size:
 			fighter_reckt_list[i].set_modulate(enemyColor)
 		else:
 			fighter_reckt_list[i].set_modulate(friendlyColor)
 	fighter_reckt_list[activePos].set_modulate(posColor)
 	
 	#yield(get_tree().create_timer(2), "timeout")
-	activePos = fmod(activePos+1,teamSize)+4
+	activePos = fmod(activePos+1,team_size)+4
 	
 	

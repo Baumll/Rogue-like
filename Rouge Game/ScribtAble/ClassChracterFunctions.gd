@@ -12,26 +12,26 @@ func loadStats(character, charLib):
 	
 	#Laden von einer Libery
 	if typeof(charLib) == TYPE_DICTIONARY :
-		character.baseMaxHealth = charLib["Health"]
-		character.baseStrength = charLib["Strengh"]
-		character.baseDefence = charLib["BaseDefence"]
-		character.baseMagicDefence = charLib["Magic_Defence"]
-		character.baseDexterity = charLib["Dexterity"]
-		character.baseMagic = charLib["Magic"]
-		character.baseSpeed = charLib["Speed"]
+		character.base_max_health = charLib["Health"]
+		character.base_strength = charLib["Strengh"]
+		character.base_defence = charLib["Base_Defence"]
+		character.base_magic_defence = charLib["Magic_Defence"]
+		character.base_dexterity = charLib["Dexterity"]
+		character.base_magic = charLib["Magic"]
+		character.base_speed = charLib["Speed"]
 		
-		character.healProcent = 0
-		character.damgeProcent = 0
-		character.protectProcent = 0
+		character.heal_procent = 0
+		character.damge_procent = 0
+		character.protect_procent = 0
 		
-		character.maxHealth = character.baseMaxHealth
-		character.strength = character.baseStrength
-		character.defence = character.baseDefence
-		character.dexterity = character.baseDexterity
-		character.magic = character.baseMagic
-		character.speed = character.baseSpeed
+		character.max_health = character.base_max_health
+		character.strength = character.base_strength
+		character.defence = character.base_defence
+		character.dexterity = character.base_dexterity
+		character.magic = character.base_magic
+		character.speed = character.base_speed
 		
-		character.health = character.maxHealth
+		character.health = character.max_health
 		
 		
 		character.name = charLib["Name"]
@@ -43,8 +43,8 @@ func loadStats(character, charLib):
 		character.icon = load(charLib["Icon"])
 		
 		character.momentum = charLib["Momentum"]
-		character.experiencePoints = charLib["ExperiencePoints"]
-		character.skillPoints = charLib["SkillPoints"]
+		character.experience_points = charLib["experience_points"]
+		character.skill_points = charLib["skill_points"]
 		#charLib["position"] = 0
 		
 		print(charLib["Moves"])
@@ -57,79 +57,85 @@ func loadStats(character, charLib):
 			character.equip.append(load(i))
 		
 		for i in charLib["Status"]:
-			character.statusList.append(load(i))
+			character.status_list.append(load(i))
 			
 		calculate_all_stats(character)
 	
 	#Das alte Laden
 	
 	else:
-		print(typeof(charLib))
 		var path = charLib
-		character.baseMaxHealth = path.baseMaxHealth
-		character.baseStrength = path.baseStrength
-		character.baseDefence = path.baseDefence
-		character.baseMagicDefence = path.baseMagicDefence
-		character.baseDexterity = path.baseDexterity
-		character.baseMagic = path.baseMagic
-		character.baseSpeed = path.baseSpeed
+		character.base_max_health = path.base_max_health
+		character.base_strength = path.base_strength
+		character.base_defence = path.base_defence
+		character.base_magic_defence = path.base_magic_defence
+		character.base_dexterity = path.base_dexterity
+		character.base_magic = path.base_magic
+		character.base_speed = path.base_speed
 		
-		character.healProcent = path.healProcent
-		character.damgeProcent = path.damgeProcent
-		character.protectProcent = path.protectProcent
+		character.heal_procent = path.heal_procent
+		character.damge_procent = path.damge_procent
+		character.protect_procent = path.protect_procent
 		
-		character.maxHealth = character.baseMaxHealth
-		character.strength = character.baseStrength
-		character.defence = character.baseDefence
-		character.dexterity = character.baseDexterity
-		character.magic = character.baseMagic
-		character.speed = character.baseSpeed
+		character.max_health = character.base_max_health
+		character.strength = character.base_strength
+		character.defence = character.base_defence
+		character.dexterity = character.base_dexterity
+		character.magic = character.base_magic
+		character.speed = character.base_speed
 		
-		character.health = character.maxHealth
+		character.health = character.max_health
 		
 		character.name = path.name
 		character.klass = path.klass
 		character.description = path.description
 		
-		character.image = path.image
-		character.icon = path.icon
+		character.image = load(path.image)
+		character.icon = load(path.icon)
 		
-		character.moves = path.moves
-		character.equip = path.equip
-		character.statusList = path.statusList
-		
+		character.moves = []
+		for i in path.moves:
+			character.moves.append(load(i))
+			
+		character.equip = []
+		for i in path.equip:
+			character.equip.append(load(i))
+			
+		character.status_list = []
+		for i in path.status_list:
+			character.status_list.append(load(i))
 		calculate_all_stats(character)
 	#else:
 	#	print("Cant load Character")
 
 func reset_stats(character):
-	character.maxHealth = character.baseMaxHealth
-	character.strength = character.baseStrength
-	character.dexterity = character.baseDexterity
-	character.defence = character.baseDefence
-	character.magicDefence = character.baseMagicDefence
-	character.magic = character.baseMagic
-	character.speed = character.baseSpeed
-	character.healProcent = 0
-	character.damgeProcent = 0
-	character.maxHealthProcent = 0
-	character.strengthProcent = 0
-	character.defenceProcent = 0
-	character.magicProcent = 0
-	character.speedProcent = 0
-	character.critChance = character.baseCritChance
-	character.critModifier = character.baseCritModifier
+	character.max_health = character.base_max_health
+	character.strength = character.base_strength
+	character.dexterity = character.base_dexterity
+	character.defence = character.base_defence
+	character.magic_defence = character.base_magic_defence
+	character.magic = character.base_magic
+	character.speed = character.base_speed
+	character.heal_procent = 0
+	character.damge_procent = 0
+	character.max_health_procent = 0
+	character.strength_procent = 0
+	character.defence_procent = 0
+	character.magic_procent = 0
+	character.speed_procent = 0
+	character.crit_chance = character.base_crit_chance
+	character.crit_modifier = character.base_crit_modifier
 
 func character_to_lib(character, pos):
 	var lib = {}
-	lib["MaxHealth"] = character.baseMaxHealth
+	lib["max_health"] = character.base_max_health
 	lib["Health"] = character.health
-	lib["Strengh"] = character.baseStrength
-	lib["BaseDefence"] = character.baseDefence
-	lib["Magic_Defence"] = character.baseMagicDefence
-	lib["Dexterity"] = character.baseDexterity
-	lib["Magic"] = character.baseMagic
-	lib["Speed"] = character.baseSpeed
+	lib["Strengh"] = character.base_strength
+	lib["Base_Defence"] = character.base_defence
+	lib["Magic_Defence"] = character.base_magic_defence
+	lib["Dexterity"] = character.base_dexterity
+	lib["Magic"] = character.base_magic
+	lib["Speed"] = character.base_speed
 	
 	lib["Name"] = character.name
 	lib["Class"] = character.klass
@@ -137,32 +143,30 @@ func character_to_lib(character, pos):
 	lib["Description"] = character.description
 	
 	
-	lib["Image"] = character.image.resource_path
-	lib["Icon"] = character.icon.resource_path
+	lib["Image"] = character.image
+	lib["Icon"] = character.icon
 	
 	#other stats:
 	lib["Momentum"] = character.momentum
-	lib["ExperiencePoints"] = character.experiencePoints
-	lib["SkillPoints"] = character.skillPoints
+	lib["experience_points"] = character.experience_points
+	lib["skill_points"] = character.skill_points
 	lib["Position"] = pos
 	
 	
 	lib["Moves"] = []
 	for i in character.moves:
 		if i != null:
-			lib["Moves"].append(i.resource_path)
+			lib["Moves"].append(i)
 		
 	lib["Equip"] = []
-	var eq = []
 	for i in character.equip:
 		if i != null:
-			lib["Equip"].append(i.resource_path)
-			eq.append(i.resource_path)
+			lib["Equip"].append(i.to_dictonary())
 	
 	lib["Status"] = []
-	for i in character.statusList:
+	for i in character.status_list:
 		if i != null:
-			lib["Status"].append(i.resource_path)
+			lib["Status"].append(i)
 	
 	return lib
 
@@ -174,7 +178,7 @@ func calculate_all_stats(character):
 	
 	#Nur für die Statusse
 	var usedList = []
-	for i in character.statusList:
+	for i in character.status_list:
 		if i != null:
 			if i.unique:
 				if usedList.has(i):
@@ -185,54 +189,54 @@ func calculate_all_stats(character):
 	
 
 	
-	character.maxHealth = (1+character.maxHealthProcent) * character.maxHealth
-	character.strength = (1+character.strengthProcent) * character.strength
-	character.dexterity = (1+character.dexterityProcent) * character.dexterity
-	character.defence = (1+character.defenceProcent) * character.defence
-	character.magicDefence = (1+character.magicDefenceProcent) * character.magicDefence
-	character.magic = (1+character.magicProcent) * character.magic
-	character.speed = (1+character.speedProcent) * character.speed
+	character.max_health = (1+character.max_health_procent) * character.max_health
+	character.strength = (1+character.strength_procent) * character.strength
+	character.dexterity = (1+character.dexterity_procent) * character.dexterity
+	character.defence = (1+character.defence_procent) * character.defence
+	character.magic_defence = (1+character.magic_defence_procent) * character.magic_defence
+	character.magic = (1+character.magic_procent) * character.magic
+	character.speed = (1+character.speed_procent) * character.speed
 	
 
 
 func calculate_stats(character, status):
-		character.maxHealth += status.maxHealth
+		character.max_health += status.max_health
 		character.strength += status.strength
 		character.dexterity += status.dexterity
 		character.defence += status.defence
-		character.magicDefence += status.magicDefence
+		character.magic_defence += status.magic_defence
 		character.magic += status.magic
 		character.speed += status.speed
-		character.healProcent += status.healProcent
-		character.damgeProcent += status.damgeProcent
-		character.maxHealthProcent += status.maxHealthProcent
-		character.strengthProcent += status.strengthProcent
-		character.defenceProcent += status.defenceProcent
-		character.magicProcent += status.magicProcent
-		character.speedProcent += status.speedProcent
-		character.critChance += status.critChance
-		character.critModifier += status.critModifier
+		character.heal_procent += status.heal_procent
+		character.damge_procent += status.damge_procent
+		character.max_health_procent += status.max_health_procent
+		character.strength_procent += status.strength_procent
+		character.defence_procent += status.defence_procent
+		character.magic_procent += status.magic_procent
+		character.speed_procent += status.speed_procent
+		character.crit_chance += status.crit_chance
+		character.crit_modifier += status.crit_modifier
 
 func iterate_status(character):
-	var removeList = []
+	var remove_list = []
 	calculate_all_stats(character)
-	for i in range(character.statusList.size()):
-		if character.statusList[i] != null:
-			if(character.statusList[i].turns > 1):
-				character.statusList[i].turns -= 1
-			if character.statusList[i].statusTyp == character.statusList[i].statusTypes.dmg:
-				get_dmg(character, character.statusList[i].value)
-			if character.statusList[i].statusTyp == character.statusList[i].statusTypes.heal:
-				get_heal(character, character.statusList[i].value)
-			if character.statusList[i].turns == 0:
-				removeList.append(i)
-	for i in removeList:
-		character.statusList.remove(i)
+	for i in range(character.status_list.size()):
+		if character.status_list[i] != null:
+			if(character.status_list[i].turns > 1):
+				character.status_list[i].turns -= 1
+			if character.status_list[i].statusTyp == character.status_list[i].status_types.dmg:
+				get_dmg(character, character.status_list[i].value)
+			if character.status_list[i].statusTyp == character.status_list[i].status_types.heal:
+				get_heal(character, character.status_list[i].value)
+			if character.status_list[i].turns == 0:
+				remove_list.append(i)
+	for i in remove_list:
+		character.status_list.remove(i)
 		
 
 func append_status(character, status):
 	if status != null:
-		for i in character.statusList:
+		for i in character.status_list:
 			#Wenn unique und unendlich
 			if i.name == status.name:
 				if status.maxTurns > 0:
@@ -241,29 +245,29 @@ func append_status(character, status):
 						i.turns = status.maxTurns
 					return
 		#Unenldich und unique hinzugefügt
-		character.statusList.append(status)
+		character.status_list.append(status)
 	calculate_all_stats(character)
 
 func remove_status(character, status):
 	if status != null:
-		for i in character.statusList:
+		for i in character.status_list:
 			#Hier der Fall für nicht einzigartige Staten
 			if i.name == status.name:
-				character.statusList.erase(i)
+				character.status_list.erase(i)
 				break
 	calculate_all_stats(character)
 
 func remove_item(character, slot):
 	if slot < character.equip.size():
 		if character.equip[slot] != null:
-			remove_status(character, character.equip[slot].status)
+			remove_status(character, load(character.equip[slot].status))
 			character.equip[slot] = null
 
 func add_item(character, slot, item):
 	if slot < character.equip.size():
 		character.equip[slot] = item
 		if item.status != null:
-			append_status(character, item.status)
+			append_status(character, load(item.status))
 		
 	
 
@@ -286,21 +290,21 @@ func get_heal(character, amount):
 	if(amount == 0):
 		return null
 	character.health += amount
-	if character.health > character.maxHealth:
-		character.health = character.maxHealth
+	if character.health > character.max_health:
+		character.health = character.max_health
 	return amount
 
 func reset_health(character):
-	character.health = character.maxHealth
+	character.health = character.max_health
 
 func give_exp(character, amount):
-	character.experiencePoints += amount
-	if character.experiencePoints > character.level*character.baseExpToLevel:
-		character.experiencePoints -= character.level*character.baseExpToLevel
+	character.experience_points += amount
+	if character.experience_points > character.level*character.base_exp_to_level:
+		character.experience_points -= character.level*character.base_exp_to_level
 		level_up(character)
 
 func level_up(character):
-	character.skillPoints += 2
+	character.skill_points += 2
 	character.level += 1
 
 func has_dealt_magic(character,amount):

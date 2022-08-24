@@ -39,7 +39,12 @@ func roomListSetup():
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	#Load Data
 	GlobalFunktions.set_up_rng()
+	GlobalFunktions.load_item_list()
+	GlobalFunktions.load_enemy_list()
+	GlobalFunktions.load_move_list()
+	
 	setup_start()
 	roomListSetup()
 
@@ -81,22 +86,8 @@ func disable_all():
 	win_screen.visible = false
 	lose_screen.visible = false
 
-func load_enemy() -> Resource:
-	#var preChar = load("res://Units/CharacterSzene.tscn")
-	#var character = preChar.instance()
-	var i = GlobalFunktions.rng.randi_range(-1.0,1.0)
-	var scene = load("res://ScribtAble/ClassCharacterContainer.gd")
-	scene = scene.new()
-	if i > 0:
-		ChrFunc.loadStats(scene,load("res://Units/enemys/enemySkeleton.tres"))
-	else:
-		ChrFunc.loadStats(scene,load("res://Units/enemys/enemyZombie.tres"))
-	return scene
-
 func load_characters_fight():
-	var enemys = []
-	for x in range(0,GlobalFunktions.rng.randi_range(1,4)):
-		enemys.append(load_enemy())
+	var enemys = GlobalFunktions.pick_enemys(GlobalFunktions.rng.randi_range(2,4), GlobalFunktions.power_level)
 	var friends = get_fighters()
 	return [enemys, friends]
 	
@@ -164,15 +155,15 @@ func _on_mercenario_mercenario():
 	setup_doors()
 
 
-	
+
 func select_chracter(preCharacter):
 	#Erstellt den character
-	var character = ChrFunc.new_character(preCharacter)
+	var character = preCharacter
 
 
 	get_fighters().append(character)
 	activeChracter = get_fighters()[get_fighters().size()-1]
-	#activeChracter.health = activeChracter.maxHealth
+	#activeChracter.health = activeChracter.max_health
 	
 	ChrFunc.calculate_all_stats(activeChracter)
 	
@@ -181,7 +172,7 @@ func select_chracter(preCharacter):
 
 func _on_HealRoom_full_team_heal():
 	for i in get_fighters():
-		i.health = i.maxHealth
+		i.health = i.max_health
 	setup_doors()
 
 
@@ -245,6 +236,7 @@ func load_game():
 			print("Can't open file")
 	else:
 		print("No Save File")
+
 
 
 func _on_Start_load_pressed():

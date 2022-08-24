@@ -23,6 +23,10 @@
 				},
 				{
 					"typeStr": "3",
+					"name": "Max_Health"
+				},
+				{
+					"typeStr": "3",
 					"name": "Health"
 				},
 				{
@@ -51,6 +55,10 @@
 				},
 				{
 					"typeStr": "3",
+					"name": "Momentum"
+				},
+				{
+					"typeStr": "3",
 					"name": "Crit_Chance"
 				},
 				{
@@ -62,6 +70,10 @@
 					"name": "Moves",
 					"opt": true,
 					"display": null
+				},
+				{
+					"typeStr": "8",
+					"name": "Status_List"
 				},
 				{
 					"typeStr": "8",
@@ -83,7 +95,7 @@
 			"lines": [
 				{
 					"Name": "Zombie",
-					"Power": 5,
+					"Power": 1,
 					"Description": "Ein dummer zombie",
 					"Moves": [
 						{
@@ -100,13 +112,66 @@
 					"Crit_Chance": 5,
 					"Crit_Dmg": 1,
 					"Level": 1,
-					"Image": "zombie.png",
-					"Icon": "zombie.png"
+					"Image": "res://Assets/images/enemys/zombie_PNG58.png",
+					"Icon": "zombie.png",
+					"Status_List": [],
+					"Max_Health": 10,
+					"Momentum": 0
+				},
+				{
+					"Name": "Wolf",
+					"Power": 2,
+					"Level": 1,
+					"Health": 10,
+					"Strengh": 0,
+					"Dexterity": 0,
+					"Magic": 0,
+					"Armor": 0,
+					"Magic_Defence": 0,
+					"Speed": 5,
+					"Crit_Chance": 5,
+					"Crit_Dmg": 1,
+					"Image": "res://Assets/images/enemys/wolf.png",
+					"Icon": "res://Assets/images/enemys/wolf.png",
+					"Description": "Ein dummer zombie",
+					"Moves": [
+						{
+							"Move": "Strike"
+						}
+					],
+					"Status_List": [],
+					"Max_Health": 10,
+					"Momentum": 0
+				},
+				{
+					"Name": "Skelett",
+					"Power": 1,
+					"Level": 2,
+					"Health": 10,
+					"Strengh": 0,
+					"Dexterity": 1,
+					"Magic": 0,
+					"Armor": 1,
+					"Magic_Defence": 0,
+					"Speed": 6,
+					"Crit_Chance": 5,
+					"Crit_Dmg": 1,
+					"Image": "res://Assets/images/enemys/skellletclip.png",
+					"Icon": "res://Assets/images/Icons/characters/NecromancerIcons_54_t.png",
+					"Description": "Ein dummer zombie",
+					"Moves": [
+						{
+							"Move": "Strike"
+						}
+					],
+					"Status_List": [],
+					"Max_Health": 10,
+					"Momentum": 0
 				},
 				{
 					"Name": "Robot",
-					"Power": 10,
-					"Level": 2,
+					"Power": 2,
+					"Level": 3,
 					"Health": 12,
 					"Strengh": 1,
 					"Dexterity": 1,
@@ -116,14 +181,17 @@
 					"Speed": 6,
 					"Crit_Chance": 5,
 					"Crit_Dmg": 1,
-					"Image": "icegolem.png",
-					"Icon": "icegolem.png",
+					"Image": "res://Assets/images/sprites/enemies/icegolem.png",
+					"Icon": "res://Assets/images/sprites/enemies/icegolem.png",
 					"Description": "Ein standart Robot",
 					"Moves": [
 						{
 							"Move": "Strike"
 						}
-					]
+					],
+					"Status_List": [],
+					"Max_Health": 12,
+					"Momentum": 0
 				}
 			],
 			"separators": [],
@@ -146,6 +214,15 @@
 		},
 		{
 			"name": "EnemyList@Equip",
+			"props": {
+				"hide": true
+			},
+			"separators": [],
+			"lines": [],
+			"columns": []
+		},
+		{
+			"name": "EnemyList@Status_List",
 			"props": {
 				"hide": true
 			},

@@ -36,7 +36,7 @@ var moves = [] # Eine Lsiter der Moves die der aktive champion nutzen kann
 var targetChooseMode = false
 
 export(bool) var pacifism = true
-export(int) var teamSize = 4
+export(int) var team_size = 4
 
 var button_time_start = 0 #Die timer Ab wann das halten nicht mehr als klicken gezählt wird
 
@@ -107,13 +107,13 @@ func add_all_fighters(args):
 		if args[i].size() >= 3:
 			for j in range(0,args[i].size()):
 				if(i == 1):
-					add_fighter_spot(args[i][j],j+teamSize)
+					add_fighter_spot(args[i][j],j+team_size)
 				else:
 					add_fighter_spot(args[i][j],j)
 		else:
 			for j in range(0,args[i].size()):
 				if(i == 1):
-					add_fighter_spot(args[i][j],j+teamSize+1)
+					add_fighter_spot(args[i][j],j+team_size+1)
 				else:
 					add_fighter_spot(args[i][j],j+1)
 					
@@ -128,7 +128,7 @@ func add_fighter_spot(fighterObj, spot):
 	timeLine.set_order( set_time_line(initative), null)
 
 func remove_fighter(num):
-	if(num < teamSize and get_fighter(num) != null):
+	if(num < team_size and get_fighter(num) != null):
 		ep += get_fighter(num).deathExp
 	fighterList[num] = null
 	initative = []
@@ -141,7 +141,7 @@ func remove_fighter(num):
 	timeLine.set_order( set_time_line(initative),null)
 
 	var tmpFinish = true
-	for i in range(0, teamSize):
+	for i in range(0, team_size):
 		if(get_fighter(i) != null):
 			tmpFinish = false
 		#Lose
@@ -150,7 +150,7 @@ func remove_fighter(num):
 		return
 	
 	tmpFinish = true
-	for i in range(teamSize, teamSize*2):
+	for i in range(team_size, team_size*2):
 		if(get_fighter(i) != null):
 			tmpFinish = false
 		#Win
@@ -167,12 +167,12 @@ func set_active_fighter(num):
 	print("Momentum: " + String(get_fighter(num).momentum))
 	activeFighter = num
 	ChrFunc.iterate_status(get_fighter(num))
-	if num < teamSize: #Wenn ein gegner dran ist nutz eine zufällige attacke
+	if num < team_size: #Wenn ein gegner dran ist nutz eine zufällige attacke
 		npc_move(activeFighter)
 	else: #Wenn ein Verbündeter dran ist
 		#emit_signal("loadAttacks", get_fighter(activeFighter).moves)
 		emit_signal("setCharActive", get_fighter(activeFighter))
-	fighterRectList[activeFighter].set_status_bar(get_fighter(activeFighter).statusList)
+	fighterRectList[activeFighter].set_status_bar(get_fighter(activeFighter).status_list)
 	fighterRectList[activeFighter].set_selection(true)
 
 func get_fighter(num) -> Resource:
@@ -198,7 +198,7 @@ func press_move_button(move):
 			emit_signal("loadAttacks", null)
 			var fighterTargetList = select_targets(move)
 			#Wenn die Attacke zum Auswählen ist:
-			if(move.targets == move.target_kinds.chooseEnemy or  move.targets == move.target_kinds.chooseFriend):
+			if(move.targets == move.target_kinds.choose_enemy or  move.targets == move.target_kinds.choose_friend):
 				targetChooseMode = true
 				activeMove = move
 				for x in select_targets(move):
@@ -233,7 +233,7 @@ func make_move(move, fighterTargetList):
 				animationImages.append(get_fighter(x).image)
 				dmgValues.append(use_move_on_fighter(x,activeFighter,move))
 		blur.material.set_shader_param("blur", 4.0)
-		MoveAnimationPanel.load_images(animationImages, floor(activeFighter/teamSize))
+		MoveAnimationPanel.load_images(animationImages, floor(activeFighter/team_size))
 		MoveAnimationPanel.play_Move(move, dmgValues)
 		yield( MoveAnimationPanel, "animation_finished" )
 		blur.material.set_shader_param("blur", 0.0)
@@ -267,108 +267,108 @@ func set_time_line(list) -> Array:
 
 #Bestimmt die Ziele:
 func select_targets(move):
-	var tempTargetList = []
+	var tmp_target_list = []
 	match move.targets:
-		move.target_kinds.chooseEnemy:
-			if( activeFighter < teamSize):
-				tempTargetList.append(4)
-				tempTargetList.append(5)
-				tempTargetList.append(6)
-				tempTargetList.append(7)
+		move.target_kinds.choose_enemy:
+			if( activeFighter < team_size):
+				tmp_target_list.append(4)
+				tmp_target_list.append(5)
+				tmp_target_list.append(6)
+				tmp_target_list.append(7)
 			else:
-				tempTargetList.append(0)
-				tempTargetList.append(1)
-				tempTargetList.append(2)
-				tempTargetList.append(3)
+				tmp_target_list.append(0)
+				tmp_target_list.append(1)
+				tmp_target_list.append(2)
+				tmp_target_list.append(3)
 				
-		move.target_kinds.chooseFriend:
-			if( activeFighter >= teamSize):
-				tempTargetList.append(4)
-				tempTargetList.append(5)
-				tempTargetList.append(6)
-				tempTargetList.append(7)
+		move.target_kinds.choose_friend:
+			if( activeFighter >= team_size):
+				tmp_target_list.append(4)
+				tmp_target_list.append(5)
+				tmp_target_list.append(6)
+				tmp_target_list.append(7)
 			else:
-				tempTargetList.append(0)
-				tempTargetList.append(1)
-				tempTargetList.append(2)
-				tempTargetList.append(3)
-		move.target_kinds.inFront:
-			tempTargetList.append(fmod(activeFighter+teamSize, teamSize*2))
-		move.target_kinds.adjacentEnemy:
-			var mintarget = fmod(activeFighter+teamSize, teamSize*2)-1
-			if(mintarget < 0):
-				mintarget = 0
-			if (activeFighter < teamSize && mintarget < teamSize):
-				mintarget = teamSize
-			var maxtarget = fmod(activeFighter+teamSize, teamSize*2)+1
-			if(maxtarget >= teamSize*2):
-				maxtarget = teamSize*2 -1
-			if (activeFighter >= teamSize && maxtarget > teamSize):
-				maxtarget = teamSize-1
-			for i in range(mintarget,maxtarget+1):
-				tempTargetList.append(i)
+				tmp_target_list.append(0)
+				tmp_target_list.append(1)
+				tmp_target_list.append(2)
+				tmp_target_list.append(3)
+		move.target_kinds.in_front:
+			tmp_target_list.append(fmod(activeFighter+team_size, team_size*2))
+		move.target_kinds.adjacent_enemy:
+			var min_target = fmod(activeFighter+team_size, team_size*2)-1
+			if(min_target < 0):
+				min_target = 0
+			if (activeFighter < team_size && min_target < team_size):
+				min_target = team_size
+			var max_target = fmod(activeFighter+team_size, team_size*2)+1
+			if(max_target >= team_size*2):
+				max_target = team_size*2 -1
+			if (activeFighter >= team_size && max_target > team_size):
+				max_target = team_size-1
+			for i in range(min_target,max_target+1):
+				tmp_target_list.append(i)
 		
-		move.target_kinds.allEnemy:
-			if( activeFighter < teamSize):
-				tempTargetList.append(4)
-				tempTargetList.append(5)
-				tempTargetList.append(6)
-				tempTargetList.append(7)
+		move.target_kinds.all_enemy:
+			if( activeFighter < team_size):
+				tmp_target_list.append(4)
+				tmp_target_list.append(5)
+				tmp_target_list.append(6)
+				tmp_target_list.append(7)
 			else:
-				tempTargetList.append(0)
-				tempTargetList.append(1)
-				tempTargetList.append(2)
-				tempTargetList.append(3)
+				tmp_target_list.append(0)
+				tmp_target_list.append(1)
+				tmp_target_list.append(2)
+				tmp_target_list.append(3)
 		move.target_kinds.me:
-			tempTargetList.append(activeFighter)
+			tmp_target_list.append(activeFighter)
 			
-		move.target_kinds.allTeamOther:
+		move.target_kinds.all_team_other:
 			match activeFighter:
 				0:
-					tempTargetList.append(1)
-					tempTargetList.append(2)
-					tempTargetList.append(4)
+					tmp_target_list.append(1)
+					tmp_target_list.append(2)
+					tmp_target_list.append(4)
 				1:
-					tempTargetList.append(0)
-					tempTargetList.append(2)
-					tempTargetList.append(3)
+					tmp_target_list.append(0)
+					tmp_target_list.append(2)
+					tmp_target_list.append(3)
 				2:
-					tempTargetList.append(1)
-					tempTargetList.append(0)
-					tempTargetList.append(3)
+					tmp_target_list.append(1)
+					tmp_target_list.append(0)
+					tmp_target_list.append(3)
 				3:
-					tempTargetList.append(0)
-					tempTargetList.append(1)
-					tempTargetList.append(2)
+					tmp_target_list.append(0)
+					tmp_target_list.append(1)
+					tmp_target_list.append(2)
 				4:
-					tempTargetList.append(5)
-					tempTargetList.append(6)
-					tempTargetList.append(7)
+					tmp_target_list.append(5)
+					tmp_target_list.append(6)
+					tmp_target_list.append(7)
 				5:
-					tempTargetList.append(4)
-					tempTargetList.append(6)
-					tempTargetList.append(7)
+					tmp_target_list.append(4)
+					tmp_target_list.append(6)
+					tmp_target_list.append(7)
 				6:
-					tempTargetList.append(4)
-					tempTargetList.append(5)
-					tempTargetList.append(7)
+					tmp_target_list.append(4)
+					tmp_target_list.append(5)
+					tmp_target_list.append(7)
 				7:
-					tempTargetList.append(4)
-					tempTargetList.append(5)
-					tempTargetList.append(6)
-		move.target_kinds.allTeam:
-			if activeFighter < teamSize:
-				tempTargetList.append(0)
-				tempTargetList.append(1)
-				tempTargetList.append(2)
-				tempTargetList.append(3)
+					tmp_target_list.append(4)
+					tmp_target_list.append(5)
+					tmp_target_list.append(6)
+		move.target_kinds.all_team:
+			if activeFighter < team_size:
+				tmp_target_list.append(0)
+				tmp_target_list.append(1)
+				tmp_target_list.append(2)
+				tmp_target_list.append(3)
 			else:
-				tempTargetList.append(4)
-				tempTargetList.append(5)
-				tempTargetList.append(6)
-				tempTargetList.append(7)
+				tmp_target_list.append(4)
+				tmp_target_list.append(5)
+				tmp_target_list.append(6)
+				tmp_target_list.append(7)
 	var returnList = []
-	for x in tempTargetList:
+	for x in tmp_target_list:
 		if get_fighter(x) != null:
 			returnList.append(x)
 	return returnList
@@ -385,14 +385,14 @@ func use_move_on_fighter(target, source, move):
 	var move3 = copyMove(move)
 	
 	#Hier kommen die Pre Combat Effekte
-	for i in source3.statusList:
+	for i in source3.status_list:
 		if i.statusTyp == 3: #combat
 			if(i.preMove != null):
 				if preCombatAttackScript.has_method(i.preMove):
 					preCombatAttackScript.call(i.preMove,target3,source3,move3)
 				else:
 					print("Warning: PreCombatAttack Source method: " + i.preMove + " dose not exist")
-	for i in target3.statusList:
+	for i in target3.status_list:
 		if i.statusTyp == 3: #combat
 			if(i.preMove != null):
 				if preCombatDefenseScript.has_method(i.preMove):
@@ -402,25 +402,32 @@ func use_move_on_fighter(target, source, move):
 	
 	
 	var rtn = []
-	if move.physicalDmg > 0:
-		rtn.append(ChrFunc.get_magic_dmg(target2,floor(move3.physicalDmg + source3.strength -source3.defence)))
+	if move.physical_dmg > 0:
+		rtn.append(ChrFunc.get_magic_dmg(target2,floor(move3.physical_dmg + source3.strength -source3.defence)))
 		ChrFunc.has_dealt_magic(source2,rtn[0])
-	if move.magicalDmg > 0:
-		rtn.append(ChrFunc.get_dmg(target2,floor(move3.magicalDmg + source3.magic -source3.magicDefence)))
+	else:
+		rtn.append(0)
+	if move.magical_dmg > 0:
+		var mgc_dmg = ChrFunc.get_dmg(target2,floor(move3.magical_dmg + source3.magic -source3.magic_defence))
+		rtn.append(mgc_dmg)
 		ChrFunc.has_dealt_physical(source2,rtn[1])
+	else:
+		rtn.append(0)
 	if move.heal > 0:
-		rtn.append((ChrFunc.get_heal(target2,floor(move3.heal*(1+source3.healProcent)))))
+		rtn.append((ChrFunc.get_heal(target2,floor(move3.heal*(1+source3.heal_procent)))))
 		ChrFunc.has_healed(source2,rtn[2])
-	
+	else:
+		rtn.append(0)
+		
 	#Hier kommen die After Combat Effekte
-	for i in source3.statusList:
+	for i in source3.status_list:
 		if i.statusTyp == 3: #combat
 			if(i.preMove != null):
 				if afterCombatDefenseScript.has_method(i.preMove):
 					afterCombatDefenseScript.call(i.preMove,target3,source3,move3)
 				else:
 					print("Warning: AfterCombatDefense Source method: " + i.preMove + " dose not exist")
-	for i in target3.statusList:
+	for i in target3.status_list:
 		if i.statusTyp == 3: #combat
 			if(i.preMove != null):
 				if afterCombatAttackScript.has_method(i.preMove):
@@ -434,8 +441,7 @@ func use_move_on_fighter(target, source, move):
 
 
 func copy_fighter(fighter):
-	var newFighter = preFighter.new()
-	ChrFunc.loadStats(newFighter,fighter)
+	var newFighter = GlobalFunktions.load_character(fighter)
 	return newFighter
 
 func copyMove(move):
@@ -458,14 +464,14 @@ func buff(fighter, status):
 		status.turns = status.maxTurns
 		print("buff")
 		get_fighter(fighter).append_status(status)
-		fighterRectList[fighter].set_status_bar(get_fighter(fighter).statusList)
+		fighterRectList[fighter].set_status_bar(get_fighter(fighter).status_list)
 		update_health(fighter)
 
 
 
 func update_health(num):
 	if(get_fighter(num) != null):
-		fighterRectList[num].set_health(get_fighter(num).maxHealth,get_fighter(num).health)
+		fighterRectList[num].set_health(get_fighter(num).max_health,get_fighter(num).health)
 	else:
 		fighterRectList[num].set_health(0,0)
 
@@ -487,7 +493,7 @@ func kill(unit):
 
 
 func refresh(fighter):
-	get_fighter(fighter).health = get_fighter(fighter).maxHealth
+	get_fighter(fighter).health = get_fighter(fighter).max_health
 
 
 #Other use full functions:
@@ -516,7 +522,7 @@ func find_CharacterContainer() -> Array:
 
 func set_up_fighter_list() -> Array:
 	var fighterListt = []
-	for i in range(teamSize*2):
+	for i in range(team_size*2):
 		fighterListt.append(null)
 	return fighterListt
 

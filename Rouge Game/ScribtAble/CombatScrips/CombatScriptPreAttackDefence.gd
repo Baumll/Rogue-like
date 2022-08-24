@@ -8,4 +8,4 @@ Die sie manipulieren können.
 """
 
 func test_funktion(source, target, attack):
-	attack.physicalDmg += 2000
+	attack.physical_dmg += 2000

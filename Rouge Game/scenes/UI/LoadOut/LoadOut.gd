@@ -31,17 +31,17 @@ func load_character(character):
 	rect.texture = character.image
 	lableName.text = (str(character.klass) )
 	TextContainer.get_child(1).text = ("Level: " + String(character.level))
-	TextContainer.get_child(2).set_text("Health: " + String(character.health) +"/" + String(character.maxHealth))
+	TextContainer.get_child(2).set_text("Health: " + String(character.health) +"/" + String(character.max_health))
 	TextContainer.get_child(3).set_text("Armor: " + String(character.defence))
-	TextContainer.get_child(4).set_text("Mag. Def.: " + String(character.magicDefence))
+	TextContainer.get_child(4).set_text("Mag. Def.: " + String(character.magic_defence))
 	TextContainer.get_child(5).set_text("Strength: " + String(character.strength))
 	TextContainer.get_child(6).set_text("Magic: " + String(character.magic))
 	TextContainer.get_child(7).set_text("Dexterity: " + String(character.dexterity))
 	TextContainer.get_child(8).set_text("Speed: " + String(character.speed))
 	lableName.update()
-	set_xp(character.experiencePoints, character.baseExpToLevel*character.level)
+	set_xp(character.experience_points, character.base_exp_to_level*character.level)
 	TextContainer.add_constant_override("separation", 0)
-	if character.skillPoints > 1:
+	if character.skill_points > 1:
 		set_level_up(true)
 
 func load_all_chracters(args):
@@ -65,51 +65,51 @@ func set_level_up(state):
 
 
 func _on_levelUp_health(num):
-	acktive_character.baseMaxHealth += 5
-	acktive_character.skillPoints -= 1
+	acktive_character.base_max_health += 5
+	acktive_character.skill_points -= 1
 	ChrFunc.calculate_all_stats(acktive_character)
 	ChrFunc.reset_health(acktive_character)
-	if acktive_character.skillPoints <= 0:
+	if acktive_character.skill_points <= 0:
 		set_level_up(false)
 
 func _on_levelUp_defence(num):
-	acktive_character.baseDefence += 1
-	acktive_character.skillPoints -= 1
+	acktive_character.Base_Defence += 1
+	acktive_character.skill_points -= 1
 	ChrFunc.calculate_all_stats(acktive_character)
-	if acktive_character.skillPoints <= 0:
+	if acktive_character.skill_points <= 0:
 		set_level_up(false)
 
 func _on_levelUp_magicDefence(num):
-	acktive_character.baseMagicDefence += 1
-	acktive_character.skillPoints -= 1
+	acktive_character.base_magic_defence += 1
+	acktive_character.skill_points -= 1
 	ChrFunc.calculate_all_stats(acktive_character)
-	if acktive_character.skillPoints <= 0:
+	if acktive_character.skill_points <= 0:
 		set_level_up(false)
 		
 func _on_levelUp_strenght(num):
-	acktive_character.baseStrength += 1
-	acktive_character.skillPoints -= 1
+	acktive_character.base_strength += 1
+	acktive_character.skill_points -= 1
 	ChrFunc.calculate_all_stats(acktive_character)
-	if acktive_character.skillPoints <= 0:
+	if acktive_character.skill_points <= 0:
 		set_level_up(false)
 
 func _on_levelUp_magic(num):
-	acktive_character.baseMagic += 1
-	acktive_character.skillPoints -= 1
+	acktive_character.base_magic += 1
+	acktive_character.skill_points -= 1
 	ChrFunc.calculate_all_stats(acktive_character)
-	if acktive_character.skillPoints <= 0:
+	if acktive_character.skill_points <= 0:
 		set_level_up(false)
 
 func _on_levelUp_dexterity(num):
-	acktive_character.baseDexterity += 1
-	acktive_character.skillPoints -= 1
+	acktive_character.base_dexterity += 1
+	acktive_character.skill_points -= 1
 	ChrFunc.calculate_all_stats(acktive_character)
-	if acktive_character.skillPoints <= 0:
+	if acktive_character.skill_points <= 0:
 		set_level_up(false)
 
 func _on_levelUp_speed(num):
-	acktive_character.baseSpeed += 1
-	acktive_character.skillPoints -= 1
+	acktive_character.base_speed += 1
+	acktive_character.skill_points -= 1
 	ChrFunc.calculate_all_stats(acktive_character)
-	if acktive_character.skillPoints <= 0:
+	if acktive_character.skill_points <= 0:
 		set_level_up(false)

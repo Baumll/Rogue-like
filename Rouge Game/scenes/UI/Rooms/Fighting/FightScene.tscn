@@ -52,6 +52,9 @@ __meta__ = {
 margin_right = 1080.0
 margin_bottom = 980.0
 script = ExtResource( 6 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="FighterTimeLine" parent="BigBox" instance=ExtResource( 7 )]
 anchor_right = 0.0

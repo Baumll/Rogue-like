@@ -2,109 +2,109 @@ extends Node
 
 class_name TargetFindScript
 
-var teamSize = 4
+var team_size = 4
 
-func select_targets(activePosition, move):
-	var tempTargetList = []
+func select_targets(active_position, move):
+	var tmp_target_list = []
 	match move.targets:
-		move.target_kinds.chooseEnemy:
-			if( activePosition < teamSize):
-				tempTargetList.append(4)
-				tempTargetList.append(5)
-				tempTargetList.append(6)
-				tempTargetList.append(7)
+		move.target_kinds.choose_enemy:
+			if( active_position < team_size):
+				tmp_target_list.append(4)
+				tmp_target_list.append(5)
+				tmp_target_list.append(6)
+				tmp_target_list.append(7)
 			else:
-				tempTargetList.append(0)
-				tempTargetList.append(1)
-				tempTargetList.append(2)
-				tempTargetList.append(3)
+				tmp_target_list.append(0)
+				tmp_target_list.append(1)
+				tmp_target_list.append(2)
+				tmp_target_list.append(3)
 				
-		move.target_kinds.chooseFriend:
-			if( activePosition >= teamSize):
-				tempTargetList.append(4)
-				tempTargetList.append(5)
-				tempTargetList.append(6)
-				tempTargetList.append(7)
+		move.target_kinds.choose_friend:
+			if( active_position >= team_size):
+				tmp_target_list.append(4)
+				tmp_target_list.append(5)
+				tmp_target_list.append(6)
+				tmp_target_list.append(7)
 			else:
-				tempTargetList.append(0)
-				tempTargetList.append(1)
-				tempTargetList.append(2)
-				tempTargetList.append(3)
-		move.target_kinds.inFront:
-			tempTargetList.append(fmod(activePosition+teamSize, teamSize*2))
-		move.target_kinds.adjacentEnemy:
-			var mintarget = fmod(activePosition+teamSize, teamSize*2)-1
-			if(mintarget < 0):
-				mintarget = 0
-			if (activePosition < teamSize && mintarget < teamSize):
-				mintarget = teamSize
-			var maxtarget = fmod(activePosition+teamSize, teamSize*2)+1
-			if(maxtarget > teamSize*2):
-				maxtarget = teamSize*2 -1
-			if (activePosition >= teamSize && maxtarget >= teamSize):
-				maxtarget = teamSize-1
-			for i in range(mintarget,maxtarget+1):
-				tempTargetList.append(i)
+				tmp_target_list.append(0)
+				tmp_target_list.append(1)
+				tmp_target_list.append(2)
+				tmp_target_list.append(3)
+		move.target_kinds.in_front:
+			tmp_target_list.append(fmod(active_position+team_size, team_size*2))
+		move.target_kinds.adjacent_enemy:
+			var min_target = fmod(active_position+team_size, team_size*2)-1
+			if(min_target < 0):
+				min_target = 0
+			if (active_position < team_size && min_target < team_size):
+				min_target = team_size
+			var max_target = fmod(active_position+team_size, team_size*2)+1
+			if(max_target > team_size*2):
+				max_target = team_size*2 -1
+			if (active_position >= team_size && max_target >= team_size):
+				max_target = team_size-1
+			for i in range(min_target,max_target+1):
+				tmp_target_list.append(i)
 		
-		move.target_kinds.allEnemy:
-			if( activePosition < teamSize):
-				tempTargetList.append(4)
-				tempTargetList.append(5)
-				tempTargetList.append(6)
-				tempTargetList.append(7)
+		move.target_kinds.all_enemy:
+			if( active_position < team_size):
+				tmp_target_list.append(4)
+				tmp_target_list.append(5)
+				tmp_target_list.append(6)
+				tmp_target_list.append(7)
 			else:
-				tempTargetList.append(0)
-				tempTargetList.append(1)
-				tempTargetList.append(2)
-				tempTargetList.append(3)
+				tmp_target_list.append(0)
+				tmp_target_list.append(1)
+				tmp_target_list.append(2)
+				tmp_target_list.append(3)
 		move.target_kinds.me:
-			tempTargetList.append(activePosition)
+			tmp_target_list.append(active_position)
 			
-		move.target_kinds.allTeamOther:
-			match activePosition:
+		move.target_kinds.all_team_other:
+			match active_position:
 				0:
-					tempTargetList.append(1)
-					tempTargetList.append(2)
-					tempTargetList.append(4)
+					tmp_target_list.append(1)
+					tmp_target_list.append(2)
+					tmp_target_list.append(4)
 				1:
-					tempTargetList.append(0)
-					tempTargetList.append(2)
-					tempTargetList.append(3)
+					tmp_target_list.append(0)
+					tmp_target_list.append(2)
+					tmp_target_list.append(3)
 				2:
-					tempTargetList.append(1)
-					tempTargetList.append(0)
-					tempTargetList.append(3)
+					tmp_target_list.append(1)
+					tmp_target_list.append(0)
+					tmp_target_list.append(3)
 				3:
-					tempTargetList.append(0)
-					tempTargetList.append(1)
-					tempTargetList.append(2)
+					tmp_target_list.append(0)
+					tmp_target_list.append(1)
+					tmp_target_list.append(2)
 				4:
-					tempTargetList.append(5)
-					tempTargetList.append(6)
-					tempTargetList.append(7)
+					tmp_target_list.append(5)
+					tmp_target_list.append(6)
+					tmp_target_list.append(7)
 				5:
-					tempTargetList.append(4)
-					tempTargetList.append(6)
-					tempTargetList.append(7)
+					tmp_target_list.append(4)
+					tmp_target_list.append(6)
+					tmp_target_list.append(7)
 				6:
-					tempTargetList.append(4)
-					tempTargetList.append(5)
-					tempTargetList.append(7)
+					tmp_target_list.append(4)
+					tmp_target_list.append(5)
+					tmp_target_list.append(7)
 				7:
-					tempTargetList.append(4)
-					tempTargetList.append(5)
-					tempTargetList.append(6)
-		move.target_kinds.allTeam:
-			if activePosition < teamSize:
-				tempTargetList.append(0)
-				tempTargetList.append(1)
-				tempTargetList.append(2)
-				tempTargetList.append(3)
+					tmp_target_list.append(4)
+					tmp_target_list.append(5)
+					tmp_target_list.append(6)
+		move.target_kinds.all_team:
+			if active_position < team_size:
+				tmp_target_list.append(0)
+				tmp_target_list.append(1)
+				tmp_target_list.append(2)
+				tmp_target_list.append(3)
 			else:
-				tempTargetList.append(4)
-				tempTargetList.append(5)
-				tempTargetList.append(6)
-				tempTargetList.append(7)
-	return tempTargetList
+				tmp_target_list.append(4)
+				tmp_target_list.append(5)
+				tmp_target_list.append(6)
+				tmp_target_list.append(7)
+	return tmp_target_list
 
 

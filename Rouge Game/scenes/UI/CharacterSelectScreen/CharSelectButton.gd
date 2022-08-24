@@ -17,7 +17,9 @@ func _ready():
 func set_image(tex):
 	reck.texture = tex
 
-
+func set_character(chara):
+	character = chara
+	set_image(chara.icon)
 
 func _on_Char0_button_down():
 	emit_signal("charButtonDown", character)

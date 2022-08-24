@@ -14,9 +14,6 @@
 anchor_right = 1.0
 anchor_bottom = 1.0
 script = ExtResource( 1 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="VBoxContainer" type="VBoxContainer" parent="."]
 anchor_right = 1.0
@@ -75,11 +72,18 @@ margin_right = 1080.0
 margin_bottom = 1392.0
 
 [node name="Description" type="Label" parent="VBoxContainer/CenterContainer4"]
-margin_left = 540.0
-margin_right = 540.0
+margin_left = 50.0
+margin_right = 1030.0
 margin_bottom = 285.0
-rect_min_size = Vector2( 0, 285 )
+grow_horizontal = 0
+grow_vertical = 0
+rect_min_size = Vector2( 980, 285 )
+size_flags_horizontal = 3
+size_flags_vertical = 3
 custom_fonts/font = ExtResource( 7 )
+align = 1
+valign = 1
+autowrap = true
 
 [node name="CenterContainer" type="CenterContainer" parent="VBoxContainer"]
 margin_top = 1396.0
@@ -99,8 +103,9 @@ margin_bottom = 40.0
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
 [connection signal="charButtonDown" from="VBoxContainer/CenterContainer2/GridContainer/Char0" to="." method="_on_Char_charButtonDown"]
 [connection signal="charButtonDown" from="VBoxContainer/CenterContainer2/GridContainer/Char1" to="." method="_on_Char_charButtonDown"]
 [connection signal="charButtonDown" from="VBoxContainer/CenterContainer2/GridContainer/Char2" to="." method="_on_Char_charButtonDown"]
 [connection signal="charButtonDown" from="VBoxContainer/CenterContainer2/GridContainer/Char3" to="." method="_on_Char_charButtonDown"]
-[connection signal="pressed" from="VBoxContainer/CenterContainer/Start" to="." method="_on_Start_pressed"]
+[connection signal="button_up" from="VBoxContainer/CenterContainer/Start" to="." method="_on_Start_pressed"]

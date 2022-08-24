@@ -12,10 +12,10 @@ func _ready():
 func set_move_text(move):
 	set_text(move.description)
 	var txt = ""
-	if move.physicalDmg > 0:
-		txt += "Dmg: " + str(move.physicalDmg) + "\n"
-	if move.magicalDmg > 0:
-		txt += "Mag: " + str(move.magicalDmg) + "\n"
+	if move.physical_dmg > 0:
+		txt += "Dmg: " + str(move.physical_dmg) + "\n"
+	if move.magical_dmg > 0:
+		txt += "Mag: " + str(move.magical_dmg) + "\n"
 	if move.heal > 0:
 		txt += "Heal: " + str(move.heal)
 	lablDMG.text = txt 

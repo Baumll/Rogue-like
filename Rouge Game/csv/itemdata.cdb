@@ -5,16 +5,15 @@
 			"columns": [
 				{
 					"typeStr": "1",
-					"name": "Name"
+					"name": "name"
 				},
 				{
 					"typeStr": "1",
-					"name": "Description",
-					"display": null
+					"name": "description"
 				},
 				{
 					"typeStr": "3",
-					"name": "cost"
+					"name": "value"
 				},
 				{
 					"typeStr": "1",
@@ -26,18 +25,33 @@
 				},
 				{
 					"typeStr": "5:common,uncommon,rare,epic,legendary",
-					"name": "Rarity",
-					"display": null
+					"name": "rarity"
 				}
 			],
 			"lines": [
 				{
-					"Name": "dagger",
-					"Description": "A simple Dagger",
 					"status": "res://Units/States/statusDagger.tres",
-					"Rarity": 0,
-					"cost": 3,
-					"icon": "res://Assets/images/Icons/items/m_t_05.png"
+					"icon": "res://Assets/images/Icons/items/m_t_05.png",
+					"value": 3,
+					"rarity": 0,
+					"description": "A simple Dagger",
+					"name": "dagger"
+				},
+				{
+					"icon": "res://Assets/images/Icons/items/Books/book_06_b.png",
+					"status": "res://Units/States/statusBook.tres",
+					"value": 4,
+					"rarity": 0,
+					"description": "Ein buch voller Magie",
+					"name": "Book"
+				},
+				{
+					"icon": "res://Assets/images/Icons/items/Armor/hm_t_01.png",
+					"status": "",
+					"value": 5,
+					"rarity": 0,
+					"description": "A Hammer to clopp",
+					"name": "Hammer"
 				}
 			],
 			"separators": [],

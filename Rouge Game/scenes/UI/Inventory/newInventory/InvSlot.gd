@@ -27,7 +27,7 @@ func get_drag_data(position):
 		data["origin_slot"] = self
 		var drag_texture = TextureRect.new()
 		drag_texture.expand = true
-		drag_texture.texture = item.icon
+		drag_texture.texture = load(item.icon)
 		drag_texture.rect_size = Vector2(200,200)
 		
 		var control = Control.new()
@@ -67,7 +67,7 @@ func set_item(newItem):
 	if(newItem != null):
 		#emit_signal("ItemSet",newItem,num)
 		item = newItem
-		texIcon.texture = item.icon
+		texIcon.texture = load(item.icon)
 		if inf != null:
 			inf[num] = item
 		if forSale:
@@ -85,7 +85,7 @@ func set_item(newItem):
 func _process(delta):
 	if Input.is_action_just_released("ui_mouse_left"):
 		if(item != null):
-			texIcon.texture = item.icon
+			texIcon.texture = load(item.icon)
 			if forSale:
 				label.text = str(item.value) + "G"
 				textureRect.visible = true

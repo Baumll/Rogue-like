@@ -52,15 +52,15 @@ anchor_bottom = 0.0
 margin_top = 456.0
 margin_right = 1080.0
 margin_bottom = 1176.0
-[connection signal="char_selected" from="VBoxContainer/CharSelect" to="." method="_on_CharSelect_char_selected"]
 [connection signal="char_selected" from="VBoxContainer/CharSelect" to="VBoxContainer/AttackButtons" method="_on_FightScene_loadCharacter"]
 [connection signal="char_selected" from="VBoxContainer/CharSelect" to="VBoxContainer/NewInventory" method="_on_CharSelect_char_selected"]
+[connection signal="char_selected" from="VBoxContainer/CharSelect" to="." method="_on_CharSelect_char_selected"]
 [connection signal="move_pressed" from="VBoxContainer/CharSelect" to="." method="_on_CharSelect_move_pressed"]
 [connection signal="mun_selected" from="VBoxContainer/CharSelect" to="." method="_on_CharSelect_mun_selected"]
 [connection signal="ItemDescription" from="VBoxContainer/NewInventory" to="VBoxContainer/DecriptinText" method="set_item_text"]
 [connection signal="inventoryButton" from="VBoxContainer/NewInventory" to="." method="_on_inventorySlots_inventoryButton"]
-[connection signal="attackDown" from="VBoxContainer/AttackButtons" to="." method="_on_AttackButtons_attackDown"]
 [connection signal="attackDown" from="VBoxContainer/AttackButtons" to="VBoxContainer/CharSelect" method="_on_AttackButtons_attackDown"]
-[connection signal="attackUP" from="VBoxContainer/AttackButtons" to="." method="_on_AttackButtons_attackUP"]
+[connection signal="attackDown" from="VBoxContainer/AttackButtons" to="." method="_on_AttackButtons_attackDown"]
 [connection signal="attackUP" from="VBoxContainer/AttackButtons" to="VBoxContainer/CharSelect" method="_on_AttackButtons_attackUP"]
+[connection signal="attackUP" from="VBoxContainer/AttackButtons" to="." method="_on_AttackButtons_attackUP"]
 [connection signal="back" from="VBoxContainer/AttackButtons" to="." method="_on_inventorySlots_inventoryButton"]

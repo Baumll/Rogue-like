@@ -29,7 +29,7 @@ func get_drag_data(position):
 		#Erstellen des Icons was der mausfolgt
 		var drag_texture = TextureRect.new()
 		drag_texture.expand = true
-		drag_texture.texture = item.icon
+		drag_texture.texture = load(item.icon)
 		drag_texture.rect_size = Vector2(200,200)
 		#Neuer Node folgt der Maus
 		var control = Control.new()
@@ -79,7 +79,7 @@ func set_item(newItem):
 		ChrFunc.remove_item(activeCaracter,num)
 		
 		item = newItem
-		texIcon.texture = item.icon
+		texIcon.texture = load(item.icon)
 		ChrFunc.add_item(activeCaracter,num,item)
 		if forSale:
 			label.text = str(item.value) + "G"
@@ -95,7 +95,7 @@ func set_item(newItem):
 func _process(delta):
 	if Input.is_action_just_released("ui_mouse_left"):
 		if(item != null):
-			texIcon.texture = item.icon
+			texIcon.texture = load(item.icon)
 			if forSale:
 				label.text = str(item.value) + "G"
 				textureRect.visible = true
