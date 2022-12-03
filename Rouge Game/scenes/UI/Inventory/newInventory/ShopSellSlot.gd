@@ -1,12 +1,10 @@
 extends TextureRect
 
-signal ItemSet(item)
 
-
-func get_drag_data(position):
+func get_drag_data(_position):
 	pass
 	
-func can_drop_data(position, data):
+func can_drop_data(_position, _data):
 	#Check if we can drop an item in this slot
 	return true
 	

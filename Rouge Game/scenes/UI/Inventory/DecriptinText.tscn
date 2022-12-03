@@ -1,9 +1,9 @@
 [gd_scene load_steps=5 format=2]
 
-[ext_resource path="res://fonts/UI/FontSmal.tres" type="DynamicFont" id=1]
+[ext_resource path="res://Assets/fonts/UI/FontSmal.tres" type="DynamicFont" id=1]
 [ext_resource path="res://scenes/UI/Inventory/DecriptinText.gd" type="Script" id=2]
-[ext_resource path="res://Assets/images/bars/DescriptionOutline.png" type="Texture" id=3]
-[ext_resource path="res://Assets/images/UI_under/ui_upper.png" type="Texture" id=4]
+[ext_resource path="res://Assets/images/UI/bars/DescriptionOutline.png" type="Texture" id=3]
+[ext_resource path="res://Assets/images/UI/moves_ui/ui_upper.png" type="Texture" id=4]
 
 [node name="DecriptinText" type="Control"]
 anchor_right = 1.0

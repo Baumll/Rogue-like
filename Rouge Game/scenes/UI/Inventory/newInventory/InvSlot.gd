@@ -19,7 +19,7 @@ func _ready():
 	label.text = ""
 	textureRect.visible = false
 
-func get_drag_data(position):
+func get_drag_data(_position):
 	if item != null and active:
 		var data = {}
 		data["origin_kind"] = "inv"
@@ -27,7 +27,7 @@ func get_drag_data(position):
 		data["origin_slot"] = self
 		var drag_texture = TextureRect.new()
 		drag_texture.expand = true
-		drag_texture.texture = load(item.icon)
+		drag_texture.texture = item.icon
 		drag_texture.rect_size = Vector2(200,200)
 		
 		var control = Control.new()
@@ -41,11 +41,11 @@ func get_drag_data(position):
 		textureRect.visible = false
 		label.text = ""
 		
-		emit_signal("ItemSet",item,num)
+		emit_signal("ItemSet",item)
 		
 		return data
 	
-func can_drop_data(position, data):
+func can_drop_data(_position, data):
 	#Check if we can drop an item in this slot
 	if(data["origin_kind"] == "shop" and item != null):
 		return false
@@ -67,7 +67,7 @@ func set_item(newItem):
 	if(newItem != null):
 		#emit_signal("ItemSet",newItem,num)
 		item = newItem
-		texIcon.texture = load(item.icon)
+		texIcon.texture = item.icon
 		if inf != null:
 			inf[num] = item
 		if forSale:
@@ -82,10 +82,10 @@ func set_item(newItem):
 		textureRect.visible = false
 
 
-func _process(delta):
+func _process(_delta):
 	if Input.is_action_just_released("ui_mouse_left"):
 		if(item != null):
-			texIcon.texture = load(item.icon)
+			texIcon.texture = item.icon
 			if forSale:
 				label.text = str(item.value) + "G"
 				textureRect.visible = true

@@ -30,5 +30,4 @@ func set_text(text):
 	leb.update()
 
 
-func _on_AttackButtons_attack(num):
-	pass # Replace with function body.
+

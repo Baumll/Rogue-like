@@ -23,7 +23,7 @@ var preTime = -1
 func _ready():
 	targetFindScript = targetFindScript.new()
 
-func _process(delta):
+func _process(_delta):
 	if activePos != -1:
 		if preTime == -1:
 			preTime = OS.get_ticks_msec()

@@ -7,7 +7,7 @@ signal selected_character(character)
 signal merchant(broker)
 signal back
 
-onready var charSelect = $VBoxContainer/CharSelect
+onready var charSelect = $VBoxContainer/HBoxContainer/CharSelect
 onready var attackButtons = $VBoxContainer/AttackButtons
 onready var inventory = $VBoxContainer/NewInventory
 onready var description = $VBoxContainer/DecriptinText
@@ -62,15 +62,14 @@ func set_inventory():
 	inventory.set_active_state(true)
 
 
-func _on_CharSelect_mun_selected(num):
+func _on_CharSelect_mun_selected():
 	#zwischen inventar und buttons toggeln
-	if num == -1:
-		if attackButtons.visible == true:
-			attackButtons.visible = false
-			inventory.set_active_state(true)
-		else:
-			attackButtons.visible = true
-			inventory.set_active_state(false)
+	if attackButtons.visible == true:
+		attackButtons.visible = false
+		inventory.set_active_state(true)
+	else:
+		attackButtons.visible = true
+		inventory.set_active_state(false)
 
 
 func _on_CharSelect_char_selected(character):

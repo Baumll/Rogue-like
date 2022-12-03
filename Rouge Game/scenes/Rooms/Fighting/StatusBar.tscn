@@ -1,0 +1,76 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://scenes/Rooms/Fighting/StatusBar.gd" type="Script" id=1]
+[ext_resource path="res://scenes/Rooms/Fighting/StatusBarIconHandler.gd" type="Script" id=2]
+
+
+[node name="StatusBar" type="Control"]
+anchor_right = 1.0
+rect_min_size = Vector2( 0, 20 )
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+anchor_right = 1.0
+margin_bottom = 30.0
+script = ExtResource( 2 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TextureRect1" type="TextureRect" parent="HBoxContainer"]
+margin_right = 30.0
+margin_bottom = 30.0
+rect_min_size = Vector2( 30, 30 )
+expand = true
+stretch_mode = 6
+
+[node name="TextureRect2" type="TextureRect" parent="HBoxContainer"]
+margin_left = 34.0
+margin_right = 64.0
+margin_bottom = 30.0
+rect_min_size = Vector2( 30, 30 )
+expand = true
+stretch_mode = 6
+
+[node name="TextureRect3" type="TextureRect" parent="HBoxContainer"]
+margin_left = 68.0
+margin_right = 98.0
+margin_bottom = 30.0
+rect_min_size = Vector2( 30, 30 )
+expand = true
+stretch_mode = 6
+
+[node name="TextureRect4" type="TextureRect" parent="HBoxContainer"]
+margin_left = 102.0
+margin_right = 132.0
+margin_bottom = 30.0
+rect_min_size = Vector2( 30, 30 )
+expand = true
+stretch_mode = 6
+
+[node name="TextureRect5" type="TextureRect" parent="HBoxContainer"]
+margin_left = 136.0
+margin_right = 166.0
+margin_bottom = 30.0
+rect_min_size = Vector2( 30, 30 )
+expand = true
+stretch_mode = 6
+
+[node name="TextureRect6" type="TextureRect" parent="HBoxContainer"]
+margin_left = 170.0
+margin_right = 200.0
+margin_bottom = 30.0
+rect_min_size = Vector2( 30, 30 )
+expand = true
+stretch_mode = 6
+
+[node name="TextureRect7" type="TextureRect" parent="HBoxContainer"]
+margin_left = 204.0
+margin_right = 234.0
+margin_bottom = 30.0
+rect_min_size = Vector2( 30, 30 )
+expand = true
+stretch_mode = 6

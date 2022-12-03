@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=2]
 
-[ext_resource path="res://Assets/images/bars/MiniTargetMarker.png" type="Texture" id=1]
+[ext_resource path="res://Assets/images/UI/bars/MiniTargetMarker.png" type="Texture" id=1]
 [ext_resource path="res://scenes/UI/Inventory/TargetMiniShow.gd" type="Script" id=2]
 
 [node name="TargetMiniShow" type="Control"]

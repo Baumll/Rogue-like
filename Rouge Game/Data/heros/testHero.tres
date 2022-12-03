@@ -1,0 +1,23 @@
+[gd_resource type="Resource" load_steps=2 format=2]
+
+[ext_resource path="res://ScribtAble/Resource/characterResource.gd" type="Script" id=1]
+
+[resource]
+script = ExtResource( 1 )
+klass = "NoClass"
+name = "NoClass"
+description = "Ups Something went wrong"
+level = 0
+base_exp_to_level = 0
+death_exp = 0
+base_max_health = 0
+base_strength = 0
+base_defence = 0
+base_magic_defence = 0
+base_dexterity = 0
+base_magic = 0
+base_speed = 0
+base_crit_chance = 0
+base_crit_modifier = 0
+moves = [  ]
+equip = [ null, null ]

@@ -1,0 +1,72 @@
+[gd_scene load_steps=12 format=2]
+
+[ext_resource path="res://scenes/Stuff/Main.gd" type="Script" id=1]
+[ext_resource path="res://Assets/Sounds/TestSounds/Cave_01_Loop.wav" type="AudioStream" id=2]
+[ext_resource path="res://scenes/Rooms/Fighting/LoseSzene.tscn" type="PackedScene" id=3]
+[ext_resource path="res://scenes/Stuff/AudioStreamPlayer.tscn" type="PackedScene" id=4]
+[ext_resource path="res://scenes/Start/CharacterSelectScreen/CharSelectScreen.tscn" type="PackedScene" id=5]
+[ext_resource path="res://scenes/Stuff/CheatNode.tscn" type="PackedScene" id=6]
+[ext_resource path="res://scenes/Rooms/Fighting/WinSzene.tscn" type="PackedScene" id=7]
+[ext_resource path="res://scenes/UI/Two_Choise/TwoChoise.tscn" type="PackedScene" id=8]
+[ext_resource path="res://scenes/Start/StartScene.tscn" type="PackedScene" id=9]
+[ext_resource path="res://scenes/UI/DoorScene.tscn" type="PackedScene" id=10]
+[ext_resource path="res://scenes/Rooms/Decision/Decision.tscn" type="PackedScene" id=11]
+
+[node name="Main" type="Node"]
+script = ExtResource( 1 )
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+anchor_bottom = 1.0
+margin_right = 1080.0
+
+[node name="DoorScene" parent="VBoxContainer" instance=ExtResource( 10 )]
+visible = false
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_right = 1080.0
+margin_bottom = 1200.0
+rect_min_size = Vector2( 540, 1200 )
+
+[node name="Decision" parent="VBoxContainer" instance=ExtResource( 11 )]
+visible = false
+anchor_right = 0.0
+margin_right = 1080.0
+
+[node name="TwoChoise" parent="VBoxContainer" instance=ExtResource( 8 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_right = 1080.0
+margin_bottom = 720.0
+
+[node name="WinSzene" parent="." instance=ExtResource( 7 )]
+visible = false
+
+[node name="LoseSzene" parent="." instance=ExtResource( 3 )]
+visible = false
+
+[node name="CharSelectScreen" parent="." instance=ExtResource( 5 )]
+visible = false
+
+[node name="Start" parent="." instance=ExtResource( 9 )]
+visible = false
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_right = 1080.0
+margin_bottom = 1920.0
+
+[node name="AudioMusik" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 2 )
+bus = "Musik"
+
+[node name="AudioEffect" parent="." instance=ExtResource( 4 )]
+bus = "Master"
+
+[node name="CheatNode" parent="." instance=ExtResource( 6 )]
+
+[connection signal="door_enter" from="VBoxContainer/DoorScene" to="." method="_on_DoorScene_door_enter"]
+[connection signal="choise_made" from="VBoxContainer/TwoChoise" to="." method="_on_TwoChoise_choise_made"]
+[connection signal="winSzene" from="WinSzene" to="." method="_on_WinSzene_winSzene"]
+[connection signal="loseSzene" from="LoseSzene" to="." method="_on_LoseSzene_loseSzene"]
+[connection signal="Chosen" from="CharSelectScreen" to="." method="_on_CharSelectScreen_Chosen"]
+[connection signal="load_pressed" from="Start" to="." method="_on_Start_load_pressed"]
+[connection signal="start_pressed" from="Start" to="." method="_on_Start_start_pressed"]

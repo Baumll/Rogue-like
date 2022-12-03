@@ -25,7 +25,7 @@ var status_list = null
 var move_list = null
 
 var rng = null
-var power_level = 1
+var power_level = 1 #Wie stark die gegner und die Belohung sind
 
 func set_up_rng(rngSeed = ""):
 	rng = RandomNumberGenerator.new()
@@ -113,6 +113,8 @@ func read_csv(path):
 					item[csv[0][j]] = csv[i+1][j]
 					if item[csv[0][j]].is_valid_integer():
 						item[csv[0][j]] = int(item[csv[0][j]])
+					elif item[csv[0][j]] == "":
+						item[csv[0][j]] = null
 					elif item[csv[0][j]].is_valid_float():
 						item[csv[0][j]] = float(item[csv[0][j]])
 					elif item[csv[0][j]] == "true":
@@ -234,7 +236,7 @@ func load_item_list():
 	print("Items loaded")
 	return item_list
 
-func load_item(item):
+func get_item(name):
 	if item_list == null:
 		load_item_list()
 	for i in item_list:
@@ -250,8 +252,9 @@ func create_item(item = null):
 		load_item_list()
 	if item == null:
 		item = item_list[rng.randi_range(0, item_list.size()-1)]
-		return load_item(item["Name"])
-	return null
+		return get_item(item["Name"])
+	else:
+		return get_item(item)
 
 func create_emty_character(data = null):
 	#data ist wenn ein vorgefertiter character
@@ -270,7 +273,7 @@ func load_character(character):
 #Passt die noch zu verwernden Power an und dann die Liste. und wiede holt so lange bis
 #das Team voll ist
 #Alle Bilder hier werden geladen.
-func pick_enemys(count = -1, power_level = 1):
+func pick_enemys(count = -1, level = 1):
 	if enemy_list == null:
 		load_enemy_list()
 	#-1 -> Zufällig viele
@@ -280,7 +283,7 @@ func pick_enemys(count = -1, power_level = 1):
 	var enemys_to_pick = []
 	var enemys_in_range = []
 	for i in enemy_list:
-		if i["Level"] == power_level:
+		if i["Level"] == level:
 			enemys_in_range.append(i)
 
 	if enemys_in_range.size() < 1:

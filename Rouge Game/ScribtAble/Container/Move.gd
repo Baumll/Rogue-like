@@ -28,7 +28,7 @@ func load_move(source):
 		heal = source["Heal"]
 		status = GlobalFunktions.get_status(source["Status"])
 		animation = source["Animation"] #0 = Value oder status
-		sound = load(source["Sound"]) #0 = Value oder status
+		sound = null #load(source["Sound"]) #0 = Value oder status
 	else:
 		name = source.name
 		description = source.description
@@ -40,4 +40,4 @@ func load_move(source):
 		heal = source.heal
 		status = source.status
 		animation = source.animation #0 = Value oder status
-		sound = source.sound #0 = Value oder status
+		sound = null#source.sound #0 = Value oder status

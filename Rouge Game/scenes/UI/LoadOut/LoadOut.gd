@@ -21,7 +21,7 @@ func _ready():
 	emit_signal("loadChars",chars)
 	load_all_chracters(chars)
 
-func _process(delta):
+func _process(_delta):
 	if acktive_character != null:
 		load_character(acktive_character)
 	$VBoxContainer/HBoxContainer.rect_size = Vector2(1080,720)
@@ -64,7 +64,7 @@ func set_level_up(state):
 
 
 
-func _on_levelUp_health(num):
+func _on_level_up_health():
 	acktive_character.base_max_health += 5
 	acktive_character.skill_points -= 1
 	acktive_character.calculate_all_stats()
@@ -72,42 +72,42 @@ func _on_levelUp_health(num):
 	if acktive_character.skill_points <= 0:
 		set_level_up(false)
 
-func _on_levelUp_defence(num):
+func _on_level_up_defence():
 	acktive_character.Base_Defence += 1
 	acktive_character.skill_points -= 1
 	acktive_character.calculate_all_stats()
 	if acktive_character.skill_points <= 0:
 		set_level_up(false)
 
-func _on_levelUp_magicDefence(num):
+func _on_level_up_magicDefence():
 	acktive_character.base_magic_defence += 1
 	acktive_character.skill_points -= 1
 	acktive_character.calculate_all_stats()
 	if acktive_character.skill_points <= 0:
 		set_level_up(false)
 		
-func _on_levelUp_strenght(num):
+func _on_level_up_strenght():
 	acktive_character.base_strength += 1
 	acktive_character.skill_points -= 1
 	acktive_character.calculate_all_stats()
 	if acktive_character.skill_points <= 0:
 		set_level_up(false)
 
-func _on_levelUp_magic(num):
+func _on_level_up_magic():
 	acktive_character.base_magic += 1
 	acktive_character.skill_points -= 1
 	acktive_character.calculate_all_stats()
 	if acktive_character.skill_points <= 0:
 		set_level_up(false)
 
-func _on_levelUp_dexterity(num):
+func _on_level_up_dexterity():
 	acktive_character.base_dexterity += 1
 	acktive_character.skill_points -= 1
 	acktive_character.calculate_all_stats()
 	if acktive_character.skill_points <= 0:
 		set_level_up(false)
 
-func _on_levelUp_speed(num):
+func _on_level_up_speed():
 	acktive_character.base_speed += 1
 	acktive_character.skill_points -= 1
 	acktive_character.calculate_all_stats()

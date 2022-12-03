@@ -31,11 +31,11 @@ onready var load_screen = preload("res://scenes/UI/LoadOut/LoadOut.tscn")
 
 func roomListSetup():
 	#Rist Path, Icon, Rarity
-	roomList.append(["res://scenes/UI/Rooms/HealRoom.tscn","res://Assets/images/Icons/Rooms/green_14.PNG", 2])
-	roomList.append(["res://scenes/UI/Rooms/mercenario.tscn","res://Assets/images/Icons/Rooms/yellow_40.png", 2])
-	roomList.append(["res://scenes/UI/Rooms/Fighting/FightScene.tscn","res://Assets/images/Icons/Rooms/blue_12.png", 2])
-	roomList.append(["res://scenes/UI/Rooms/merchantScene.tscn","res://Assets/images/Icons/Rooms/gray_07.PNG", 2])
-	roomList.append(["res://scenes/UI/Rooms/ItemRoom.tscn","res://Assets/images/Icons/Rooms/TradingIcons_08.png", 2])
+	roomList.append(["res://scenes/Rooms/Heal/HealRoom.tscn","res://Assets/images/Icons/Rooms/green_14.PNG", 2])
+	roomList.append(["res://scenes/Rooms/mercenario/mercenario.tscn","res://Assets/images/Icons/Rooms/yellow_40.png", 2])
+	roomList.append(["res://scenes/Rooms/Fighting/FightScene.tscn","res://Assets/images/Icons/Rooms/blue_12.png", 2])
+	roomList.append(["res://scenes/Rooms/merchant/merchantScene.tscn","res://Assets/images/Icons/Rooms/gray_07.PNG", 2])
+	roomList.append(["res://scenes/Rooms/Item/ItemRoom.tscn","res://Assets/images/Icons/Rooms/TradingIcons_08.png", 2])
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -48,7 +48,7 @@ func _ready():
 	setup_start()
 	roomListSetup()
 
-func _process(delta):
+func _process(_delta):
 	if(Input.is_action_just_pressed("ui_down")):
 		room = load(roomList[2][0]).instance()
 		add_child(room)
@@ -71,7 +71,7 @@ func setup_doors():
 	door.visible = true
 	var num = 0
 	doors = []
-	for i in range(2):
+	for _i in range(2):
 		num = GlobalFunktions.rng.randi_range(0,roomList.size()-1)
 		doors.append(num)
 	door.setup_doors(load(roomList[doors[0]][1]), load(roomList[doors[1]][1]))
@@ -107,7 +107,7 @@ func _on_DoorScene_door_enter(num):
 	room.visible = true
 
 
-func _on_TwoChoise_choise_made(num):
+func _on_TwoChoise_choise_made(_num):
 	if(door.visible == true):
 		setup_load_out()
 
@@ -184,10 +184,10 @@ func _on_exit():
 				if x.health > 0:
 					#win screen hier noch besser machen
 					save_game()
-					win_screen.visible
+					win_screen.visible = true
 					room.queue_free()
 					return
-			lose_screen.visible
+			lose_screen.visible  = true
 			room.queue_free()
 			return
 		room.queue_free()
@@ -220,7 +220,8 @@ func save_game():
 		print("Can't open file")
 
 func load_game():
-	var save_game = File.new()
+	print("Loading is loading ist work in progress! plas start a new game")
+""""	var save_game = File.new()
 	if save_game.file_exists(GlobalFunktions.save_file):
 		var error = save_game.open(GlobalFunktions.save_file, File.READ)
 		if error == OK:
@@ -235,7 +236,7 @@ func load_game():
 		else:
 			print("Can't open file")
 	else:
-		print("No Save File")
+		print("No Save File")"""
 
 
 

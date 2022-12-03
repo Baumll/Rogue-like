@@ -23,9 +23,9 @@ func set_image(image):
 		tex.texture = image
 
 func change_size(x,y):
-	var tex = $TextureRect
+	var texture_rect = $TextureRect
 	rect_min_size = Vector2(x,y)
-	tex.rect_min_size = rect_min_size
+	texture_rect.rect_min_size = rect_min_size
 	
 
 func change_pos(x,y):

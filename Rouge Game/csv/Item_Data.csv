@@ -1,4 +1,4 @@
 Name,Description,Value,Status,Rarity,Icon
-Dagger,A sharp blade,10,Dagger_Status,1,
-Book,A heavy book,12,Book_Status,1,
-Hammer,A strong Hammer,11,Hammer_Status,1,
+Dagger,A sharp blade,10,Dagger_Status,1,res://Assets/images/Icons/items/m_t_05.png
+Book,A heavy book,12,Book_Status,1,res://Assets/images/Icons/items/Books/book_16_b.png
+Hammer,A strong Hammer,11,Hammer_Status,1,res://Assets/images/Icons/items/Armor/hm_t_01.png

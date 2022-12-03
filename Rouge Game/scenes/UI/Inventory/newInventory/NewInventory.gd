@@ -7,7 +7,6 @@ onready var grid = $HBoxContainer/GridContainer
 onready var equip = $HBoxContainer/VBoxContainer/EquipSlots
 
 onready var itemContainer = preload("res://scenes/UI/Inventory/newInventory/InvSlot1.tscn")
-onready var preItem  = preload("res://ScribtAble/ClassItem.gd")
 onready var inf = get_node("/root/Main").inventory
 onready var gold = get_node("/root/Main").gold
 var slotList = []
@@ -34,7 +33,7 @@ func _ready():
 			inf.append(null)
 		
 
-func _process(delta):
+func _process(_delta):
 	if(Input.is_action_just_pressed("ui_up")):
 			add_item()
 

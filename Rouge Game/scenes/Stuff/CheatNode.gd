@@ -1,6 +1,5 @@
 extends Node
 
-signal cheat(cheat)
 
 var secret_string = ""
 
@@ -11,7 +10,7 @@ func _input(event: InputEvent):
 		#print(OS.get_scancode_string(event.scancode))
 		secret_string += OS.get_scancode_string(event.scancode).to_lower()
 		
-		if "levelup" in secret_string:
+		if "level_up" in secret_string:
 			print("LEVEL UP!")
 			secret_string = ""
 			for i in main.characterList:

@@ -1,7 +1,7 @@
 extends Node
 
 enum status_types {buff, heal, dmg, combat}
-export(status_types) var status_typ
+export(status_types) var status_type
 
 export(StreamTexture) var icon = null
 export var unique = true
@@ -40,8 +40,9 @@ export(String) var trigger_after_dmg = null
 
 func load_status(data):
 	if typeof(data) == TYPE_DICTIONARY:
-		status_typ = data["Typ"]
-		icon = load(data["Icon"])
+		status_type = data["Type"]
+		if data["Icon"] != null:
+			icon = load(data["Icon"])
 		unique = data["Unique"]
 		turns = data["Turns"]
 		max_turns = data["Max_Turns"]
