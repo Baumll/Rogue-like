@@ -1,32 +1,27 @@
 [gd_scene load_steps=4 format=2]
 
-[ext_resource path="res://fonts/UI/FontSmal.tres" type="DynamicFont" id=1]
-[ext_resource path="res://Assets/images/bars/ItemCorner.png" type="Texture" id=2]
+[ext_resource path="res://Assets/fonts/UI/FontMini.tres" type="DynamicFont" id=1]
+[ext_resource path="res://Assets/images/UI/bars/ItemCorner.png" type="Texture" id=2]
 [ext_resource path="res://scenes/UI/Inventory/newInventory/InvSlot.gd" type="Script" id=3]
 
 [node name="InvSlot1" type="Button"]
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_bottom = -840.0
-rect_min_size = Vector2( 200, 200 )
+rect_min_size = Vector2( 240, 240 )
 action_mode = 0
+flat = true
 expand_icon = true
 script = ExtResource( 3 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="TexIcon" type="TextureRect" parent="."]
 anchor_right = 1.0
 anchor_bottom = 1.0
-rect_min_size = Vector2( 200, 200 )
+rect_min_size = Vector2( 240, 240 )
 size_flags_horizontal = 3
 size_flags_vertical = 3
 expand = true
 stretch_mode = 5
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="TextureRect" type="TextureRect" parent="."]
 anchor_right = 1.0
@@ -42,10 +37,8 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 mouse_filter = 1
 custom_fonts/font = ExtResource( 1 )
-text = "dsfdsfds"
+text = "10"
 align = 2
 valign = 2
-__meta__ = {
-"_edit_use_anchors_": false
-}
+
 [connection signal="button_down" from="." to="." method="_on_InvSlot1_button_down"]

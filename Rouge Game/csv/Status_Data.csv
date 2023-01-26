@@ -1,4 +1,6 @@
 Name,Description,Icon,Type,Unique,Code,Turns,Max_Turns,Max_Health,Strength,Defence,Magic_Defence,Dexterity,Magic,Speed,Crit_Chance,Crit_Modifier,Heal_Procent,Damage_Procent,Protect_Procent,Max_Health_Procent,Strength_Procent,Defence_Procent,Magic_Defence_Procent,Dexterity_Procent,Magic_Procent,Speed_Procent
-Dagger_Status,,,,0,,,-1,,,,,3,,,,,,,,,,,,,,
-Book_Status,,,,1,,,-1,,,,,,4,,,,,,,,,,,,,
-Hammer_Status,,,,0,,,-1,1,1,1,,,,,,,,,,,,,,,,
+Dagger_Status,,,0,0,,-1,-1,0,0,0,0,3,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+Book_Status,,,0,1,,-1,-1,0,0,0,0,0,4,0,0,0,0,0,0,0,0,0,0,0,0,0
+Hammer_Status,,,0,0,,-1,-1,1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+Defence_stand,,res://Assets/images/Icons/Moves/armor_20.PNG,0,1,,3,3,0,0,3,3,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+Bleed,,res://Assets/images/Icons/status/red_21.PNG,2,1,,3,3,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,,,,

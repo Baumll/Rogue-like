@@ -7,17 +7,13 @@ onready var grid = $HBoxContainer/GridContainer
 onready var equip = $HBoxContainer/VBoxContainer/EquipSlots
 
 onready var itemContainer = preload("res://scenes/UI/Inventory/newInventory/InvSlot1.tscn")
-onready var preItem  = preload("res://ScribtAble/ClassItem.gd")
-onready var inf = get_node("/root/Main").inventory
-onready var gold = get_node("/root/Main").gold
 var slotList = []
 #var activeCharacter = null
-
-var rows = 3
-var collums = 3
-
+var collums = GlobalFunktions.inventory_collums
+var rows = GlobalFunktions.inventory_rows
 
 func _ready():
+	var inv = GameData.inventory
 	grid.columns = collums
 	for i in range(0,rows*collums):
 		var container = itemContainer.instance()
@@ -25,19 +21,25 @@ func _ready():
 		slotList.append(container)
 		container.connect("ItemSet", self,"_on_item_pressed")
 		container.connect("bought", self,"_on_item_bought")
-		container.num = i
-		container.inf = inf
-		if inf.size() > i:
-			if inf[i] != null:
-				container.set_item(inf[i])
-		else:
-			inf.append(null)
+		container.rect_size = Vector2(grid.rect_size.x/collums, grid.rect_size.y/rows)
 		
+		container.num = i
+		container.inv = inv
+		if inv.size() > i:
+			if inv[i] != null:
+				container.set_item(inv[i])
+		else:
+			inv.append(null)
 
-func _process(delta):
+func _process(_delta):
 	if(Input.is_action_just_pressed("ui_up")):
-			add_item()
+		add_item()
+	#refresh_inventory()
 
+func refresh_inventory():
+	for i in range(slotList.size()):
+		slotList[i].set_item(GameData.inventory[i])
+	
 func add_item(item = null):
 	for i in grid.get_children():
 		if i.item == null:
@@ -54,7 +56,7 @@ func _on_item_pressed(item):
 		emit_signal("ItemDescription", item)
 
 func _on_item_bought(item):
-	get_node("/root/Main").gold -= item.value
+	GameData.gold -= item.value
 
 func _on_CharSelect_char_selected(character):
 	equip.set_equip(character)

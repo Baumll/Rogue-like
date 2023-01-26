@@ -1,0 +1,71 @@
+[gd_scene load_steps=8 format=2]
+
+[ext_resource path="res://Assets/Shader/TestShaderMaterial2.tres" type="Material" id=1]
+[ext_resource path="res://scenes/UI/ui_under/Ui_Under.gd" type="Script" id=2]
+[ext_resource path="res://scenes/UI/LoadOut/Attack Buttons.tscn" type="PackedScene" id=3]
+[ext_resource path="res://scenes/Start/Character_Choise/CharacterChoise.tscn" type="PackedScene" id=4]
+[ext_resource path="res://scenes/UI/Inventory/newInventory/NewInventory.tscn" type="PackedScene" id=5]
+[ext_resource path="res://scenes/UI/ui_under/DecriptinText.tscn" type="PackedScene" id=6]
+[ext_resource path="res://Assets/fonts/UI/FontMini.tres" type="DynamicFont" id=7]
+
+[node name="Ui_Under" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_bottom = -940.0
+rect_pivot_offset = Vector2( 0, 104 )
+script = ExtResource( 2 )
+
+[node name="VBox" type="VBoxContainer" parent="."]
+margin_right = 1084.0
+margin_bottom = 980.0
+custom_constants/separation = 0
+
+[node name="DecriptinText" parent="VBox" instance=ExtResource( 6 )]
+material = ExtResource( 1 )
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_right = 1084.0
+margin_bottom = 160.0
+
+[node name="HBox" type="HBoxContainer" parent="VBox"]
+margin_top = 160.0
+margin_right = 1084.0
+margin_bottom = 260.0
+
+[node name="CharSelect" parent="VBox/HBox" instance=ExtResource( 4 )]
+material = ExtResource( 1 )
+anchor_right = 0.0
+margin_right = 864.0
+
+[node name="Button" type="Button" parent="VBox/HBox"]
+margin_left = 868.0
+margin_right = 1084.0
+margin_bottom = 100.0
+rect_min_size = Vector2( 216, 0 )
+custom_fonts/font = ExtResource( 7 )
+text = "Item"
+clip_text = true
+
+[node name="NewInventory" parent="VBox" instance=ExtResource( 5 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_top = 260.0
+margin_right = 1084.0
+margin_bottom = 260.0
+
+[node name="AttackButtons" parent="VBox" instance=ExtResource( 3 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_top = 260.0
+margin_right = 1084.0
+margin_bottom = 980.0
+
+[connection signal="move_clicked" from="." to="VBox/DecriptinText" method="set_move_text"]
+[connection signal="selected_character" from="." to="VBox/AttackButtons" method="_on_FightScene_loadCharacter"]
+[connection signal="char_selected" from="VBox/HBox/CharSelect" to="." method="_on_CharSelect_char_selected"]
+[connection signal="button_up" from="VBox/HBox/Button" to="." method="_on_CharSelect_mun_selected"]
+[connection signal="inventoryButton" from="VBox/NewInventory" to="." method="_on_inventorySlots_inventoryButton"]
+[connection signal="attackDown" from="VBox/AttackButtons" to="." method="_on_AttackButtons_attackDown"]
+[connection signal="attackUP" from="VBox/AttackButtons" to="." method="_on_AttackButtons_attackUP"]
+[connection signal="back" from="VBox/AttackButtons" to="." method="_on_inventorySlots_inventoryButton"]
+[connection signal="moveDown" from="VBox/AttackButtons" to="." method="_on_CharSelect_move_pressed"]

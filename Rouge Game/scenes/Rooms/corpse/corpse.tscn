@@ -1,0 +1,53 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://Assets/fonts/UI/FontSmal.tres" type="DynamicFont" id=1]
+[ext_resource path="res://Assets/images/rooms/schrine/shrine.png" type="Texture" id=2]
+[ext_resource path="res://Assets/fonts/UI/FontChracterStats.tres" type="DynamicFont" id=3]
+[ext_resource path="res://scenes/Rooms/shrine/Shrine.gd" type="Script" id=4]
+
+[node name="Corpse" type="VBoxContainer"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource( 4 )
+
+[node name="TextureRect" type="TextureRect" parent="."]
+margin_right = 1084.0
+margin_bottom = 1000.0
+rect_min_size = Vector2( 0, 1000 )
+texture = ExtResource( 2 )
+expand = true
+
+[node name="Label" type="Label" parent="."]
+margin_top = 1004.0
+margin_right = 1084.0
+margin_bottom = 1404.0
+rect_min_size = Vector2( 0, 400 )
+custom_fonts/font = ExtResource( 1 )
+text = "Do you want to pray?"
+align = 1
+valign = 1
+autowrap = true
+
+[node name="VBoxContainer" type="HBoxContainer" parent="."]
+margin_top = 1408.0
+margin_right = 1084.0
+margin_bottom = 1928.0
+rect_min_size = Vector2( 0, 520 )
+
+[node name="ButtonYes" type="Button" parent="VBoxContainer"]
+margin_right = 540.0
+margin_bottom = 520.0
+rect_min_size = Vector2( 540, 520 )
+custom_fonts/font = ExtResource( 3 )
+text = "Yes"
+
+[node name="ButtonNo" type="Button" parent="VBoxContainer"]
+margin_left = 544.0
+margin_right = 1084.0
+margin_bottom = 520.0
+rect_min_size = Vector2( 540, 520 )
+custom_fonts/font = ExtResource( 3 )
+text = "No"
+
+[connection signal="button_up" from="VBoxContainer/ButtonYes" to="." method="_on_ButtonLeft_button_up"]
+[connection signal="button_up" from="VBoxContainer/ButtonNo" to="." method="_on_ButtonRight_button_up"]

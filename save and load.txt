@@ -1,0 +1,42 @@
+func save_game():
+	#Check if folder ecists:
+	var dir = Directory.new()
+	if !dir.dir_exists(GlobalFunktions.save_dir):
+		dir.make_dir_recursive(GlobalFunktions.save_dir)
+	
+	#Save Data:
+	var save_game = File.new()
+	var error = save_game.open(GlobalFunktions.save_file, File.WRITE)
+	if error == OK:
+		
+		#Speicher bis jtzt nur die Charactere
+		var saveChars = []
+		var data = {"Characters" : saveChars,
+		"Version" : "PreAlpha"}
+		for i in range(characterList.size()):
+			saveChars.append(characterList[i].character_to_lib(i))
+		
+		save_game.store_var(data)
+		save_game.close()
+		print("Data saved")
+	else:
+		print("Can't open file")
+
+func load_game():
+	print("Loading is loading ist work in progress! plas start a new game")
+""""	var save_game = File.new()
+	if save_game.file_exists(GlobalFunktions.save_file):
+		var error = save_game.open(GlobalFunktions.save_file, File.READ)
+		if error == OK:
+			#Hier laden
+			var player_data = save_game.get_var()
+			var characterList = [null,null,null,null]
+			for i in player_data["Characters"]:
+				characterList[i["Position"]] = ChrFunc.new_character(i)
+			save_game.close()
+			print("Data loaded")
+			return player_data
+		else:
+			print("Can't open file")
+	else:
+		print("No Save File")"""

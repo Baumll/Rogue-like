@@ -1,7 +1,10 @@
 extends Node
 
+#Globale Variablen
 var team_size = 4
-var equipSize = 2
+var equip_size = 2
+var inventory_rows = 3
+var inventory_collums = 3
 
 var save_dir = "user://save/"
 var data_path = "res://csv/"
@@ -25,14 +28,18 @@ var status_list = null
 var move_list = null
 
 var rng = null
-var power_level = 1
+var power_level = 1 #Wie stark die gegner und die Belohung sind
+
+func _ready():
+	rng = set_up_rng()
 
 func set_up_rng(rngSeed = ""):
-	rng = RandomNumberGenerator.new()
+	var rng = RandomNumberGenerator.new()
 	if rngSeed == "":
 		rng.randomize()
 	else:
 		rng.seed = hash(rngSeed)
+	return rng
 
 func load_image(image):
 	if image == null:
@@ -62,6 +69,18 @@ func create_floaty_text(amount, position, color = Color('33040b') ):
 			floaty_text.text = floaty_text.text
 		add_child(floaty_text)
 
+func get_inventory_size():
+	return inventory_collums * inventory_rows
+
+func add_item(item = null,slot = -1):
+	if item:
+		if slot >= 0 and slot < get_inventory_size():
+			if GameData.inventory[slot] == null:
+				 GameData.inventory[slot] = item
+		for i in range(get_inventory_size()):
+			if  GameData.inventory[i] == null:
+				GameData.inventory[i] = item
+				return
 
 ####Lade Zeugs
 func read_json(path):
@@ -113,6 +132,8 @@ func read_csv(path):
 					item[csv[0][j]] = csv[i+1][j]
 					if item[csv[0][j]].is_valid_integer():
 						item[csv[0][j]] = int(item[csv[0][j]])
+					elif item[csv[0][j]] == "":
+						item[csv[0][j]] = null
 					elif item[csv[0][j]].is_valid_float():
 						item[csv[0][j]] = float(item[csv[0][j]])
 					elif item[csv[0][j]] == "true":
@@ -154,6 +175,12 @@ func get_hero_list():
 		load_hero_list()
 	return hero_list
 
+func add_hero(hero):
+	if hero.typeof() == TYPE_DICTIONARY:
+		hero = GlobalFunktions.load_character(hero)
+	GameData.heros.append(hero)
+	hero.calculate_all_stats()
+	GameData.active_character = hero
 
 ###Enemy
 func get_enemy(name):
@@ -175,8 +202,6 @@ func get_enemy_list():
 	if enemy_list == null:
 		load_enemy_list()
 	return enemy_list
-
-
 
 #Zum laden eines einzelnen Status
 func get_status(name, turns = -2):
@@ -215,6 +240,13 @@ func get_move(name):
 			return new_move
 	return null
 
+func load_move(move):
+	if move:
+		var new_move = load(move_container)
+		new_move = new_move.instance()
+		new_move.load_move(move)
+		return new_move
+
 func load_move_list():
 	var move_data = read_csv("res://csv/Move_Data.csv")
 	move_list = move_data
@@ -223,18 +255,20 @@ func load_move_list():
 func get_move_list():
 	if move_list == null:
 		load_move_list()
-	return move_list
+	var new_list = []
+	for i in move_list:
+		new_list.append(load_move(i))
+	return new_list
 
 
-
-
+#Item---------------------------------
 func load_item_list():
 	#Hier werden alle items geladen 
 	item_list = read_csv("res://csv/Item_Data.csv")
 	print("Items loaded")
 	return item_list
 
-func load_item(item):
+func get_item(name):
 	if item_list == null:
 		load_item_list()
 	for i in item_list:
@@ -250,7 +284,20 @@ func create_item(item = null):
 		load_item_list()
 	if item == null:
 		item = item_list[rng.randi_range(0, item_list.size()-1)]
-		return load_item(item["Name"])
+		return get_item(item["Name"])
+	else:
+		return get_item(item)
+
+func get_item_in_power_level():
+	var power_level = get_power_range()
+	var reduced_list = []
+	for item in load_item_list():
+		if item["Level"] >= power_level[0] and item["Level"] <= power_level[1]:
+			reduced_list.append(item)
+	if reduced_list.size() > 0:
+		var new_item = load(item_container).instance()
+		new_item.load_stats(reduced_list[rng.randi_range(0,reduced_list.size()-1)])
+		return new_item
 	return null
 
 func create_emty_character(data = null):
@@ -270,25 +317,43 @@ func load_character(character):
 #Passt die noch zu verwernden Power an und dann die Liste. und wiede holt so lange bis
 #das Team voll ist
 #Alle Bilder hier werden geladen.
-func pick_enemys(count = -1, power_level = 1):
+func pick_enemys(power_level = -1, count = -1):
 	if enemy_list == null:
 		load_enemy_list()
 	#-1 -> Zufällig viele
+	if power_level == -1:
+		power_level = GameData.power_level
+	
 	if count == -1:
-		count = rng.randi_range(2,team_size)
-		
+		count = 1 + min(3,ceil(power_level/5))
+	
 	var enemys_to_pick = []
-	var enemys_in_range = []
-	for i in enemy_list:
-		if i["Level"] == power_level:
-			enemys_in_range.append(i)
-
-	if enemys_in_range.size() < 1:
-		print("No Enemys at this power Level")
+	var enemys_in_range = enemy_list
 	
 	while enemys_to_pick.size() < count:
+		var new_enemy_list = []
+		for i in enemys_in_range:
+			if i["Level"] < power_level:
+				new_enemy_list.append(i)
+		enemys_in_range = new_enemy_list
+		if enemys_in_range.size() < 1:
+			print("No Enemys at this power Level")
+			return enemys_to_pick
+		
 		var enemy = enemys_in_range[rng.randi_range(0,enemys_in_range.size()-1)]
 		enemy = load_character(enemy)
 		enemys_to_pick.append(enemy)
+		power_level -= enemy.level
 		
 	return enemys_to_pick
+
+#Baurche ich das?
+func get_fighter():
+	var fighters = []
+	var heros = []
+
+func get_power_range():
+	var mid_level = ceil(GameData.power_level/4)
+	var min_level = max(1,mid_level-2)
+	var max_level = mid_level + 1
+	return [min_level,max_level]

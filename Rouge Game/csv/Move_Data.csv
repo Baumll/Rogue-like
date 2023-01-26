@@ -1,4 +1,7 @@
-Name,Description,Image,Cost,Targets,Physical_Dmg,Magical_Dmg,Heal,Status,Animation,Sound
-Flamethrower,A devastating Flame,res://Assets/images/Icons/Moves/yellow_42.png,5,1,0,1,0,,TestStrike,
-Strike,Sipme strike in front,res://Assets/images/Icons/Moves/red_13.PNG,4,0,4,0,0,,TestStrike,
-Spit,Disgusting Acid,res://Assets/images/Icons/Moves/green_08.png,6,6,2,2,0,,TestStrike,
+Name,Description,Image,Cost,Targets,Physical_Dmg,Magical_Dmg,Heal,Status,Animation,Sound,Level
+Flamethrower,A devastating Flame,res://Assets/images/Icons/Moves/yellow_42.png,5,1,0,1,0,,TestStrike,,1
+Strike,Sipme strike in front,res://Assets/images/Icons/Moves/red_13.PNG,4,0,4,0,0,,TestStrike,,1
+Spit,Disgusting Acid,res://Assets/images/Icons/Moves/green_08.png,6,6,2,2,0,,TestStrike,,1
+Defense Stand,Aros Up,res://Assets/images/Icons/Moves/armor_20.PNG,5,3,0,0,0,Defence_stand,TestStrike,,1
+TeamHeal,Heals your Team,res://Assets/images/Icons/Moves/green_20.PNG,6,5,0,0,1,,TestStrike,,1
+DeathRay,Incinerate Everything,res://Assets/images/Icons/Moves/violet_07.PNG,10,2,9999,0,0,,TestStrike,,2

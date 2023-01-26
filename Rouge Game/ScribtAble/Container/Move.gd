@@ -4,7 +4,7 @@ enum target_kinds {in_front, adjacent_enemy, all_enemy, me, all_team_other, all_
 
 
 export(String) var description = "Ein einfacher angriff ohne was"
-export(Texture) var image = null
+export(Texture) var icon = null
 export(int) var cost = 10
 export(target_kinds) var targets = target_kinds.in_front
 export(int) var physical_dmg = 0
@@ -13,14 +13,14 @@ export(int) var heal = 0
 export(Resource) var status
 export(String) var animation #0 = Value oder status
 export(AudioStream) var sound #0 = Value oder status
-
+var level = 1
 
 #Damit man ein Move auch kopieren kann brauche ich für den Kampf
 func load_move(source):
 	if typeof(source) == TYPE_DICTIONARY:
 		name = source["Name"]
 		description = source["Description"]
-		image = load(source["Image"])
+		icon = load(source["Image"])
 		cost = source["Cost"]
 		targets = source["Targets"]
 		physical_dmg = source["Physical_Dmg"]
@@ -28,11 +28,12 @@ func load_move(source):
 		heal = source["Heal"]
 		status = GlobalFunktions.get_status(source["Status"])
 		animation = source["Animation"] #0 = Value oder status
-		sound = load(source["Sound"]) #0 = Value oder status
+		sound = null #load(source["Sound"]) #0 = Value oder status
+		level = source["Level"]
 	else:
 		name = source.name
 		description = source.description
-		image = load(source.image)
+		icon = load(source.icon)
 		cost = source.cost
 		targets = source.targets
 		physical_dmg = source.physical_dmg
@@ -40,4 +41,5 @@ func load_move(source):
 		heal = source.heal
 		status = source.status
 		animation = source.animation #0 = Value oder status
-		sound = source.sound #0 = Value oder status
+		sound = null#source.sound #0 = Value oder status
+		level = source.level

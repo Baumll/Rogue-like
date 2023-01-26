@@ -1,0 +1,47 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://Assets/fonts/UI/FontBig.tres" type="DynamicFont" id=1]
+[ext_resource path="res://scenes/Rooms/door/DoorScene.gd" type="Script" id=2]
+[ext_resource path="res://Assets/images/Icons/Rooms/TradingIcons_111.PNG" type="Texture" id=3]
+[ext_resource path="res://Assets/images/Icons/Rooms/red_31.PNG" type="Texture" id=4]
+
+[node name="DoorScene" type="VBoxContainer"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+rect_min_size = Vector2( 0, 1200 )
+script = ExtResource( 2 )
+
+[node name="HBox" type="HBoxContainer" parent="."]
+margin_right = 1084.0
+margin_bottom = 1520.0
+rect_min_size = Vector2( 0, 1520 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ButtonLeft" type="Button" parent="HBox"]
+margin_right = 540.0
+margin_bottom = 1520.0
+rect_min_size = Vector2( 540, 0 )
+icon = ExtResource( 3 )
+expand_icon = true
+
+[node name="ButtonRight" type="Button" parent="HBox"]
+margin_left = 544.0
+margin_right = 1084.0
+margin_bottom = 1520.0
+rect_min_size = Vector2( 540, 0 )
+icon = ExtResource( 4 )
+expand_icon = true
+
+[node name="Button" type="Button" parent="."]
+margin_top = 1524.0
+margin_right = 1084.0
+margin_bottom = 1930.0
+rect_min_size = Vector2( 0, 400 )
+custom_fonts/font = ExtResource( 1 )
+text = "Loadout"
+
+[connection signal="pressed" from="HBox/ButtonLeft" to="." method="_on_ButtonLeft_pressed"]
+[connection signal="pressed" from="HBox/ButtonRight" to="." method="_on_ButtonRight_pressed"]
+[connection signal="button_up" from="Button" to="." method="_on_Button_button_up"]

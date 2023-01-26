@@ -6,32 +6,26 @@ signal moveDown(move) #Drücken
 signal back #Drücken
 
 onready var reckList = [$Attack01/Light2D, $Attack02/Light2D, $Attack03/Light2D, $Attack04/Light2D]
-onready var descriptionText = get_node("/root/Main/Control/VBoxContainer/DecriptinText")
 var aktive_moves = []
 
+func _process(delta):
+	_on_FightScene_loadCharacter(GameData.active_character)
 
 func _on_FightScene_loadCharacter(character):
-	if(character == null):
-		visible = false
-		return
-	else:
-		visible = true
+	if(character != null):
 		aktive_moves = character.moves
 		for x in range(reckList.size()):
 			if x < character.moves.size():
-				reckList[x].set_texture(character.moves[x].image)
+				reckList[x].set_texture(character.moves[x].icon)
 			else:
 				reckList[x].set_texture(null)
 
 func _on_FightScene_loadAttacks(moves):
-	if(moves == null):
-		visible = false;
-	else:
-		visible = true
+	if(moves != null):
 		aktive_moves = moves
 		for x in range(reckList.size()):
 			if x < moves.size():
-				reckList[x].set_texture(moves[x].image)
+				reckList[x].set_texture(moves[x].icon)
 				
 			else:
 				reckList[x].set_texture(null)

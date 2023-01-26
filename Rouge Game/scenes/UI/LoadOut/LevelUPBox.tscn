@@ -1,0 +1,81 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://scenes/UI/LoadOut/LevelUPBox.gd" type="Script" id=1]
+[ext_resource path="res://Assets/fonts/UI/FontMini.tres" type="DynamicFont" id=2]
+[ext_resource path="res://scenes/UI/LoadOut/LoadOutSkill.tscn" type="PackedScene" id=3]
+
+[node name="LevelUpBox" type="VBoxContainer"]
+margin_left = 730.0
+margin_right = 1080.0
+margin_bottom = 900.0
+script = ExtResource( 1 )
+
+[node name="Label" type="Label" parent="."]
+margin_right = 350.0
+margin_bottom = 71.0
+custom_fonts/font = ExtResource( 2 )
+text = "Name:"
+
+[node name="Label2" type="Label" parent="."]
+margin_top = 75.0
+margin_right = 350.0
+margin_bottom = 146.0
+custom_fonts/font = ExtResource( 2 )
+text = "Level:"
+
+[node name="LoadOutSkill2" parent="." instance=ExtResource( 3 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_top = 150.0
+margin_right = 350.0
+margin_bottom = 253.0
+
+[node name="LoadOutSkill3" parent="." instance=ExtResource( 3 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_top = 257.0
+margin_right = 350.0
+margin_bottom = 361.0
+
+[node name="LoadOutSkill4" parent="." instance=ExtResource( 3 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_top = 365.0
+margin_right = 350.0
+margin_bottom = 469.0
+
+[node name="LoadOutSkill5" parent="." instance=ExtResource( 3 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_top = 473.0
+margin_right = 350.0
+margin_bottom = 576.0
+
+[node name="LoadOutSkill6" parent="." instance=ExtResource( 3 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_top = 580.0
+margin_right = 350.0
+margin_bottom = 684.0
+
+[node name="LoadOutSkill7" parent="." instance=ExtResource( 3 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_top = 688.0
+margin_right = 350.0
+margin_bottom = 792.0
+
+[node name="LoadOutSkill8" parent="." instance=ExtResource( 3 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_top = 796.0
+margin_right = 350.0
+margin_bottom = 900.0
+
+[connection signal="level_up" from="LoadOutSkill2" to="." method="_on_level_up_health"]
+[connection signal="level_up" from="LoadOutSkill3" to="." method="_on_level_up_defence"]
+[connection signal="level_up" from="LoadOutSkill4" to="." method="_on_level_up_magicDefence"]
+[connection signal="level_up" from="LoadOutSkill5" to="." method="_on_level_up_strenght"]
+[connection signal="level_up" from="LoadOutSkill6" to="." method="_on_level_up_magic"]
+[connection signal="level_up" from="LoadOutSkill7" to="." method="_on_level_up_dexterity"]
+[connection signal="level_up" from="LoadOutSkill8" to="." method="_on_level_up_speed"]

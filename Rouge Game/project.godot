@@ -10,29 +10,29 @@ config_version=4
 
 _global_script_classes=[ {
 "base": "Resource",
+"class": "Character",
+"language": "GDScript",
+"path": "res://ScribtAble/Resource/characterResource.gd"
+}, {
+"base": "Resource",
 "class": "ClassInventory",
 "language": "GDScript",
 "path": "res://ScribtAble/ClassInventory.gd"
 }, {
 "base": "Resource",
-"class": "ClassItem",
+"class": "Item",
 "language": "GDScript",
-"path": "res://ScribtAble/ClassItem.gd"
+"path": "res://ScribtAble/Resource/itemResource.gd"
 }, {
 "base": "Resource",
-"class": "ClassMove",
+"class": "Move",
 "language": "GDScript",
-"path": "res://ScribtAble/ClassMove.gd"
+"path": "res://ScribtAble/Resource/moveResource.gd"
 }, {
 "base": "Resource",
-"class": "ClassStatus",
+"class": "Status",
 "language": "GDScript",
-"path": "res://ScribtAble/ClassStatus.gd"
-}, {
-"base": "Resource",
-"class": "ScriptableRoomLoad",
-"language": "GDScript",
-"path": "res://ScribtAble/ClassRoomList.gd"
+"path": "res://ScribtAble/Resource/statusResource.gd"
 }, {
 "base": "Node",
 "class": "TargetFindScript",
@@ -40,25 +40,28 @@ _global_script_classes=[ {
 "path": "res://Scripts/TargetFindScript.gd"
 } ]
 _global_script_class_icons={
+"Character": "",
 "ClassInventory": "",
-"ClassItem": "",
-"ClassMove": "",
-"ClassStatus": "",
-"ScriptableRoomLoad": "",
+"Item": "",
+"Move": "",
+"Status": "",
 "TargetFindScript": ""
 }
 
 [application]
 
 config/name="RougeLike"
-run/main_scene="res://scenes/Stuff/test.tscn"
+run/main_scene="res://main.tscn"
 config/icon="res://icon.png"
+
+[audio]
+
+default_bus_layout="res://Sound/default_bus_layout.tres"
 
 [autoload]
 
-SaveData="*res://Data/ImportSave.gd"
+GameData="*res://Data/GameDataScript.gd"
 GlobalFunktions="*res://Scripts/GlobalFunktions.gd"
-ChrFunc="*res://ScribtAble/ClassChracterFunctions.gd"
 
 [display]
 

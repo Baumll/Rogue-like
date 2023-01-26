@@ -1,6 +1,6 @@
 extends TextureRect
 
-signal levelUp
+signal level_up
 
 export(StreamTexture) var imageNormal = null
 export(StreamTexture) var imagePressed = null
@@ -10,7 +10,7 @@ func _ready():
 		texture = imageNormal
 
 func _on_Button_button_down():
-	emit_signal("levelUp")
+	emit_signal("level_up")
 	if(imagePressed != null):
 		texture = imagePressed
 

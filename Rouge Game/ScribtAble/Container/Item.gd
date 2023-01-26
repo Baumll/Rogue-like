@@ -9,6 +9,7 @@ export(StreamTexture) var icon = null
 export(int) var value = 10
 export(Resource) var status = null
 var rarity = null
+var level = 1
 
 
 func load_stats(data):
@@ -19,6 +20,7 @@ func load_stats(data):
 		icon = load(data["Icon"])
 		rarity = data["Rarity"]
 		status = GlobalFunktions.get_status(data["Status"])
+		level = data["Level"]
 
 func to_dictonary():
 	var dic = {}
@@ -28,4 +30,5 @@ func to_dictonary():
 	dic["Icon"] = icon.resource_path
 	dic["Rarity"] = rarity
 	dic["Status"] = status.name
+	dic["Level"] = level
 	return dic

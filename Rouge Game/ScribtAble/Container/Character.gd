@@ -56,6 +56,10 @@ export(Array, Resource) var equip = [null,null] #max quipp
 #export(Array, Resource) var status = []
 var status_list = []
 
+##Hidden stats
+var holy = 0
+var fun = 1
+
 ###Functions###
 #Für die Charactere aus den CSV datein
 func load_stats(charLib):
@@ -95,6 +99,8 @@ func load_stats(charLib):
 		momentum = charLib["Momentum"]
 		experience_points = charLib["Experience_Points"]
 		skill_points = charLib["Skill_Points"]
+		death_exp = charLib["Death_Exp"]
+		
 		#charLib["position"] = 0
 		
 		print(charLib["Moves"])
@@ -102,13 +108,18 @@ func load_stats(charLib):
 		for i in charLib["Moves"]:
 			moves.append(GlobalFunktions.get_move(i))
 	
-		equip = []
-		for i in charLib["Equip"]:
-			equip.append(GlobalFunktions.get_item(i))
+		equip = [null,null]
+		if charLib["Equip"] != null:
+			for i in range(len(charLib["Equip"])):
+				equip[i] = GlobalFunktions.get_item(i)
 		
-		for i in range(len(charLib["Status"])):
-			status_list.append(GlobalFunktions.get_status(charLib["Status"][i], charLib["Turns"][i]))
-			
+		if charLib["Status"] != null:
+			for i in range(len(charLib["Status"])):
+				status_list.append(GlobalFunktions.get_status(charLib["Status"][i], charLib["Turns"][i]))
+		
+		#holy = charLib["Holy"]
+		#fun = charLib["Fun"]
+		
 		calculate_all_stats()
 	
 	#Das alte Laden
@@ -146,6 +157,9 @@ func load_stats(charLib):
 		moves = path.moves
 		equip = path.equip
 		status_list = path.status_list
+		
+		holy = path.holy
+		fun = path.fun
 		
 	calculate_all_stats()
 	#else:
@@ -209,7 +223,6 @@ func character_to_lib(pos):
 	for i in status_list:
 		if i != null:
 			lib["Status"].append(i.name)
-	return lib
 	
 	#Die zeiten für die Status effekte
 	lib["Turns"] = []
@@ -247,7 +260,7 @@ func calculate_all_stats():
 	
 
 
-func calculate_stats( status):
+func calculate_stats(status):
 		max_health += status.max_health
 		strength += status.strength
 		dexterity += status.dexterity
@@ -272,9 +285,9 @@ func iterate_status():
 		if status_list[i] != null:
 			if(status_list[i].turns > 1):
 				status_list[i].turns -= 1
-			if status_list[i].statusTyp == status_list[i].status_types.dmg:
+			if status_list[i].status_type == status_list[i].status_types.dmg:
 				get_dmg(status_list[i].value)
-			if status_list[i].statusTyp == status_list[i].status_types.heal:
+			if status_list[i].status_type == status_list[i].status_types.heal:
 				get_heal( status_list[i].value)
 			if status_list[i].turns == 0:
 				remove_list.append(i)
@@ -287,10 +300,10 @@ func append_status(status):
 		for i in status_list:
 			#Wenn unique und unendlich
 			if i.name == status.name:
-				if status.maxTurns > 0:
+				if status.max_turns > 0:
 					#Wenn endlich unique und vorhanden wird der wert zurrück gesetzt
-					if i.turns < status.maxTurns:
-						i.turns = status.maxTurns
+					if i.turns < status.max_turns:
+						i.turns = status.max_turns
 					return
 		#Unenldich und unique hinzugefügt
 		status_list.append(status)
@@ -308,14 +321,14 @@ func remove_status(status):
 func remove_item(slot):
 	if slot < equip.size():
 		if equip[slot] != null:
-			remove_status( load(equip[slot].status))
+			remove_status(equip[slot].status)
 			equip[slot] = null
 
 func add_item(slot,item):
 	if slot < equip.size():
 		equip[slot] = item
 		if item.status != null:
-			append_status( load(item.status))
+			append_status(item.status)
 
 #0 = physisch
 #1 = magisch
@@ -354,10 +367,22 @@ func level_up():
 	level += 1
 
 func has_dealt_magic(amount):
-	pass
+	print(name + " has deald " + str(amount) + " magic dmg")
+
 
 func has_dealt_physical(amount):
-	pass
+	print(name + " has deald " + str(amount) + " pyhrical dmg")
+
 
 func has_healed(amount):
-	pass
+	print(name + " has deald " + str(amount) + " heald dmg")
+
+func learn_move(move):
+	if moves.size < 4:
+		moves.append(move)
+
+func knows_move(move):
+	for i in moves:
+		if i.name == move.name:
+			return true
+	return false

@@ -106,5 +106,3 @@ func select_targets(active_position, move):
 				tmp_target_list.append(6)
 				tmp_target_list.append(7)
 	return tmp_target_list
-
-

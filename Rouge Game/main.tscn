@@ -1,0 +1,33 @@
+[gd_scene load_steps=7 format=2]
+
+[ext_resource path="res://scenes/Stuff/Main.gd" type="Script" id=1]
+[ext_resource path="res://Assets/Sounds/TestSounds/Cave_01_Loop.wav" type="AudioStream" id=2]
+[ext_resource path="res://scenes/UI/LoadOut/LoadOut.tscn" type="PackedScene" id=3]
+[ext_resource path="res://scenes/Stuff/AudioStreamPlayer.tscn" type="PackedScene" id=4]
+[ext_resource path="res://scenes/Stuff/CheatNode.tscn" type="PackedScene" id=6]
+[ext_resource path="res://scenes/Start/StartScene.tscn" type="PackedScene" id=9]
+
+[node name="Main" type="Node"]
+script = ExtResource( 1 )
+
+[node name="Start_scene" parent="." instance=ExtResource( 9 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_right = 1080.0
+margin_bottom = 1920.0
+
+[node name="LoadOut" parent="." instance=ExtResource( 3 )]
+visible = false
+
+[node name="AudioMusik" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 2 )
+bus = "Musik"
+
+[node name="AudioEffect" parent="." instance=ExtResource( 4 )]
+bus = "Master"
+
+[node name="CheatNode" parent="." instance=ExtResource( 6 )]
+targets = 118164750
+
+[connection signal="exit" from="Start_scene" to="." method="_on_enter_room"]
+[connection signal="exit" from="LoadOut" to="." method="_on_exit_loadout"]

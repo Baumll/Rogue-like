@@ -1,21 +1,20 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://scenes/UI/LoadOut/LoadOut.gd" type="Script" id=1]
-[ext_resource path="res://Assets/images/bars/healthbar.png" type="Texture" id=2]
-[ext_resource path="res://fonts/UI/FontSmal.tres" type="DynamicFont" id=3]
-[ext_resource path="res://scenes/UI/Inventory/Ui_Under.tscn" type="PackedScene" id=4]
+[ext_resource path="res://Assets/images/UI/bars/healthbar.png" type="Texture" id=2]
+[ext_resource path="res://scenes/UI/LoadOut/LevelUPBox.tscn" type="PackedScene" id=3]
+[ext_resource path="res://scenes/UI/ui_under/Ui_Under.tscn" type="PackedScene" id=4]
 [ext_resource path="res://scenes/UI/LoadOut/GoldSign.tscn" type="PackedScene" id=5]
-[ext_resource path="res://scenes/UI/LoadOut/LoadOutSkill.tscn" type="PackedScene" id=6]
-[ext_resource path="res://Assets/images/chars/NicePng_mage-png_3499950.png" type="Texture" id=7]
 
 [node name="LoadOut" type="Control"]
 anchor_right = 1.0
 anchor_bottom = 1.0
 rect_min_size = Vector2( 1080, 720 )
 script = ExtResource( 1 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
+
+[node name="Panel" type="Panel" parent="."]
+margin_right = 1080.0
+margin_bottom = 1920.0
 
 [node name="GoldSign" parent="." instance=ExtResource( 5 )]
 anchor_right = 0.0
@@ -24,126 +23,50 @@ margin_left = -7.0
 margin_right = 293.0
 margin_bottom = 120.0
 
-[node name="VBoxContainer" type="VBoxContainer" parent="."]
+[node name="VBox" type="VBoxContainer" parent="."]
 anchor_right = 1.0
 anchor_bottom = 1.0
+margin_bottom = -1020.0
 alignment = 2
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
-[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer"]
+[node name="HBox" type="HBoxContainer" parent="VBox"]
 margin_right = 1080.0
-margin_bottom = 720.0
-rect_min_size = Vector2( 0, 720 )
+margin_bottom = 900.0
+rect_min_size = Vector2( 0, 900 )
 size_flags_vertical = 0
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="TextureRect" type="TextureRect" parent="VBoxContainer/HBoxContainer"]
+[node name="TextureRect" type="TextureRect" parent="VBox/HBox"]
 margin_right = 726.0
-margin_bottom = 720.0
+margin_bottom = 900.0
 size_flags_horizontal = 3
-texture = ExtResource( 7 )
 expand = true
 stretch_mode = 5
 
-[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/HBoxContainer"]
-margin_left = 730.0
+[node name="LevelUpBox" parent="VBox/HBox" instance=ExtResource( 3 )]
+
+[node name="TextureProgress" type="TextureProgress" parent="."]
+margin_top = 916.0
 margin_right = 1080.0
-margin_bottom = 720.0
-
-[node name="Label" type="Label" parent="VBoxContainer/HBoxContainer/VBoxContainer"]
-margin_right = 350.0
-margin_bottom = 80.0
-custom_fonts/font = ExtResource( 3 )
-text = "Name:"
-
-[node name="Label2" type="Label" parent="VBoxContainer/HBoxContainer/VBoxContainer"]
-margin_top = 84.0
-margin_right = 350.0
-margin_bottom = 164.0
-custom_fonts/font = ExtResource( 3 )
-text = "Level:"
-
-[node name="LoadOutSkill2" parent="VBoxContainer/HBoxContainer/VBoxContainer" instance=ExtResource( 6 )]
-anchor_right = 0.0
-anchor_bottom = 0.0
-margin_top = 168.0
-margin_right = 350.0
-margin_bottom = 243.0
-
-[node name="LoadOutSkill3" parent="VBoxContainer/HBoxContainer/VBoxContainer" instance=ExtResource( 6 )]
-anchor_right = 0.0
-anchor_bottom = 0.0
-margin_top = 247.0
-margin_right = 350.0
-margin_bottom = 322.0
-
-[node name="LoadOutSkill4" parent="VBoxContainer/HBoxContainer/VBoxContainer" instance=ExtResource( 6 )]
-anchor_right = 0.0
-anchor_bottom = 0.0
-margin_top = 326.0
-margin_right = 350.0
-margin_bottom = 402.0
-
-[node name="LoadOutSkill5" parent="VBoxContainer/HBoxContainer/VBoxContainer" instance=ExtResource( 6 )]
-anchor_right = 0.0
-anchor_bottom = 0.0
-margin_top = 406.0
-margin_right = 350.0
-margin_bottom = 481.0
-
-[node name="LoadOutSkill6" parent="VBoxContainer/HBoxContainer/VBoxContainer" instance=ExtResource( 6 )]
-anchor_right = 0.0
-anchor_bottom = 0.0
-margin_top = 485.0
-margin_right = 350.0
-margin_bottom = 561.0
-
-[node name="LoadOutSkill7" parent="VBoxContainer/HBoxContainer/VBoxContainer" instance=ExtResource( 6 )]
-anchor_right = 0.0
-anchor_bottom = 0.0
-margin_top = 565.0
-margin_right = 350.0
-margin_bottom = 640.0
-
-[node name="LoadOutSkill8" parent="VBoxContainer/HBoxContainer/VBoxContainer" instance=ExtResource( 6 )]
-anchor_right = 0.0
-anchor_bottom = 0.0
-margin_top = 644.0
-margin_right = 350.0
-margin_bottom = 720.0
-
-[node name="TextureProgress" type="TextureProgress" parent="VBoxContainer"]
-margin_top = 724.0
-margin_right = 1080.0
-margin_bottom = 744.0
+margin_bottom = 936.0
 rect_min_size = Vector2( 1080, 20 )
 value = 50.0
 texture_progress = ExtResource( 2 )
 tint_progress = Color( 0.952941, 0.462745, 0.172549, 1 )
 nine_patch_stretch = true
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
-[node name="Ui_Under" parent="VBoxContainer" instance=ExtResource( 4 )]
+[node name="Ui_Under" parent="." instance=ExtResource( 4 )]
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_top = 748.0
+margin_top = 940.0
 margin_right = 1080.0
-margin_bottom = 1924.0
-rect_min_size = Vector2( 0, 1176 )
-[connection signal="loadChars" from="." to="VBoxContainer/Ui_Under" method="load_characters"]
-[connection signal="needDescription" from="." to="VBoxContainer/Ui_Under" method="set_description"]
-[connection signal="levelUp" from="VBoxContainer/HBoxContainer/VBoxContainer/LoadOutSkill2" to="." method="_on_levelUp_health"]
-[connection signal="levelUp" from="VBoxContainer/HBoxContainer/VBoxContainer/LoadOutSkill3" to="." method="_on_levelUp_defence"]
-[connection signal="levelUp" from="VBoxContainer/HBoxContainer/VBoxContainer/LoadOutSkill4" to="." method="_on_levelUp_magicDefence"]
-[connection signal="levelUp" from="VBoxContainer/HBoxContainer/VBoxContainer/LoadOutSkill5" to="." method="_on_levelUp_strenght"]
-[connection signal="levelUp" from="VBoxContainer/HBoxContainer/VBoxContainer/LoadOutSkill6" to="." method="_on_levelUp_magic"]
-[connection signal="levelUp" from="VBoxContainer/HBoxContainer/VBoxContainer/LoadOutSkill7" to="." method="_on_levelUp_dexterity"]
-[connection signal="levelUp" from="VBoxContainer/HBoxContainer/VBoxContainer/LoadOutSkill8" to="." method="_on_levelUp_speed"]
-[connection signal="back" from="VBoxContainer/Ui_Under" to="." method="_on_Ui_Under_back"]
-[connection signal="selected_character" from="VBoxContainer/Ui_Under" to="." method="load_character"]
+margin_bottom = 1920.0
+rect_min_size = Vector2( 0, 980 )
+
+[connection signal="loadChars" from="." to="Ui_Under" method="load_characters"]
+[connection signal="needDescription" from="." to="Ui_Under" method="set_description"]
+[connection signal="setCharcterActive" from="." to="Ui_Under" method="set_active_character"]
+[connection signal="back" from="Ui_Under" to="." method="_on_Ui_Under_back"]
+[connection signal="selected_character" from="Ui_Under" to="." method="load_character"]

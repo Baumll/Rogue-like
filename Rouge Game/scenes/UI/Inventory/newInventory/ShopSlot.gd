@@ -8,9 +8,9 @@ var active = true
 onready var label = $Label
 onready var textureRect = $TextureRect
 
-func get_drag_data(position):
+func get_drag_data(_position):
 	if item != null and active:
-		if( get_node("/root/Main").gold >= item.value):
+		if( GameData.gold >= item.value):
 			var data = {}
 			data["origin_kind"] = "shop"
 			data["origin_item"] = item
@@ -23,21 +23,22 @@ func get_drag_data(position):
 			var control = Control.new()
 			control.add_child(drag_texture)
 			drag_texture.rect_position = -0.5 * drag_texture.rect_size
-			
 			set_drag_preview(control)
+			
+			
 			texture = null
 			textureRect.visible = false
 			label.text = ""
 			return data
 	
-func can_drop_data(position, data):
+func can_drop_data(_position, _data):
 	#Check if we can drop an item in this slot
 	return false
 	
 
 
 func set_item(newItem):
-	get_node("/root/Main").inventory[num] = newItem
+	GameData.inventory[num] = newItem
 	if(newItem != null):
 		emit_signal("ItemSet",newItem)
 		item = newItem
@@ -52,7 +53,7 @@ func set_item(newItem):
 		textureRect.visible = false
 
 
-func _process(delta):
+func _process(_delta):
 	if Input.is_action_just_released("ui_mouse_left"):
 		if(item != null):
 			texture = item.icon

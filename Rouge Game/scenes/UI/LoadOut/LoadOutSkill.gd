@@ -1,16 +1,15 @@
 extends HBoxContainer
 
-signal levelUp(num)
+signal level_up()
 
 onready var label = $Label
 onready var button = $Button 
-var num = -1
 
 func _ready():
 	set_level_up(false)
 
 func set_text(text):
-	label.text = text
+	get_child(0).set_text(text)
 	#label.update()
 
 func set_level_up(state):
@@ -18,4 +17,4 @@ func set_level_up(state):
 
 
 func _on_Button_button_up():
-	emit_signal("levelUp",num)
+	emit_signal("level_up")

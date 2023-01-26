@@ -1,0 +1,212 @@
+[gd_scene load_steps=13 format=2]
+
+[ext_resource path="res://Assets/images/rooms/Fight/background example.png" type="Texture" id=1]
+[ext_resource path="res://scenes/Rooms/Fighting/FightScene.gd" type="Script" id=2]
+[ext_resource path="res://scenes/Rooms/Fighting/CharacterContainer.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Assets/images/UI/bars/healthbar.png" type="Texture" id=4]
+[ext_resource path="res://scenes/Rooms/Fighting/MoveAnimationPanel.tscn" type="PackedScene" id=5]
+[ext_resource path="res://scenes/Rooms/Fighting/BigBox.gd" type="Script" id=6]
+[ext_resource path="res://scenes/Rooms/Fighting/FighterTimeLine.tscn" type="PackedScene" id=7]
+[ext_resource path="res://scenes/UI/ui_under/Ui_Under.tscn" type="PackedScene" id=8]
+[ext_resource path="res://scenes/Stuff/ShakeCamera2D.tscn" type="PackedScene" id=9]
+[ext_resource path="res://scenes/Rooms/Fighting/FightEnd.tscn" type="PackedScene" id=11]
+
+[sub_resource type="Shader" id=1]
+code = "shader_type canvas_item;
+
+uniform float blur : hint_range(0,6) = 0.0;
+
+void fragment(){
+	vec4 color = texture(SCREEN_TEXTURE, SCREEN_UV, blur);
+	COLOR = color;
+}"
+
+[sub_resource type="ShaderMaterial" id=2]
+shader = SubResource( 1 )
+shader_param/blur = 0.0
+
+[node name="FightScene" type="Control"]
+anchor_right = 1.0
+margin_bottom = 1920.0
+rect_min_size = Vector2( 1080, 1920 )
+script = ExtResource( 2 )
+
+[node name="ShakeCamera2D" parent="." instance=ExtResource( 9 )]
+current = true
+
+[node name="TextureRect" type="TextureRect" parent="."]
+margin_right = 1080.0
+margin_bottom = 928.0
+texture = ExtResource( 1 )
+expand = true
+
+[node name="BigBox" type="Container" parent="."]
+margin_right = 1080.0
+margin_bottom = 928.0
+script = ExtResource( 6 )
+
+[node name="FighterTimeLine" parent="BigBox" instance=ExtResource( 7 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_right = 1080.0
+margin_bottom = 60.0
+
+[node name="FR" type="HBoxContainer" parent="BigBox"]
+margin_top = 60.0
+margin_right = 1080.0
+margin_bottom = 609.0
+grow_horizontal = 0
+grow_vertical = 0
+custom_constants/separation = 20
+alignment = 2
+
+[node name="C" parent="BigBox/FR" instance=ExtResource( 3 )]
+margin_left = 220.0
+margin_top = 0.0
+margin_right = 420.0
+margin_bottom = 549.0
+flip = true
+
+[node name="V2" type="VBoxContainer" parent="BigBox/FR"]
+margin_left = 440.0
+margin_right = 640.0
+margin_bottom = 549.0
+custom_constants/separation = -1
+
+[node name="MarginContainer" type="MarginContainer" parent="BigBox/FR/V2"]
+margin_right = 200.0
+margin_bottom = 30.0
+rect_min_size = Vector2( 0, 30 )
+
+[node name="C2" parent="BigBox/FR/V2" instance=ExtResource( 3 )]
+margin_top = 29.0
+margin_bottom = 429.0
+flip = true
+
+[node name="V3" type="VBoxContainer" parent="BigBox/FR"]
+margin_left = 660.0
+margin_right = 860.0
+margin_bottom = 549.0
+custom_constants/separation = -1
+
+[node name="MarginContainer" type="MarginContainer" parent="BigBox/FR/V3"]
+margin_right = 200.0
+margin_bottom = 60.0
+rect_min_size = Vector2( 0, 60 )
+
+[node name="C3" parent="BigBox/FR/V3" instance=ExtResource( 3 )]
+margin_top = 59.0
+margin_bottom = 459.0
+flip = true
+
+[node name="V4" type="VBoxContainer" parent="BigBox/FR"]
+margin_left = 880.0
+margin_right = 1080.0
+margin_bottom = 549.0
+custom_constants/separation = -1
+
+[node name="MarginContainer" type="MarginContainer" parent="BigBox/FR/V4"]
+margin_right = 200.0
+margin_bottom = 90.0
+rect_min_size = Vector2( 0, 90 )
+
+[node name="C4" parent="BigBox/FR/V4" instance=ExtResource( 3 )]
+margin_top = 89.0
+margin_bottom = 489.0
+flip = true
+
+[node name="FR2" type="HBoxContainer" parent="BigBox"]
+margin_top = 400.0
+margin_right = 1080.0
+margin_bottom = 894.0
+custom_constants/separation = 20
+
+[node name="C5" parent="BigBox/FR2" instance=ExtResource( 3 )]
+margin_top = 0.0
+margin_bottom = 494.0
+
+[node name="V2" type="VBoxContainer" parent="BigBox/FR2"]
+margin_left = 220.0
+margin_right = 420.0
+margin_bottom = 494.0
+
+[node name="MarginContainer" type="MarginContainer" parent="BigBox/FR2/V2"]
+margin_right = 200.0
+margin_bottom = 30.0
+rect_min_size = Vector2( 0, 30 )
+
+[node name="C6" parent="BigBox/FR2/V2" instance=ExtResource( 3 )]
+margin_top = 34.0
+margin_bottom = 434.0
+
+[node name="V3" type="VBoxContainer" parent="BigBox/FR2"]
+margin_left = 440.0
+margin_right = 640.0
+margin_bottom = 494.0
+
+[node name="MarginContainer" type="MarginContainer" parent="BigBox/FR2/V3"]
+margin_right = 200.0
+margin_bottom = 60.0
+rect_min_size = Vector2( 0, 60 )
+
+[node name="C7" parent="BigBox/FR2/V3" instance=ExtResource( 3 )]
+margin_top = 64.0
+margin_bottom = 464.0
+
+[node name="V4" type="VBoxContainer" parent="BigBox/FR2"]
+margin_left = 660.0
+margin_right = 860.0
+margin_bottom = 494.0
+
+[node name="MarginContainer" type="MarginContainer" parent="BigBox/FR2/V4"]
+margin_right = 200.0
+margin_bottom = 90.0
+rect_min_size = Vector2( 0, 90 )
+
+[node name="C8" parent="BigBox/FR2/V4" instance=ExtResource( 3 )]
+margin_top = 94.0
+margin_bottom = 494.0
+
+[node name="Ui_Under" parent="." instance=ExtResource( 8 )]
+margin_top = 900.0
+margin_bottom = 100.0
+
+[node name="Blur" type="TextureRect" parent="."]
+material = SubResource( 2 )
+margin_right = 1080.0
+margin_bottom = 984.0
+rect_min_size = Vector2( 1080, 960 )
+mouse_filter = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+texture = ExtResource( 4 )
+expand = true
+
+[node name="MoveAnimationPanel" parent="." instance=ExtResource( 5 )]
+anchor_bottom = 1.0813
+margin_bottom = -156.096
+rect_min_size = Vector2( 1080, 984 )
+mouse_filter = 2
+
+[node name="FightEnd" parent="." instance=ExtResource( 11 )]
+visible = false
+
+[connection signal="endFight" from="." to="FightEnd" method="distribute_reward"]
+[connection signal="loadChars" from="." to="Ui_Under" method="load_characters"]
+[connection signal="setCharActive" from="." to="Ui_Under" method="set_active_character"]
+[connection signal="useCharSelect" from="." to="Ui_Under" method="set_charSelect"]
+[connection signal="down" from="BigBox" to="." method="_on_BigBox_down"]
+[connection signal="up" from="BigBox" to="." method="_on_BigBox_up"]
+[connection signal="pressed" from="BigBox/FR/C" to="BigBox" method="_on_CharacterContainer_pressed"]
+[connection signal="pressed_down" from="BigBox/FR/C" to="BigBox" method="_on_CharacterContainer_pressed_down"]
+[connection signal="pressed_up" from="BigBox/FR/C" to="BigBox" method="_on_CharacterContainer_pressed_up"]
+[connection signal="pressed" from="BigBox/FR/V2/C2" to="BigBox" method="_on_CharacterContainer2_pressed"]
+[connection signal="pressed_up" from="BigBox/FR/V2/C2" to="BigBox" method="_on_CharacterContainer2_pressed_up"]
+[connection signal="pressed" from="BigBox/FR/V3/C3" to="BigBox" method="_on_CharacterContainer3_pressed"]
+[connection signal="pressed_up" from="BigBox/FR/V3/C3" to="BigBox" method="_on_CharacterContainer3_pressed_up"]
+[connection signal="pressed" from="BigBox/FR/V4/C4" to="BigBox" method="_on_CharacterContainer4_pressed"]
+[connection signal="pressed_up" from="BigBox/FR/V4/C4" to="BigBox" method="_on_CharacterContainer4_pressed_up"]
+[connection signal="move_num_down" from="Ui_Under" to="." method="_on_AttackButtons_attackDown"]
+[connection signal="move_num_up" from="Ui_Under" to="." method="_on_AttackButtons_attackUP"]
+[connection signal="selected_character" from="Ui_Under" to="." method="_on_Ui_Under_selected_character"]
+[connection signal="exit" from="FightEnd" to="." method="_on_FightEnd_exit"]

@@ -1,0 +1,28 @@
+[gd_resource type="Resource" load_steps=5 format=2]
+
+[ext_resource path="res://ScribtAble/Resource/characterResource.gd" type="Script" id=1]
+[ext_resource path="res://Assets/images/sprites/heros/hero-mage.png" type="Texture" id=2]
+[ext_resource path="res://Assets/images/Icons/characters/heros/staff_05_t.png" type="Texture" id=3]
+[ext_resource path="res://Data/moves/MoveTest.tres" type="Resource" id=4]
+
+[resource]
+script = ExtResource( 1 )
+klass = "Mage"
+name = "Tessa"
+description = "She likes to Blow ip"
+level = 1
+base_exp_to_level = 0
+death_exp = 0
+base_max_health = 10
+base_strength = 0
+base_defence = 0
+base_magic_defence = 2
+base_dexterity = 1
+base_magic = 4
+base_speed = 5
+base_crit_chance = 0
+base_crit_modifier = 0
+image = ExtResource( 2 )
+icon = ExtResource( 3 )
+moves = [ ExtResource( 4 ) ]
+equip = [ null, null ]
