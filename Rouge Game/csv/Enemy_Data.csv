@@ -1,10 +1,4 @@
 Name,Description,Name,Description,Class,Level,Health,Max_Health,Strength,Defence,Magic_Defence,Dexterity,Magic,Speed,Crit_Chance,Crit_Modifier,Experience_Points,Base_Exp_To_Level,Skill_Points,Death_Exp,Icon,Image,Moves,Status,Truns,Equip,Momentum
-<<<<<<< HEAD
 Zombie,He wants your brain,Zombie,He wants your brain,Undead,1,7,7,1,0,2,1,4,3,5,0,5,10,0,10,res://Assets/images/Icons/characters/enemys/NecromancerIcons_19_b.PNG,res://Assets/images/sprites/enemies/zombie.png,[Strike],,,,0
 Skelett,He has already died twice,Skelett,He has already died twice,Undead,1,8,8,2,2,2,1,0,4,5,0,5,10,0,10,res://Assets/images/Icons/characters/enemys/NecromancerIcons_37_b.png,res://Assets/images/sprites/enemies/ghost.png,[Strike],,,,0
 Golem,She just want to be leave alone,Golem,She just want to be leave alone,Golem,1,12,12,1,1,1,4,0,5,5,0,5,10,0,20,res://Assets/images/Icons/characters/enemys/NecromancerIcons_44_b.PNG,res://Assets/images/sprites/enemies/icegolem.png,[Strike],,,,0
-=======
-Zombie,He wants your brain,Zombie,He wants your brain,Undead,1,7,7,1,0,2,1,4,3,5,0,0,10,0,10,res://Assets/images/Icons/characters/enemys/NecromancerIcons_19_b.PNG,res://Assets/images/sprites/enemies/zombie.png,[Strike],,,,0
-Skelett,He has already died twice,Skelett,He has already died twice,Undead,1,8,8,2,2,2,1,0,4,5,0,0,10,0,10,res://Assets/images/Icons/characters/enemys/NecromancerIcons_37_b.png,res://Assets/images/sprites/enemies/ghost.png,[Strike],,,,0
-Golem,She just want to be leave alone,Golem,She just want to be leave alone,Golem,1,12,12,1,1,1,4,0,5,5,0,0,10,0,20,res://Assets/images/Icons/characters/enemys/NecromancerIcons_44_b.PNG,res://Assets/images/sprites/enemies/icegolem.png,[Strike],,,,0
->>>>>>> b26ad2a4a3b997982141b5ee3200de834facf93d

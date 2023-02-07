@@ -15,13 +15,5 @@ func _ready():
 
 
 func _on_Button_button_up():
-<<<<<<< HEAD
 	GlobalFunktions.add_item(GlobalFunktions.create_item())
-=======
-	for i in range(get_node("/root/Main").inventory.size()):
-		if get_node("/root/Main").inventory[i] == null:
-			get_node("/root/Main").inventory[i] = GlobalFunktions.create_item()
-			emit_signal("exit")
-			return
->>>>>>> b26ad2a4a3b997982141b5ee3200de834facf93d
 	emit_signal("exit")

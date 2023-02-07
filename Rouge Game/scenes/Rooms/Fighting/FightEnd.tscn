@@ -5,11 +5,6 @@
 [ext_resource path="res://Assets/fonts/UI/FontBig.tres" type="DynamicFont" id=3]
 [ext_resource path="res://scenes/Rooms/Fighting/FightEnd.gd" type="Script" id=4]
 [ext_resource path="res://Assets/fonts/UI/FontMedium.tres" type="DynamicFont" id=5]
-<<<<<<< HEAD
-=======
-
-
->>>>>>> b26ad2a4a3b997982141b5ee3200de834facf93d
 
 [node name="FightEnd" type="Control"]
 anchor_right = 1.0
