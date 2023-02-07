@@ -2,15 +2,24 @@
 
 importer="texture"
 type="StreamTexture"
+<<<<<<<< HEAD:Rouge Game/Assets/images/Backgrounds/Illustration6.png.import
 path="res://.import/Illustration6.png-25cb38c46cc8b748f63bb406df9a7e76.stex"
+========
+path="res://.import/helmets_23.png-75e743fee75302a125b464e24bac0650.stex"
+>>>>>>>> b26ad2a4a3b997982141b5ee3200de834facf93d:Rouge Game/Assets/images/Icons/characters/heros/helmets_23.png.import
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
+<<<<<<<< HEAD:Rouge Game/Assets/images/Backgrounds/Illustration6.png.import
 source_file="res://Assets/images/Backgrounds/Illustration6.png"
 dest_files=[ "res://.import/Illustration6.png-25cb38c46cc8b748f63bb406df9a7e76.stex" ]
+========
+source_file="res://Assets/images/Icons/characters/heros/helmets_23.png"
+dest_files=[ "res://.import/helmets_23.png-75e743fee75302a125b464e24bac0650.stex" ]
+>>>>>>>> b26ad2a4a3b997982141b5ee3200de834facf93d:Rouge Game/Assets/images/Icons/characters/heros/helmets_23.png.import
 
 [params]
 

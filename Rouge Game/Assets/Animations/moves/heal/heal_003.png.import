@@ -2,15 +2,24 @@
 
 importer="texture"
 type="StreamTexture"
+<<<<<<<< HEAD:Rouge Game/Assets/Animations/moves/heal/heal_003.png.import
 path="res://.import/heal_003.png-89abab20c926518a053faea75f6f676d.stex"
+========
+path="res://.import/hero-mage.png-2cc86df088ed34efdd0bcec0849c726e.stex"
+>>>>>>>> b26ad2a4a3b997982141b5ee3200de834facf93d:Rouge Game/Assets/images/sprites/heros/hero-mage.png.import
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
+<<<<<<<< HEAD:Rouge Game/Assets/Animations/moves/heal/heal_003.png.import
 source_file="res://Assets/Animations/moves/heal/heal_003.png"
 dest_files=[ "res://.import/heal_003.png-89abab20c926518a053faea75f6f676d.stex" ]
+========
+source_file="res://Assets/images/sprites/heros/hero-mage.png"
+dest_files=[ "res://.import/hero-mage.png-2cc86df088ed34efdd0bcec0849c726e.stex" ]
+>>>>>>>> b26ad2a4a3b997982141b5ee3200de834facf93d:Rouge Game/Assets/images/sprites/heros/hero-mage.png.import
 
 [params]
 

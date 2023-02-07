@@ -56,7 +56,11 @@ func setup_fight():
 	initative = []
 	fighter_rect_list = find_CharacterContainer()
 	for x in fighter_rect_list:
+<<<<<<< HEAD
 		x.set_health(0,0)
+=======
+			x.set_health(0,0)
+>>>>>>> b26ad2a4a3b997982141b5ee3200de834facf93d
 	#bekommt ein array [enemys,friends]
 	var enemy_list = GlobalFunktions.pick_enemys()
 	var powerlevel = GameData.power_level
@@ -86,6 +90,13 @@ func start_fight():
 func end_fight(team):
 	pacifism = true
 	initative = []
+<<<<<<< HEAD
+=======
+	#for x in fighter_rect_list:
+	#	x = null
+	#for x in fighter_rect_list:
+	#	x.set_health(0,0)
+>>>>>>> b26ad2a4a3b997982141b5ee3200de834facf93d
 	var chars = null
 	if team == 1:
 		chars = GameData.heros
@@ -504,6 +515,7 @@ func customComparison(a,b):
 
 func find_CharacterContainer() -> Array:
 	var new_fighter_rect_list = []
+<<<<<<< HEAD
 	new_fighter_rect_list.append($BigBox/FR/C)
 	new_fighter_rect_list.append($BigBox/FR/V2/C2)
 	new_fighter_rect_list.append($BigBox/FR/V3/C3)
@@ -513,6 +525,17 @@ func find_CharacterContainer() -> Array:
 	new_fighter_rect_list.append($BigBox/FR2/V2/C6)
 	new_fighter_rect_list.append($BigBox/FR2/V3/C7)
 	new_fighter_rect_list.append($BigBox/FR2/V4/C8)
+=======
+	new_fighter_rect_list.append($BigBox/T/FR/V/C)
+	new_fighter_rect_list.append($BigBox/T/FR/V2/C2)
+	new_fighter_rect_list.append($BigBox/T/FR/V3/C3)
+	new_fighter_rect_list.append($BigBox/T/FR/C4)
+	
+	new_fighter_rect_list.append($BigBox/T2/FR/V3/C5)
+	new_fighter_rect_list.append($BigBox/T2/FR/V/C6)
+	new_fighter_rect_list.append($BigBox/T2/FR/V2/C7)
+	new_fighter_rect_list.append($BigBox/T2/FR/C8)
+>>>>>>> b26ad2a4a3b997982141b5ee3200de834facf93d
 	return new_fighter_rect_list
 
 

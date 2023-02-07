@@ -1,4 +1,11 @@
+<<<<<<< HEAD
 Name,Description,Value,Status,Level,Rarity,Icon
 Dagger,A sharp blade,10,Dagger_Status,1,1,res://Assets/images/Icons/items/m_t_05.png
 Book,A heavy book,12,Book_Status,1,1,res://Assets/images/Icons/items/Books/book_16_b.png
 Hammer,A strong Hammer,11,Hammer_Status,1,1,res://Assets/images/Icons/items/Armor/hm_t_01.png
+=======
+Name,Description,Value,Status,Rarity,Icon
+Dagger,A sharp blade,10,Dagger_Status,1,res://Assets/images/Icons/items/m_t_05.png
+Book,A heavy book,12,Book_Status,1,res://Assets/images/Icons/items/Books/book_16_b.png
+Hammer,A strong Hammer,11,Hammer_Status,1,res://Assets/images/Icons/items/Armor/hm_t_01.png
+>>>>>>> b26ad2a4a3b997982141b5ee3200de834facf93d
