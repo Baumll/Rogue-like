@@ -8,8 +8,8 @@ var num = -1
 var active = true
 var forSale = true
 
-onready var label = $Label
-onready var textureRect = $TextureRect
+onready var label = $TexIcon/Label
+onready var textureRect = $TexIcon/TextureRect
 onready var texIcon = $TexIcon
 onready var label2 = $Label2
 

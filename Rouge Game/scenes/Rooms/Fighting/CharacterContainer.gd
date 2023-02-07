@@ -49,7 +49,11 @@ func set_status_bar(list):
 func play_animation(animation):
 	visible = true
 	animator.frame = 0
-	animator.play(animation)
+	if "res://" in animation:
+		animator.frames = animation
+		animator.play("Default")
+	else:
+		animator.play(animation)
 
 func _on_Button_pressed():
 	emit_signal("pressed")

@@ -83,3 +83,7 @@ func _on_AttackButtons_attackDown(num):
 func _on_merchant_merchant(broker):
 	set_inventory()
 	emit_signal("merchant",broker)
+
+
+func _on_LoadOut_refreshInventory():
+	inventory.refresh_inventory()

@@ -3,15 +3,18 @@ extends Control
 signal needDescription(state)
 signal loadChars(chars)
 signal setCharcterActive(character)
+signal refreshInventory()
 signal exit()
 
 
-onready var expProgess = $VBox/TextureProgress
+onready var expProgess = $TextureProgress
 
 onready var rect = $VBox/HBox/TextureRect
 onready var gold = $GoldSign
 
-onready var ui_under = $VBox/Ui_Under
+onready var ui_under = $Ui_Under
+
+var pre_visiblity = visible
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -20,6 +23,9 @@ func _ready():
 func _process(_delta):
 	load_character(GameData.active_character)
 	$VBox/HBox.rect_size = Vector2(1080,720)
+	if visible and not pre_visiblity:
+		emit_signal("refreshInventory")
+	pre_visiblity = visible
 
 func load_character(character):
 	if character != null:

@@ -34,7 +34,7 @@ func _ready():
 	rng = set_up_rng()
 
 func set_up_rng(rngSeed = ""):
-	var rng = RandomNumberGenerator.new()
+	rng = RandomNumberGenerator.new()
 	if rngSeed == "":
 		rng.randomize()
 	else:

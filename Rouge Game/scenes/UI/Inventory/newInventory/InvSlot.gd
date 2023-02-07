@@ -9,8 +9,8 @@ var active = true
 var forSale = true
 var inv = null
 
-onready var label = $Label
-onready var textureRect = $TextureRect
+onready var label = $TexIcon/Label
+onready var textureRect = $TexIcon/TextureRect
 onready var texIcon = $TexIcon
 
 var activeCaracter = null 
@@ -76,7 +76,7 @@ func set_item(newItem):
 		if forSale:
 			label.text = str(item.value) + "G"
 			textureRect.visible = true
-			
+		
 	else:
 		#emit_signal("ItemSet",null,num)
 		item = null

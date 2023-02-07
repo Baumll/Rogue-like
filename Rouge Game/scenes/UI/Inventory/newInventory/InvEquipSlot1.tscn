@@ -1,8 +1,9 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://Assets/fonts/UI/FontSmal.tres" type="DynamicFont" id=1]
 [ext_resource path="res://Assets/images/UI/bars/ItemCorner.png" type="Texture" id=2]
 [ext_resource path="res://scenes/UI/Inventory/newInventory/InvEquipSlot.gd" type="Script" id=3]
+[ext_resource path="res://Assets/images/UI/ui_under/inventory/invSlotBackgroundExtra.png" type="Texture" id=4]
 
 [node name="InvEquipSlot1" type="Button"]
 anchor_right = 0.333
@@ -25,31 +26,38 @@ text = "Slot 1"
 align = 1
 valign = 1
 
+[node name="TextureRect2" type="TextureRect" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+texture = ExtResource( 4 )
+expand = true
+
 [node name="TexIcon" type="TextureRect" parent="."]
 anchor_right = 1.0
 anchor_bottom = 1.0
-rect_min_size = Vector2( 360, 220 )
+margin_left = 40.0
+margin_top = 10.0
+margin_right = -40.0
+margin_bottom = -10.0
+rect_min_size = Vector2( 280, 200 )
 size_flags_horizontal = 3
 size_flags_vertical = 3
 expand = true
 stretch_mode = 5
 
-[node name="TextureRect" type="TextureRect" parent="."]
+[node name="TextureRect" type="TextureRect" parent="TexIcon"]
 anchor_right = 1.0
 anchor_bottom = 1.0
 texture = ExtResource( 2 )
 expand = true
 stretch_mode = 1
 
-[node name="Label" type="Label" parent="."]
+[node name="Label" type="Label" parent="TexIcon"]
 anchor_right = 1.0
 anchor_bottom = 1.0
 custom_fonts/font = ExtResource( 1 )
 text = "s"
 align = 2
 valign = 2
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [connection signal="button_down" from="." to="." method="_on_InvEquipSlot1_button_down"]

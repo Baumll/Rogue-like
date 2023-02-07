@@ -1,9 +1,10 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://scenes/Stuff/Main.gd" type="Script" id=1]
 [ext_resource path="res://Assets/Sounds/TestSounds/Cave_01_Loop.wav" type="AudioStream" id=2]
 [ext_resource path="res://scenes/UI/LoadOut/LoadOut.tscn" type="PackedScene" id=3]
 [ext_resource path="res://scenes/Stuff/AudioStreamPlayer.tscn" type="PackedScene" id=4]
+[ext_resource path="res://scenes/UI/LoadOut/GoldSign.tscn" type="PackedScene" id=5]
 [ext_resource path="res://scenes/Stuff/CheatNode.tscn" type="PackedScene" id=6]
 [ext_resource path="res://scenes/Start/StartScene.tscn" type="PackedScene" id=9]
 
@@ -18,6 +19,8 @@ margin_bottom = 1920.0
 
 [node name="LoadOut" parent="." instance=ExtResource( 3 )]
 visible = false
+
+[node name="GoldSign" parent="." instance=ExtResource( 5 )]
 
 [node name="AudioMusik" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 2 )

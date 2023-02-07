@@ -36,6 +36,8 @@ func _process(_delta):
 		add_item()
 	#refresh_inventory()
 
+
+
 func refresh_inventory():
 	for i in range(slotList.size()):
 		slotList[i].set_item(GameData.inventory[i])

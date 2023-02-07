@@ -67,6 +67,7 @@ rect_min_size = Vector2( 0, 980 )
 
 [connection signal="loadChars" from="." to="Ui_Under" method="load_characters"]
 [connection signal="needDescription" from="." to="Ui_Under" method="set_description"]
+[connection signal="refreshInventory" from="." to="Ui_Under" method="_on_LoadOut_refreshInventory"]
 [connection signal="setCharcterActive" from="." to="Ui_Under" method="set_active_character"]
 [connection signal="back" from="Ui_Under" to="." method="_on_Ui_Under_back"]
 [connection signal="selected_character" from="Ui_Under" to="." method="load_character"]

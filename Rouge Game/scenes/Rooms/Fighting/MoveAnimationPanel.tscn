@@ -87,7 +87,6 @@ frames = ExtResource( 2 )
 
 [node name="AnimatedSprite5" type="AnimatedSprite" parent="."]
 frames = ExtResource( 2 )
-animation = "Test01"
 
 [connection signal="animation_finished" from="AnimatedSprite" to="." method="_on_AnimatedSprite_animation_finished"]
 [connection signal="animation_finished" from="AnimatedSprite2" to="." method="_on_AnimatedSprite_animation_finished"]

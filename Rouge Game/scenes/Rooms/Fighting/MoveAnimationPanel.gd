@@ -216,7 +216,11 @@ func play_Move(move, numbers):
 	for i in range(0, targets):
 		if move != null:
 			targetAnimList[i].frame = 0
-			targetAnimList[i].play(move.animation)
+			if "res://" in move.animation:
+				targetAnimList[i].frames = load(move.animation)
+				targetAnimList[i].play("Default")
+			else:
+				targetAnimList[i].play(move.animation)
 		if i != 0:
 			for j in range(0,numbers[i-1].size()):
 				match j:

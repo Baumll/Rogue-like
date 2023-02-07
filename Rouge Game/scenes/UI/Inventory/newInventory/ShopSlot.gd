@@ -38,7 +38,7 @@ func can_drop_data(_position, _data):
 
 
 func set_item(newItem):
-	GameData.inventory[num] = newItem
+	#GameData.inventory[num] = newItem
 	if(newItem != null):
 		emit_signal("ItemSet",newItem)
 		item = newItem
