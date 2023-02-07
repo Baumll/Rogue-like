@@ -2,24 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-<<<<<<<< HEAD:Rouge Game/Assets/images/UI/ui_under/inventory/intemslot_background.png.import
-path="res://.import/intemslot_background.png-87f2a56adfd7bb8dd7ee9c109b0c25c3.stex"
-========
 path="res://.import/71zv96KC9GL._AC_SS450_.jpg-d0c88e86defc2a2b4629015b9e1d4489.stex"
->>>>>>>> b26ad2a4a3b997982141b5ee3200de834facf93d:Rouge Game/Assets/images/rooms/schrine/71zv96KC9GL._AC_SS450_.jpg.import
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-<<<<<<<< HEAD:Rouge Game/Assets/images/UI/ui_under/inventory/intemslot_background.png.import
-source_file="res://Assets/images/UI/ui_under/inventory/intemslot_background.png"
-dest_files=[ "res://.import/intemslot_background.png-87f2a56adfd7bb8dd7ee9c109b0c25c3.stex" ]
-========
 source_file="res://Assets/images/rooms/schrine/71zv96KC9GL._AC_SS450_.jpg"
 dest_files=[ "res://.import/71zv96KC9GL._AC_SS450_.jpg-d0c88e86defc2a2b4629015b9e1d4489.stex" ]
->>>>>>>> b26ad2a4a3b997982141b5ee3200de834facf93d:Rouge Game/Assets/images/rooms/schrine/71zv96KC9GL._AC_SS450_.jpg.import
 
 [params]
 

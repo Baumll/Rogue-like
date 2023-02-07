@@ -2,24 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-<<<<<<<< HEAD:Rouge Game/Assets/images/UI/box/Rectangle 1(1).png.import
 path="res://.import/Rectangle 1(1).png-b43d0651f709be90e4b46326a8aa64ac.stex"
-========
-path="res://.import/hero-warrior.png-9e93c08ad837577c809d36d6dda02f44.stex"
->>>>>>>> b26ad2a4a3b997982141b5ee3200de834facf93d:Rouge Game/Assets/images/sprites/heros/hero-warrior.png.import
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-<<<<<<<< HEAD:Rouge Game/Assets/images/UI/box/Rectangle 1(1).png.import
 source_file="res://Assets/images/UI/box/Rectangle 1(1).png"
 dest_files=[ "res://.import/Rectangle 1(1).png-b43d0651f709be90e4b46326a8aa64ac.stex" ]
-========
-source_file="res://Assets/images/sprites/heros/hero-warrior.png"
-dest_files=[ "res://.import/hero-warrior.png-9e93c08ad837577c809d36d6dda02f44.stex" ]
->>>>>>>> b26ad2a4a3b997982141b5ee3200de834facf93d:Rouge Game/Assets/images/sprites/heros/hero-warrior.png.import
 
 [params]
 

@@ -2,24 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-<<<<<<<< HEAD:Rouge Game/Assets/images/rooms/schrine/shrine.png.import
 path="res://.import/shrine.png-216fd6e27e82b77c3592232271d9f89c.stex"
-========
-path="res://.import/b_t_05.png-ff2e06e6098444f9628d742e3659f031.stex"
->>>>>>>> b26ad2a4a3b997982141b5ee3200de834facf93d:Rouge Game/Assets/images/Icons/characters/heros/b_t_05.png.import
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-<<<<<<<< HEAD:Rouge Game/Assets/images/rooms/schrine/shrine.png.import
 source_file="res://Assets/images/rooms/schrine/shrine.png"
 dest_files=[ "res://.import/shrine.png-216fd6e27e82b77c3592232271d9f89c.stex" ]
-========
-source_file="res://Assets/images/Icons/characters/heros/b_t_05.png"
-dest_files=[ "res://.import/b_t_05.png-ff2e06e6098444f9628d742e3659f031.stex" ]
->>>>>>>> b26ad2a4a3b997982141b5ee3200de834facf93d:Rouge Game/Assets/images/Icons/characters/heros/b_t_05.png.import
 
 [params]
 
