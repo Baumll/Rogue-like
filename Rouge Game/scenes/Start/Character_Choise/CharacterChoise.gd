@@ -64,7 +64,7 @@ func add_character(character):
 		newButton.set_number(characterList.size()-1)
 		buttonList.append(newButton)
 		container.add_child(newButton)
-		container.move_child(newButton,newButton.get_index()-1 )
+		container.move_child(newButton,newButton.get_index())
 		for i in range(buttonList.size()):
 			buttonList[i].change_size(xsize/buttonList.size(), ysize)
 			buttonList[i].change_pos(i * (xsize/buttonList.size()),rect_position.y)

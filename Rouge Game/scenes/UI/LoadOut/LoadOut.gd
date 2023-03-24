@@ -18,7 +18,8 @@ var pre_visiblity = visible
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	emit_signal("setCharcterActive",GameData.active_character)
+	if GameData.active_character:
+		emit_signal("setCharcterActive",GameData.active_character)
 
 func _process(_delta):
 	load_character(GameData.active_character)

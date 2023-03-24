@@ -23,7 +23,8 @@ margin_right = 1084.0
 margin_bottom = 1404.0
 rect_min_size = Vector2( 0, 400 )
 custom_fonts/font = ExtResource( 1 )
-text = "Do you want to pray?"
+text = "You come across this Shrine.
+What do You want to do?"
 align = 1
 valign = 1
 autowrap = true
@@ -39,7 +40,7 @@ margin_right = 540.0
 margin_bottom = 520.0
 rect_min_size = Vector2( 540, 520 )
 custom_fonts/font = ExtResource( 3 )
-text = "Yes"
+text = "Pray"
 
 [node name="ButtonNo" type="Button" parent="VBoxContainer"]
 margin_left = 544.0
@@ -47,7 +48,7 @@ margin_right = 1084.0
 margin_bottom = 520.0
 rect_min_size = Vector2( 540, 520 )
 custom_fonts/font = ExtResource( 3 )
-text = "No"
+text = "Destroy"
 
 [connection signal="button_up" from="VBoxContainer/ButtonYes" to="." method="_on_ButtonLeft_button_up"]
 [connection signal="button_up" from="VBoxContainer/ButtonNo" to="." method="_on_ButtonRight_button_up"]

@@ -1,5 +1,6 @@
 extends Control
 
+signal bar_finished
 
 onready var bar = $H/TextureProgress
 onready var label = $H/Label
@@ -15,6 +16,8 @@ func _process(delta):
 		bar.value += ceil(bar.max_value*delta)
 	elif value*100 < bar.value:
 		bar.value -= ceil(bar.max_value*delta)
+	
+	
 
 func set_bar(maximal,amount):
 	if(maximal == 0):
@@ -37,3 +40,8 @@ func get_value() -> int:
 	return value
 	
 
+func level_char(character, ep):
+	while ep > 0:
+		set_bar(character.get_level_ep(),max(character.get_level_ep(),character.experience_points+ep))
+
+ 

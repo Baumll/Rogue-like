@@ -29,23 +29,6 @@ var healColor = Color('42ce00')
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	"""
-	for i in range(0, team_size):
-		targetTexList.append(TextureRect.new())
-		add_child(targetTexList[i])
-		#targetAnimList.append(AnimatedSprite.new())
-		#add_child(targetAnimList[i])
-		targetAnimList[i].connect("animation_finished", self, "_on_animation_finished")
-		#targetAnimList[i].frames = animations
-		targetTexList[i].flip_h = true
-		targetTexList[i].expand = true
-	imageTexture = TextureRect.new()
-	#imageAnimation = AnimatedSprite.new()
-	add_child(imageTexture)
-	#add_child(imageAnimation)
-	#imageAnimation.connect("animation_finished", self, "_on_animation_finished")
-	#imageAnimation.frames = animations
-	"""
 	pass
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.

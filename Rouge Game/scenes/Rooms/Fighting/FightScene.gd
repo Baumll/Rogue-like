@@ -1,11 +1,11 @@
 extends Control
 
 signal setCharActive(character)
-signal endFight(chars,items,ep)
+signal endFight(chars)
 signal playSound(sound)
 signal loadChars(chars)
 signal useCharSelect(arg)
-signal exit()
+signal exit(team)
 
 onready var blur = $Blur
 onready var MoveAnimationPanel = $MoveAnimationPanel
@@ -21,7 +21,6 @@ var rng = RandomNumberGenerator.new()
 var fighter_list = Array()  #Ein 2D array mit der Liste der Kämpfer geilt in die Teams
 var fighter_rect_list = Array()
 var friendlyFighterCount = -1
-var activeFighter
 var selectedFighter = null #Der character der gerade unten angezeigt wird
 var activeMove
 
@@ -37,8 +36,6 @@ export(bool) var pacifism = true
 export(int) var team_size = 4
 
 var button_time_start = 0 #Die timer Ab wann das halten nicht mehr als klicken gezählt wird
-
-var ep = 0 #Wie viel EP zwischend en Charaktären aufgeteilt wird
 
 func _ready():
 	preCombatAttackScript = preCombatAttackScript.new()
@@ -89,7 +86,7 @@ func end_fight(team):
 	var chars = null
 	if team == 1:
 		chars = GameData.heros
-	emit_signal("endFight",chars ,[], ep)
+	emit_signal("exit",team)
 
 #Wenn Momemtum < 0
 func next_round():
@@ -126,8 +123,6 @@ func add_fighter_spot(fighterObj, spot):
 	timeLine.set_order( set_time_line(initative), null)
 
 func remove_fighter(num):
-	if(num < team_size and get_fighter(num) != null):
-		ep += get_fighter(num).death_exp
 	fighter_list[num] = null
 	initative = []
 	for x in range(fighter_list.size()):
@@ -145,7 +140,7 @@ func remove_fighter(num):
 		#Win
 	if(tmpFinish):
 		end_fight(1)
-		return
+		return(0)
 	
 	tmpFinish = true
 	for i in range(team_size, team_size*2):
@@ -154,7 +149,7 @@ func remove_fighter(num):
 		#Lose
 	if(tmpFinish):
 		end_fight(0)
-		return
+		return(0)
 
 
 func set_active_fighter(num):
@@ -163,15 +158,15 @@ func set_active_fighter(num):
 	for i in fighter_rect_list:
 		i.set_selection(false)
 	print("Momentum: " + String(get_fighter(num).momentum))
-	activeFighter = num
+	initative[0] = num
 	get_fighter(num).iterate_status()
 	if num < team_size: #Wenn ein gegner dran ist nutz eine zufällige attacke
-		npc_move(activeFighter)
+		npc_move(initative[0])
 	else: #Wenn ein Verbündeter dran ist
-		#emit_signal("loadAttacks", get_fighter(activeFighter).moves)
-		emit_signal("setCharActive", get_fighter(activeFighter))
-	fighter_rect_list[activeFighter].set_status_bar(get_fighter(activeFighter).status_list)
-	fighter_rect_list[activeFighter].set_selection(true)
+		#emit_signal("loadAttacks", get_fighter(initative[0]).moves)
+		emit_signal("setCharActive", get_fighter(initative[0]))
+	fighter_rect_list[initative[0]].set_status_bar(get_fighter(initative[0]).status_list)
+	fighter_rect_list[initative[0]].set_selection(true)
 
 func get_fighter(num) -> Resource:
 	if( fighter_list[num] != null):
@@ -190,7 +185,7 @@ func get_fighter_container(num) -> Resource:
 
 #der move wird aufgeführt  Animation kommt noch dazu
 func press_move_button(move):
-	if selectedFighter == get_fighter(activeFighter):
+	if selectedFighter == get_fighter(initative[0]) and not pacifism:
 		targetChooseMode = false
 		if pacifism == false: 
 			emit_signal("loadAttacks", null)
@@ -203,6 +198,7 @@ func press_move_button(move):
 					get_fighter_container(x).set_selection(true)
 				return
 			make_move(move, fighterTargetList)
+			
 			#Wenn ausgewählt wurde
 
 func npc_move(npc):
@@ -224,26 +220,31 @@ func make_move(move, fighterTargetList):
 	if fighterTargetList.size() > 0:
 		#DMG/Heal Calculation:
 		#Sammelt die Images für Animation
-		var animationImages = [get_fighter(activeFighter).image]
+		var animationImages = [get_fighter(initative[0]).image]
 		var dmgValues = []
 		for x in fighterTargetList:
 			if(get_fighter(x) != null):
 				animationImages.append(get_fighter(x).image)
-				dmgValues.append(use_move_on_fighter(x,activeFighter,move))
+				dmgValues.append(use_move_on_fighter(x,initative[0],move))
 		blur.material.set_shader_param("blur", 4.0)
-		MoveAnimationPanel.load_images(animationImages, floor(activeFighter/team_size))
+		MoveAnimationPanel.load_images(animationImages, floor(initative[0]/team_size))
 		MoveAnimationPanel.play_Move(move, dmgValues)
-		yield( MoveAnimationPanel, "animation_finished" )
+		#pacifism = true
+		yield( MoveAnimationPanel, "animation_finished")
+		#pacifism = false
 		blur.material.set_shader_param("blur", 0.0)
 		
 	#Schaut ob wer stirbt
-	fighterTargetList.append(activeFighter)
+	fighterTargetList.append(initative[0])
 	for x in fighterTargetList:
 		if(get_fighter(x).health <= 0):
-			remove_fighter(x)
-			
+			if remove_fighter(x) == 0:
+				return
+	
+	#Wenn ein team gewwonnen hat dann wird abgebrochen
+	
 	#Next turn und so
-	get_fighter(activeFighter).momentum -= move.cost
+	get_fighter(initative[0]).momentum -= move.cost
 	initative.sort_custom(self, "customComparison")
 	if initative.size() > 0:
 		if get_fighter(initative[0]).momentum > 0:
@@ -268,7 +269,7 @@ func select_targets(move):
 	var tmp_target_list = []
 	match move.targets:
 		move.target_kinds.choose_enemy:
-			if( activeFighter < team_size):
+			if( initative[0] < team_size):
 				tmp_target_list.append(4)
 				tmp_target_list.append(5)
 				tmp_target_list.append(6)
@@ -280,7 +281,7 @@ func select_targets(move):
 				tmp_target_list.append(3)
 				
 		move.target_kinds.choose_friend:
-			if( activeFighter >= team_size):
+			if( initative[0] >= team_size):
 				tmp_target_list.append(4)
 				tmp_target_list.append(5)
 				tmp_target_list.append(6)
@@ -291,23 +292,23 @@ func select_targets(move):
 				tmp_target_list.append(2)
 				tmp_target_list.append(3)
 		move.target_kinds.in_front:
-			tmp_target_list.append(fmod(activeFighter+team_size, team_size*2))
+			tmp_target_list.append(fmod(initative[0]+team_size, team_size*2))
 		move.target_kinds.adjacent_enemy:
-			var min_target = fmod(activeFighter+team_size, team_size*2)-1
+			var min_target = fmod(initative[0]+team_size, team_size*2)-1
 			if(min_target < 0):
 				min_target = 0
-			if (activeFighter < team_size && min_target < team_size):
+			if (initative[0] < team_size && min_target < team_size):
 				min_target = team_size
-			var max_target = fmod(activeFighter+team_size, team_size*2)+1
+			var max_target = fmod(initative[0]+team_size, team_size*2)+1
 			if(max_target >= team_size*2):
 				max_target = team_size*2 -1
-			if (activeFighter >= team_size && max_target > team_size):
+			if (initative[0] >= team_size && max_target > team_size):
 				max_target = team_size-1
 			for i in range(min_target,max_target+1):
 				tmp_target_list.append(i)
 		
 		move.target_kinds.all_enemy:
-			if( activeFighter < team_size):
+			if( initative[0] < team_size):
 				tmp_target_list.append(4)
 				tmp_target_list.append(5)
 				tmp_target_list.append(6)
@@ -318,10 +319,10 @@ func select_targets(move):
 				tmp_target_list.append(2)
 				tmp_target_list.append(3)
 		move.target_kinds.me:
-			tmp_target_list.append(activeFighter)
+			tmp_target_list.append(initative[0])
 			
 		move.target_kinds.all_team_other:
-			match activeFighter:
+			match initative[0]:
 				0:
 					tmp_target_list.append(1)
 					tmp_target_list.append(2)
@@ -355,7 +356,7 @@ func select_targets(move):
 					tmp_target_list.append(5)
 					tmp_target_list.append(6)
 		move.target_kinds.all_team:
-			if activeFighter < team_size:
+			if initative[0] < team_size:
 				tmp_target_list.append(0)
 				tmp_target_list.append(1)
 				tmp_target_list.append(2)
@@ -529,7 +530,6 @@ func _on_BigBox_down(num):
 
 
 func _on_BigBox_up(num):
-	print("BigBoxUP")
 	if targetChooseMode:
 		if select_targets(activeMove).has(num):
 			targetChooseMode = false
@@ -537,7 +537,7 @@ func _on_BigBox_up(num):
 
 
 func _on_AnimatedSprite_animation_finished():
-	pass # Replace with function body.
+	pacifism = false
 
 
 func _on_AttackButtons_attackDown(num):
@@ -548,15 +548,13 @@ func _on_AttackButtons_attackDown(num):
 		if(button_time_start == 0):
 			button_time_start = OS.get_ticks_msec()
 			#Ziele Zeigen
-			if(get_fighter(activeFighter).moves.size() > num):
-				var targets = select_targets(get_fighter(activeFighter).moves[num])
-				timeLine.set_order(set_time_line(initative), get_fighter(activeFighter).moves[num],get_fighter(activeFighter).icon)
+			if(get_fighter(initative[0]).moves.size() > num):
+				var targets = select_targets(get_fighter(initative[0]).moves[num])
+				timeLine.set_order(set_time_line(initative), get_fighter(initative[0]).moves[num],get_fighter(initative[0]).icon)
 				for i in targets:
 					fighter_rect_list[i].set_selection(true)
 		else:
 			button_time_start = -1
-	
-
 
 func _on_AttackButtons_attackUP(num):
 	if(targetChooseMode == false):
@@ -568,17 +566,12 @@ func _on_AttackButtons_attackUP(num):
 		timeLine.set_order(set_time_line(initative), null)
 		if (num != -1 and (button_time_now-button_time_start)/100 < 5):
 			if !pacifism: 
-				if(get_fighter(activeFighter).moves.size() > num):
-					press_move_button(get_fighter(activeFighter).moves[num])
+				if(get_fighter(initative[0]).moves.size() > num):
+					press_move_button(get_fighter(initative[0]).moves[num])
 	button_time_start = 0
-
-
-
 
 func _on_MoveAnimationPanel_playSound(sound):
 	emit_signal("playSound", sound)
-
-
 
 
 func _on_Ui_Under_selected_character(character):

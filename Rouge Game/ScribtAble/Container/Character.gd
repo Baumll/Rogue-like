@@ -23,7 +23,7 @@ var crit_modifier = 0 #Wie viel schade meher ein Kriischer treffer macht 0 = 200
 var momentum = 0
 var skill_points = 0
 
-export(int) var base_exp_to_level = 0 #Wie viel Exp pro level draufgeschlagen wird damit er aufleved
+export(int) var base_exp_to_level = 10 #Wie viel Exp pro level draufgeschlagen wird damit er aufleved
 export(int) var death_exp = 0 #Wie viel Exp der Chracter gibt wenn man ihn besiegt mal Level
 
 export(int) var base_max_health = 0
@@ -365,6 +365,9 @@ func give_exp(amount):
 func level_up():
 	skill_points += 2
 	level += 1
+
+func get_level_ep():
+	return level*base_exp_to_level
 
 func has_dealt_magic(amount):
 	print(name + " has deald " + str(amount) + " magic dmg")

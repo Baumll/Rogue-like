@@ -4,14 +4,10 @@
 [ext_resource path="res://scenes/Rooms/Fighting/HealthBar.gd" type="Script" id=2]
 [ext_resource path="res://Assets/fonts/UI/FontTiny.tres" type="DynamicFont" id=3]
 
-
 [node name="HealthBar" type="Control"]
 anchor_right = 1.0
 anchor_bottom = 1.0
 script = ExtResource( 2 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
 value = 33
 
 [node name="H" type="HBoxContainer" parent="."]
@@ -26,8 +22,8 @@ margin_right = 30.0
 margin_bottom = 1920.0
 rect_min_size = Vector2( 30, 0 )
 size_flags_vertical = 1
-custom_fonts/font = ExtResource( 3 )
 custom_colors/font_color = Color( 0, 0, 0, 1 )
+custom_fonts/font = ExtResource( 3 )
 text = "0"
 align = 2
 valign = 1
@@ -41,7 +37,6 @@ margin_right = 1080.0
 margin_bottom = 1920.0
 rect_min_size = Vector2( 160, 10 )
 size_flags_horizontal = 3
-max_value = 100.0
 value = 1.0
 texture_under = ExtResource( 1 )
 texture_progress = ExtResource( 1 )
